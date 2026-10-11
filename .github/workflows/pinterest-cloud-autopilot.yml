@@ -1,9 +1,10 @@
 name: Pinterest 24/7 Cloud Autopilot Engine
 
+# on:
+#   schedule:
+#     # Runs every 4 hours automatically 100% in the cloud
+#     - cron: '0 */4 * * *'
 on:
-  schedule:
-    # Runs every 4 hours automatically 100% in the cloud
-    - cron: '0 */4 * * *'
   workflow_dispatch: # Allows manual trigger anytime from GitHub Actions tab
 
 permissions:
