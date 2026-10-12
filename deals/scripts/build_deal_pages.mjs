@@ -23,8 +23,11 @@ function escapeHtml(str) {
 let generated = 0;
 for (const item of catalog) {
   const filePath = path.join(pDir, `${item.slug}.html`);
-  const originalPriceFormatted = item.originalPrice ? `₹${item.originalPrice.toLocaleString("en-IN")}` : "";
-  const dealPriceFormatted = item.dealPrice ? `₹${item.dealPrice.toLocaleString("en-IN")}` : "FREE";
+  const dealPrice = Number(item.dealPrice ?? item.price ?? 0);
+  const origPrice = Number(item.originalPrice ?? item.mrp ?? 0);
+  const originalPriceFormatted = origPrice > dealPrice ? `₹${origPrice.toLocaleString("en-IN")}` : "";
+  const dealPriceFormatted = dealPrice > 0 ? `₹${dealPrice.toLocaleString("en-IN")}` : "Check Price";
+  const buyUrl = item.profitLink || item.url || (item.asin ? `https://www.amazon.in/dp/${item.asin}?tag=bhom120704-21` : "https://thebhom.in/deals/");
 
   const html = `<!DOCTYPE html>
 <html lang="en">
@@ -150,7 +153,7 @@ for (const item of catalog) {
       <div class="header-nav-right">
         <a href="/deals/" class="nav-link-subtle">← All Deals</a>
         <a href="/" class="nav-link-subtle">TheBhom Home</a>
-        <a href="${item.profitLink}" target="_blank" rel="noopener noreferrer nofollow" class="telegram-deal-pill">
+        <a href="${buyUrl}" target="_blank" rel="noopener noreferrer nofollow" class="telegram-deal-pill">
           <span>Buy on ${escapeHtml(item.store)}</span>
         </a>
       </div>
@@ -181,7 +184,7 @@ for (const item of catalog) {
           <p style="color: #475569; font-size: 14px; line-height: 1.6; margin-top: 8px;">${escapeHtml(item.summary || "")}</p>
 
           <div style="margin-top: 16px;">
-            <a href="${item.profitLink}" target="_blank" rel="noopener noreferrer nofollow" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: #fb641b; color: #fff; font-weight: 800; font-size: 16px; padding: 14px 32px; border-radius: 8px; text-decoration: none; box-shadow: 0 4px 12px rgba(251, 100, 27, 0.3);">
+            <a href="${buyUrl}" target="_blank" rel="noopener noreferrer nofollow" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: #fb641b; color: #fff; font-weight: 800; font-size: 16px; padding: 14px 32px; border-radius: 8px; text-decoration: none; box-shadow: 0 4px 12px rgba(251, 100, 27, 0.3);">
               <span>Buy Now on ${escapeHtml(item.store)}</span>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </a>
