@@ -31374,8 +31374,20 @@ function renderProducts() {
       matchesCategory = item.category === "electronics" || item.category === "tech";
     } else if (currentCategory === "footwear") {
       matchesCategory = item.category === "footwear";
+    } else if (currentCategory === "women") {
+      matchesCategory = item.department === "women" ||
+        item.category === "women" ||
+        (item.category === "fashion" && /women|kurti|saree|suit|dress|top|crop|lehenga|anarkali|chikankari|blouse|maxi/i.test((item.subCategory || "") + " " + item.title) && !/\bmen\b/i.test(item.title));
+    } else if (currentCategory === "men") {
+      matchesCategory = item.department === "men" ||
+        item.category === "men" ||
+        (item.category === "fashion" && /\b(men|man|mens|polo|chino|formal shirt|kurta pyjama)\b/i.test((item.subCategory || "") + " " + item.title) && !/women/i.test(item.title));
+    } else if (currentCategory === "girls") {
+      matchesCategory = item.department === "girls" ||
+        item.category === "girls" ||
+        (item.category === "fashion" && /\b(girl|girls|frock|frocks|kids|kid|dungaree|dungarees)\b/i.test((item.subCategory || "") + " " + item.title));
     } else if (currentCategory === "fashion") {
-      matchesCategory = item.category === "fashion";
+      matchesCategory = item.category === "fashion" || item.department === "women" || item.department === "men" || item.department === "girls";
     } else if (currentCategory === "home") {
       matchesCategory = item.category === "home" || item.category === "appliances";
     } else if (currentCategory === "finance") {
