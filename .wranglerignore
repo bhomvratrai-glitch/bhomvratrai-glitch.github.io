@@ -1,0 +1,14 @@
+
+.git
+.github
+.vercel
+.wrangler
+node_modules
+scripts
+__pycache__
+*.py
+*.pyc
+*.sh
+*.mjs
+*.md
+*.log
