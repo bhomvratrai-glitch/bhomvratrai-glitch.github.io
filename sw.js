@@ -3,15 +3,10 @@
 // Cache Version: v2026.09.14
 // ============================================================
 
-const CACHE_NAME = 'thebhom-cache-v4';
+const CACHE_NAME = 'thebhom-cache-v5';
 const PRECACHE_ASSETS = [
   '/',
   '/index.html',
-  '/wallpapers.html',
-  '/ebooks.html',
-  '/magazines.html',
-  '/templates.html',
-  '/cards.html',
   '/shared.css?v=20260914_imgpdf_v9',
   '/shared.js?v=20260914_imgpdf_v9',
   '/data.js?v=20260914_imgpdf_v9',

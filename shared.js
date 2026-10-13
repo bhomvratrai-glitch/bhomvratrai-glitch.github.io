@@ -35,14 +35,6 @@
 
 const SUBDOMAINS = [
   {
-    id: "tools",
-    name: "Web Tools",
-    label: "🛠️ Web Tools",
-    url: "/tools/",
-    color: "#9333ea",
-    svg: `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#9333ea" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>`
-  },
-  {
     id: "imgpdf",
     name: "ImgPDF",
     label: "📄 ImgPDF",
@@ -51,68 +43,12 @@ const SUBDOMAINS = [
     svg: `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#e5322d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>`
   },
   {
-    id: "downloader",
-    name: "Downloader",
-    label: "⚡ Downloader",
-    url: "/downloader/",
-    color: "#0891b2",
-    svg: `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0891b2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`
-  },
-  {
-    id: "wallpapers",
-    name: "Wallpapers",
-    label: "🖼️ Wallpapers",
-    url: "/wallpapers",
-    color: "#16a34a",
-    svg: `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>`
-  },
-  {
-    id: "ebooks",
-    name: "E-Books",
-    label: "📚 E-Books",
-    url: "/ebooks",
-    color: "#dc2626",
-    svg: `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>`
-  },
-  {
-    id: "magazines",
-    name: "Magazines",
-    label: "📰 Magazines",
-    url: "/magazines",
-    color: "#2563eb",
-    svg: `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg>`
-  },
-  {
-    id: "templates",
-    name: "Templates",
-    label: "🎨 Templates",
-    url: "/templates",
-    color: "#c026d3",
-    svg: `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#c026d3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg>`
-  },
-  {
-    id: "cards",
-    name: "Cards",
-    label: "💌 Cards",
-    url: "/cards",
-    color: "#e11d48",
-    svg: `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#e11d48" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>`
-  },
-  {
     id: "deals",
     name: "Deals",
     label: "🔥 Deals",
     url: "/deals/",
     color: "#fb641b",
     svg: `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fb641b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>`
-  },
-  {
-    id: "news",
-    name: "News",
-    label: "📰 News",
-    url: "/news/",
-    color: "#0284c7",
-    svg: `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0284c7" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg>`
   }
 ];
 
@@ -215,7 +151,7 @@ function initTheme() {
 
 function getBasePath() {
   const p = window.location.pathname;
-  if (p.includes('/downloader/') || p.includes('/tools/') || p.includes('/directory/')) {
+  if (p.includes('/imgpdf/') || p.includes('/deals/') || p.includes('/directory/')) {
     return '../';
   }
   return '';
@@ -239,16 +175,8 @@ function renderHeader(activePage=''){
   </a>
   <nav class="hdr-nav-container">
     <ul class="hdr-nav">
-      <li><a href="/tools/" class="hdr-nav-link ${activePage==='tools'?'active':''}"><span class="hdr-nav-ic" style="color:#9333ea;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#9333ea" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg></span><span class="hdr-nav-txt" style="color:#9333ea;font-weight:600;">Web Tools</span></a></li>
-      <li><a href="/imgpdf/" class="hdr-nav-link ${activePage==='imgpdf'?'active':''}" title="ImgPDF"><span class="hdr-nav-ic" style="color:#e5322d;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#e5322d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span><span class="hdr-nav-txt" style="color:#e5322d;font-weight:700;">ImgPDF</span></a></li>
-      <li><a href="/downloader/" class="hdr-nav-link ${activePage==='downloader'?'active':''}"><span class="hdr-nav-ic" style="color:#0891b2;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0891b2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span><span class="hdr-nav-txt">Downloader</span></a></li>
-      <li><a href="/wallpapers" class="hdr-nav-link ${activePage==='wallpapers'?'active':''}"><span class="hdr-nav-ic" style="color:#16a34a;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg></span><span class="hdr-nav-txt">Wallpapers</span></a></li>
-      <li><a href="/ebooks" class="hdr-nav-link ${activePage==='ebooks'?'active':''}"><span class="hdr-nav-ic" style="color:#dc2626;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#dc2626" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/><line x1="16" x2="8" y1="13" y2="13"/><line x1="16" x2="8" y1="17" y2="17"/></svg></span><span class="hdr-nav-txt">E-Books</span></a></li>
-      <li><a href="/magazines" class="hdr-nav-link ${activePage==='magazines'?'active':''}"><span class="hdr-nav-ic" style="color:#2563eb;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg></span><span class="hdr-nav-txt">Magazines</span></a></li>
-      <li><a href="/templates" class="hdr-nav-link ${activePage==='templates'?'active':''}"><span class="hdr-nav-ic" style="color:#c026d3;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#c026d3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg></span><span class="hdr-nav-txt">Templates</span></a></li>
-      <li><a href="/cards" class="hdr-nav-link ${activePage==='cards'?'active':''}"><span class="hdr-nav-ic" style="color:#e11d48;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#e11d48" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg></span><span class="hdr-nav-txt">Cards</span></a></li>
+      <li><a href="/imgpdf/" class="hdr-nav-link ${activePage==='imgpdf'?'active':''}" title="ImgPDF — Image &amp; PDF Tools"><span class="hdr-nav-ic" style="color:#e5322d;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#e5322d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span><span class="hdr-nav-txt" style="color:#e5322d;font-weight:700;">ImgPDF</span></a></li>
       <li><a href="/deals/" class="hdr-nav-link ${activePage==='deals'?'active':''}" title="TheBhom Deals"><span class="hdr-nav-ic" style="color:#f59e0b;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"/><circle cx="7" cy="7" r="1.5"/></svg></span><span class="hdr-nav-txt" style="color:#f59e0b;font-weight:700;">Deals</span></a></li>
-      <li><a href="/news/" class="hdr-nav-link ${activePage==='news'?'active':''}" title="TheBhom News"><span class="hdr-nav-ic" style="color:#ea580c;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#ea580c" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2Zm0 0a2 2 0 0 1-2-2v-9c0-1.1.9-2 2-2h2"/><path d="M18 14h-8"/><path d="M15 18h-5"/><path d="M10 6h8v4h-8V6Z"/></svg></span><span class="hdr-nav-txt" style="color:#ea580c;font-weight:700;">News</span></a></li>
     </ul>
   </nav>
   <div class="hdr-right">
@@ -276,20 +204,12 @@ function renderHeader(activePage=''){
     <button class="mob-theme-pill" data-theme="dark" onclick="setAppTheme('dark')">🌙 Dark</button>
   </div>
   <a href="/">🏠 Home</a>
-  <a href="/deals/" style="color:#f59e0b;font-weight:700;">🔥 Deals</a>
-  <a href="/news/" style="color:#ea580c;font-weight:700;">📰 News</a>
-  <a href="/tools/" style="color:#9333ea;font-weight:700;">🛠️ Web Tools</a>
   <a href="/imgpdf/" style="color:#e5322d;font-weight:700;">📄 ImgPDF</a>
-  <a href="/downloader/" style="color:#0891b2;font-weight:700;">⚡ Downloader</a>
-  <a href="/wallpapers">🖼️ Wallpapers</a>
-  <a href="/ebooks">📚 E-Books</a>
-  <a href="/magazines">📰 Magazines</a>
-  <a href="/templates">🎨 Templates</a>
-  <a href="/cards">💌 Cards</a>
+  <a href="/deals/" style="color:#f59e0b;font-weight:700;">🔥 Deals</a>
   <a href="/articles/" style="color:#0284c7;font-weight:700;">📚 Articles & Guides</a>
   <a href="/about">ℹ️ About Us</a>
   <a href="/contact">📞 Contact</a>
-  <a href="#" onclick="openSpotlight();return false;" style="color:#2563eb;font-weight:700;">🔍 Global Search (Cmd+K)</a>
+  <a href="#" onclick="openSpotlight();return false;" style="color:#2563eb;font-weight:700;">🔍 Search (Cmd+K)</a>
 </nav>
 `;
 }
@@ -778,16 +698,8 @@ window.renderFavDrawerBody = function() {
 function renderSubnav(activePage='') {
   return `
 <nav class="subnav">
-  <a href="/tools/" class="${activePage==='tools'?'here':''}">🛠️ Web Tools</a>
   <a href="/imgpdf/" class="${activePage==='imgpdf'?'here':''}">📄 ImgPDF</a>
-  <a href="/downloader/" class="${activePage==='downloader'?'here':''}">⚡ Downloader</a>
-  <a href="/wallpapers" class="${activePage==='wallpapers'?'here':''}">🖼️ Wallpapers</a>
-  <a href="/ebooks" class="${activePage==='ebooks'?'here':''}">📚 E-Books</a>
-  <a href="/magazines" class="${activePage==='magazines'?'here':''}">📰 Magazines</a>
-  <a href="/templates" class="${activePage==='templates'?'here':''}">🎨 Templates</a>
-  <a href="/cards" class="${activePage==='cards'?'here':''}">💌 Cards</a>
   <a href="/deals/" class="${activePage==='deals'?'here':''}">🔥 Deals</a>
-  <a href="/news/" class="${activePage==='news'?'here':''}">📰 News</a>
 </nav>
 `;
 }
@@ -798,16 +710,8 @@ function upgradeHeaderToNewNav() {
   let activePage = window.PAGE_ACTIVE_ID || '';
   if (!activePage) {
     const path = window.location.pathname.toLowerCase();
-    if (path.includes('wallpapers')) activePage = 'wallpapers';
-    else if (path.includes('ebooks')) activePage = 'ebooks';
-    else if (path.includes('magazines')) activePage = 'magazines';
-    else if (path.includes('templates')) activePage = 'templates';
-    else if (path.includes('cards')) activePage = 'cards';
-    else if (path.includes('downloader')) activePage = 'downloader';
-    else if (path.includes('tools')) activePage = 'tools';
+    if (path.includes('imgpdf')) activePage = 'imgpdf';
     else if (path.includes('deals')) activePage = 'deals';
-    else if (path.includes('news')) activePage = 'news';
-    else if (path.includes('imgpdf')) activePage = 'imgpdf';
     else if (path.includes('articles')) activePage = 'articles';
   }
 

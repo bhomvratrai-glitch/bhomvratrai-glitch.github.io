@@ -10,7 +10,13 @@
   "theme_color": "#7c3aed",
   "lang": "hi-IN",
   "dir": "ltr",
-  "categories": ["lifestyle", "books", "personalization", "productivity", "entertainment"],
+  "categories": [
+    "lifestyle",
+    "books",
+    "personalization",
+    "productivity",
+    "entertainment"
+  ],
   "icons": [
     {
       "src": "icon-192.png",
@@ -37,36 +43,5 @@
       "purpose": "any"
     }
   ],
-  "shortcuts": [
-    {
-      "name": "HD/4K Wallpapers",
-      "short_name": "Wallpapers",
-      "url": "wallpapers.html",
-      "description": "Download Ultra-HD 4K Mobile & Desktop Wallpapers"
-    },
-    {
-      "name": "Full E-Books",
-      "short_name": "E-Books",
-      "url": "ebooks.html",
-      "description": "Read & Download Full 10-Page Unabridged Books"
-    },
-    {
-      "name": "Digital Magazines",
-      "short_name": "Magazines",
-      "url": "magazines.html",
-      "description": "Read Full 10-Page Glossy Digital Magazines"
-    },
-    {
-      "name": "Multi-Slide Templates",
-      "short_name": "Templates",
-      "url": "templates.html",
-      "description": "Download Instagram, Story & Business Card Packs"
-    },
-    {
-      "name": "Foldable Cards",
-      "short_name": "Cards",
-      "url": "cards.html",
-      "description": "Download 4-Panel Foldable Anniversary & Greeting Cards"
-    }
-  ]
+  "shortcuts": []
 }
