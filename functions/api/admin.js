@@ -133,6 +133,101 @@ export async function onRequestPost(context) {
       );
     }
 
+    // 2.5 Fetch Real-Time Telemetry Analytics (Pinterest Style, 100% Real Live Data)
+    if (action === 'get_analytics') {
+      const timeframe = (body.timeframe || '30d').toLowerCase();
+      let timeSql = "created_at >= NOW() - INTERVAL '30 days'";
+      if (timeframe === '24h') timeSql = "created_at >= NOW() - INTERVAL '24 hours'";
+      else if (timeframe === '7d') timeSql = "created_at >= NOW() - INTERVAL '7 days'";
+      else if (timeframe === '90d') timeSql = "created_at >= NOW() - INTERVAL '90 days'";
+      else if (timeframe === 'all') timeSql = '1=1';
+
+      // 1. Overview metrics
+      const overviewRes = await queryNeon(
+        env,
+        `SELECT
+           COUNT(*) FILTER (WHERE event_type = 'impression') AS impressions,
+           COUNT(*) FILTER (WHERE event_type = 'engagement') AS engagements,
+           COUNT(*) FILTER (WHERE event_type = 'outbound_click') AS outbound_clicks,
+           COUNT(*) FILTER (WHERE event_type = 'save') AS saves,
+           COUNT(DISTINCT visitor_id) AS total_audience,
+           COUNT(DISTINCT visitor_id) FILTER (WHERE event_type IN ('engagement', 'outbound_click', 'save')) AS engaged_audience,
+           COUNT(DISTINCT visitor_id) FILTER (WHERE created_at >= NOW() - INTERVAL '15 minutes') AS realtime_active
+         FROM site_events
+         WHERE ${timeSql};`
+      );
+
+      // 2. Section breakdown
+      const sectionRes = await queryNeon(
+        env,
+        `SELECT
+           section,
+           COUNT(*) FILTER (WHERE event_type = 'impression') AS impressions,
+           COUNT(*) FILTER (WHERE event_type = 'engagement') AS engagements,
+           COUNT(*) FILTER (WHERE event_type = 'outbound_click') AS outbound_clicks,
+           COUNT(*) FILTER (WHERE event_type = 'save') AS saves,
+           COUNT(DISTINCT visitor_id) AS total_audience
+         FROM site_events
+         WHERE ${timeSql}
+         GROUP BY section
+         ORDER BY impressions DESC;`
+      );
+
+      // 3. Top outbound click destinations
+      const topOutboundRes = await queryNeon(
+        env,
+        `SELECT target_url, COUNT(*) AS clicks
+         FROM site_events
+         WHERE event_type = 'outbound_click' AND target_url IS NOT NULL AND ${timeSql}
+         GROUP BY target_url
+         ORDER BY clicks DESC
+         LIMIT 10;`
+      );
+
+      // 4. Recent live events stream
+      const recentEventsRes = await queryNeon(
+        env,
+        `SELECT id, event_type, section, page_path, target_url, visitor_id, created_at
+         FROM site_events
+         ORDER BY created_at DESC
+         LIMIT 15;`
+      );
+
+      const r = overviewRes.rows?.[0] || {};
+      const impressions = parseInt(r.impressions, 10) || 0;
+      const engagements = parseInt(r.engagements, 10) || 0;
+      const outboundClicks = parseInt(r.outbound_clicks, 10) || 0;
+      const saves = parseInt(r.saves, 10) || 0;
+      const totalAudience = parseInt(r.total_audience, 10) || 0;
+      const engagedAudience = parseInt(r.engaged_audience, 10) || 0;
+      const realtimeActive = parseInt(r.realtime_active, 10) || 0;
+
+      const engagementRate = impressions > 0 ? ((engagements / impressions) * 100).toFixed(2) : '0.00';
+      const outboundCtr = impressions > 0 ? ((outboundClicks / impressions) * 100).toFixed(2) : '0.00';
+
+      return new Response(
+        JSON.stringify({
+          success: true,
+          timeframe,
+          overview: {
+            impressions,
+            engagements,
+            outboundClicks,
+            saves,
+            totalAudience,
+            engagedAudience,
+            realtimeActive,
+            engagementRate,
+            outboundCtr,
+          },
+          sections: sectionRes.rows || [],
+          topOutbound: topOutboundRes.rows || [],
+          recentEvents: recentEventsRes.rows || [],
+        }),
+        { status: 200, headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' } }
+      );
+    }
+
     // 3. Approve Order
     if (action === 'approve') {
       const { orderId } = body;

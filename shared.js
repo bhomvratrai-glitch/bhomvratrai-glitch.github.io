@@ -33,6 +33,118 @@
   }
 })();
 
+// ============================================================
+// Real-Time Telemetry & Pinterest-Style Live Analytics
+// ============================================================
+(function initTheBhomTelemetry() {
+  if (window.__tbTelemetryLoaded) return;
+  window.__tbTelemetryLoaded = true;
+
+  // Generate or retrieve persistent visitor ID
+  let vid = '';
+  try {
+    vid = localStorage.getItem('tb_vid') || '';
+    if (!vid) {
+      vid = 'tb_v_' + Math.random().toString(36).substring(2, 10) + Date.now().toString(36);
+      localStorage.setItem('tb_vid', vid);
+    }
+  } catch (e) {
+    vid = 'tb_v_' + Math.random().toString(36).substring(2, 10);
+  }
+
+  // Session ID
+  let sid = '';
+  try {
+    sid = sessionStorage.getItem('tb_sid') || '';
+    if (!sid) {
+      sid = 'tb_s_' + Math.random().toString(36).substring(2, 10);
+      sessionStorage.setItem('tb_sid', sid);
+    }
+  } catch (e) {
+    sid = 'tb_s_' + Math.random().toString(36).substring(2, 10);
+  }
+
+  function getSection() {
+    const p = window.location.pathname.toLowerCase();
+    if (p.startsWith('/deals')) return 'deals';
+    if (p.startsWith('/downloader')) return 'downloader';
+    if (p.startsWith('/articles')) return 'articles';
+    if (p.startsWith('/admin')) return 'admin';
+    return 'home';
+  }
+
+  window.tbTrack = function(eventType, options = {}) {
+    const section = options.section || getSection();
+    if (section === 'admin') return; // Do not count owner admin views
+
+    const payload = JSON.stringify({
+      event_type: eventType,
+      section: section,
+      page_path: options.page_path || window.location.pathname,
+      target_url: options.target_url || null,
+      visitor_id: vid,
+      session_id: sid,
+      referrer: options.referrer || document.referrer || null,
+      meta: options.meta || {}
+    });
+
+    try {
+      if (navigator.sendBeacon) {
+        navigator.sendBeacon('/api/track', payload);
+      } else {
+        fetch('/api/track', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: payload,
+          keepalive: true
+        }).catch(() => {});
+      }
+    } catch (e) {}
+  };
+
+  // 1. Auto Impression on Page Load
+  if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    window.tbTrack('impression');
+  } else {
+    document.addEventListener('DOMContentLoaded', () => window.tbTrack('impression'), { once: true });
+  }
+
+  // 2. Global Outbound Click & Save Listener
+  document.addEventListener('click', function(e) {
+    const a = e.target.closest('a');
+    if (a && a.href) {
+      const href = a.href;
+      if (href.startsWith('http://') || href.startsWith('https://')) {
+        try {
+          const u = new URL(href);
+          if (u.hostname !== window.location.hostname && !u.hostname.includes('thebhom.in')) {
+            window.tbTrack('outbound_click', {
+              target_url: href,
+              meta: { text: (a.textContent || '').trim().slice(0, 80), host: u.hostname }
+            });
+          }
+        } catch (err) {}
+      }
+    }
+
+    // Check if Save / Download button
+    const saveBtn = e.target.closest('#downloadBtn, #savedLink, .btn-download-start, [data-action="save"], .btn-save, .save-deal');
+    if (saveBtn) {
+      window.tbTrack('save', {
+        meta: { id: saveBtn.id || saveBtn.className, text: (saveBtn.textContent || '').trim().slice(0, 50) }
+      });
+    }
+
+    // Check if Engagement (search, filter tabs, analyze button)
+    const engBtn = e.target.closest('#parseBtn, .btn-parse, .cat-tab, .filter-chip, .tool-pill, .btn-see-details');
+    if (engBtn) {
+      window.tbTrack('engagement', {
+        meta: { id: engBtn.id || engBtn.className, text: (engBtn.textContent || '').trim().slice(0, 50) }
+      });
+    }
+  }, { passive: true });
+})();
+
 const SUBDOMAINS = [
   {
     id: "deals",
