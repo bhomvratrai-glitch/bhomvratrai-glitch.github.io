@@ -4,7 +4,7 @@
 const NEON_SQL_URL = 'https://ep-gentle-lab-awk96f6x-pooler.c-12.us-east-1.aws.neon.tech/sql';
 const DEFAULT_CONN_STR = 'postgresql://neondb_owner:npg_yAGWlbrK5PN6@ep-gentle-lab-awk96f6x-pooler.c-12.us-east-1.aws.neon.tech/neondb?sslmode=require';
 const OWNER_EMAIL = 'bhomvratrai7225@gmail.com';
-const DEFAULT_PASSKEY = 'bhom7225'; // Master Owner Passkey
+const DEFAULT_PASSKEY = 'Bhomvrat@123'; // Master Owner Passkey
 
 function esc(val) {
   if (val === null || val === undefined) return 'NULL';
