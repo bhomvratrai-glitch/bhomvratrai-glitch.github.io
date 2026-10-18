@@ -11,11 +11,30 @@
 - **Edge Cache Purge**:
   ```bash
   curl -s -X POST "https://api.cloudflare.com/client/v4/zones/$CLOUDFLARE_ZONE_ID/purge_cache" \
-    -H "X-Auth-Email: $CLOUDFLARE_EMAIL" \
-    -H "X-Auth-Key: $CLOUDFLARE_API_KEY" \
+    -H "Authorization: Bearer $CLOUDFLARE_DNS_API_TOKEN" \
     -H "Content-Type: application/json" \
     --data '{"purge_everything":true}'
   ```
+
+---
+
+## 2. Site Architecture Cleanup (October 18, 2026)
+- **Active Core Structure**:
+  - **Main Landing Site**: Root (`/`) at `https://www.thebhom.in/` featuring Deals Hub & Universal Video Downloader.
+  - **Deals Store**: Subdirectory (`/deals/`) at `https://www.thebhom.in/deals/`.
+  - **Universal Video Downloader**: Subdirectory (`/downloader/`) at `https://www.thebhom.in/downloader/`.
+- **Obsolete Sections Removed & 301 Redirected to Root**:
+  - `/tools/`, `/imgpdf/`, `/wallpapers`, `/ebooks`, `/magazines`, `/templates`, `/cards`, `/news/`.
+- **Preserved Tags & Verification System**:
+  - Google AdSense: `ca-pub-4674566886677472` (Script & Account meta + `ads.txt`).
+  - Google Tag Manager: `GTM-K2B22XSW`.
+  - Google Analytics 4: `G-GHVNZWFVQV`.
+  - Pinterest Domain Verification: `027b813eb55f730989b6236aea44ed88`.
+  - Google Search Console Verification: `googlec324d892b7f2bbf5`.
+- **Sitemap & SEO**:
+  - `sitemap.xml` streamlined to 35 high-priority canonical URLs.
+  - `robots.txt` updated to allow `/`, `/deals/`, `/downloader/` and disallow removed sections.
+
 
 ---
 
