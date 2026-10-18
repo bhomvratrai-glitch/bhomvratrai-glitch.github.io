@@ -1,3 +1,16 @@
 https://thebhom.in/* https://www.thebhom.in/:splat 301!
 http://thebhom.in/* https://www.thebhom.in/:splat 301!
 http://www.thebhom.in/* https://www.thebhom.in/:splat 301!
+
+# 301 Redirects for removed obsolete sections
+/tools/* / 301
+/tools / 301
+/imgpdf/* / 301
+/imgpdf / 301
+/wallpapers* / 301
+/ebooks* / 301
+/magazines* / 301
+/templates* / 301
+/cards* / 301
+/news/* / 301
+/news / 301

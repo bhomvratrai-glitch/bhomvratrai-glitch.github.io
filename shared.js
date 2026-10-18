@@ -35,20 +35,20 @@
 
 const SUBDOMAINS = [
   {
-    id: "imgpdf",
-    name: "ImgPDF",
-    label: "📄 ImgPDF",
-    url: "/imgpdf/",
-    color: "#e5322d",
-    svg: `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#e5322d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>`
-  },
-  {
     id: "deals",
     name: "Deals",
     label: "🔥 Deals",
     url: "/deals/",
     color: "#fb641b",
     svg: `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fb641b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>`
+  },
+  {
+    id: "downloader",
+    name: "Downloader",
+    label: "⚡ Downloader",
+    url: "/downloader/",
+    color: "#0891b2",
+    svg: `<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0891b2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>`
   }
 ];
 
@@ -151,7 +151,7 @@ function initTheme() {
 
 function getBasePath() {
   const p = window.location.pathname;
-  if (p.includes('/imgpdf/') || p.includes('/deals/') || p.includes('/directory/')) {
+  if (p.includes('/deals/') || p.includes('/downloader/')) {
     return '../';
   }
   return '';
@@ -169,23 +169,23 @@ function renderHeader(activePage=''){
   return `
 <div class="scroll-prog" id="sp"></div>
 <header class="hdr">
-  <a href="/" class="logo" title="TheBhom — Free Digital Content & Web Tools">
+  <a href="/" class="logo" title="TheBhom — Home">
     <div class="logo-box" style="background:linear-gradient(135deg, #e11d48, #be123c);border-radius:11px;color:#fff;font-weight:900;">TB</div>
     <span class="logo-txt">The<span class="brand-accent" style="color:#e11d48;">Bhom</span></span>
   </a>
   <nav class="hdr-nav-container">
     <ul class="hdr-nav">
-      <li><a href="/imgpdf/" class="hdr-nav-link ${activePage==='imgpdf'?'active':''}" title="ImgPDF — Image &amp; PDF Tools"><span class="hdr-nav-ic" style="color:#e5322d;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#e5322d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span><span class="hdr-nav-txt" style="color:#e5322d;font-weight:700;">ImgPDF</span></a></li>
       <li><a href="/deals/" class="hdr-nav-link ${activePage==='deals'?'active':''}" title="TheBhom Deals"><span class="hdr-nav-ic" style="color:#f59e0b;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"/><circle cx="7" cy="7" r="1.5"/></svg></span><span class="hdr-nav-txt" style="color:#f59e0b;font-weight:700;">Deals</span></a></li>
+      <li><a href="/downloader/" class="hdr-nav-link ${activePage==='downloader'?'active':''}" title="Universal Video Downloader"><span class="hdr-nav-ic" style="color:#0891b2;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0891b2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span><span class="hdr-nav-txt" style="color:#0891b2;font-weight:700;">Downloader</span></a></li>
     </ul>
   </nav>
   <div class="hdr-right">
-    <div class="hdr-search-pill" onclick="openSpotlight()" role="button" tabindex="0" title="Search tools (⌘K)">
+    <div class="hdr-search-pill" onclick="openSpotlight()" role="button" tabindex="0" title="Search (⌘K)">
       <svg class="hdr-search-ic" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="11" cy="11" r="8"></circle>
         <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
       </svg>
-      <span class="hdr-search-txt">Search tools...</span>
+      <span class="hdr-search-txt">Search...</span>
       <kbd class="hdr-search-kbd">⌘K</kbd>
     </div>
     <button class="hdr-theme-btn" id="hdrThemeBtn" onclick="quickToggleTheme()" title="Toggle Theme" aria-label="Toggle Theme">
@@ -204,9 +204,8 @@ function renderHeader(activePage=''){
     <button class="mob-theme-pill" data-theme="dark" onclick="setAppTheme('dark')">🌙 Dark</button>
   </div>
   <a href="/">🏠 Home</a>
-  <a href="/imgpdf/" style="color:#e5322d;font-weight:700;">📄 ImgPDF</a>
   <a href="/deals/" style="color:#f59e0b;font-weight:700;">🔥 Deals</a>
-  <a href="/articles/" style="color:#0284c7;font-weight:700;">📚 Articles & Guides</a>
+  <a href="/downloader/" style="color:#0891b2;font-weight:700;">⚡ Downloader</a>
   <a href="/about">ℹ️ About Us</a>
   <a href="/contact">📞 Contact</a>
   <a href="#" onclick="openSpotlight();return false;" style="color:#2563eb;font-weight:700;">🔍 Search (Cmd+K)</a>
@@ -698,25 +697,35 @@ window.renderFavDrawerBody = function() {
 function renderSubnav(activePage='') {
   return `
 <nav class="subnav">
-  <a href="/imgpdf/" class="${activePage==='imgpdf'?'here':''}">📄 ImgPDF</a>
   <a href="/deals/" class="${activePage==='deals'?'here':''}">🔥 Deals</a>
+  <a href="/downloader/" class="${activePage==='downloader'?'here':''}">⚡ Downloader</a>
 </nav>
 `;
 }
 
 function upgradeHeaderToNewNav() {
+  if (window.location.pathname.includes('/deals/')) {
+    // In deals, the native .ecommerce-header is used; strip any legacy duplicate header or subnav
+    const legacyHdr = document.querySelector('header.hdr');
+    if (legacyHdr) legacyHdr.remove();
+    const legacyMob = document.getElementById('mobNav') || document.querySelector('.mob-nav');
+    if (legacyMob) legacyMob.remove();
+    const legacySub = document.querySelector('nav.subnav');
+    if (legacySub) legacySub.remove();
+    return;
+  }
+
   const existingHdr = document.querySelector('header.hdr');
 
   let activePage = window.PAGE_ACTIVE_ID || '';
   if (!activePage) {
     const path = window.location.pathname.toLowerCase();
-    if (path.includes('imgpdf')) activePage = 'imgpdf';
+    if (path.includes('downloader')) activePage = 'downloader';
     else if (path.includes('deals')) activePage = 'deals';
-    else if (path.includes('articles')) activePage = 'articles';
   }
 
-  // Upgrade header if missing /deals/ or /news/ or has obsolete /articles/
-  if (existingHdr && (!existingHdr.querySelector('a[href="/deals/"]') || !existingHdr.querySelector('a[href="/news/"]') || existingHdr.querySelector('a[href="/articles/"]'))) {
+  // Upgrade header if missing downloader or has obsolete sections
+  if (existingHdr && (!existingHdr.querySelector('a[href="/downloader/"]') || existingHdr.querySelector('a[href="/tools/"]') || existingHdr.querySelector('a[href="/imgpdf/"]') || existingHdr.querySelector('a[href="/wallpapers"]') || existingHdr.querySelector('a[href="/ebooks"]') || existingHdr.querySelector('a[href="/articles/"]'))) {
     const container = document.createElement('div');
     container.innerHTML = renderHeader(activePage);
     const newHdr = container.querySelector('header.hdr');
@@ -733,7 +742,6 @@ function upgradeHeaderToNewNav() {
     }
     updateThemeIcon(getStoredTheme());
   } else if (!existingHdr && !document.getElementById('shared-header') && document.body && !document.querySelector('.no-shared-hdr')) {
-    // Mount top header at the very top of body
     const container = document.createElement('div');
     container.innerHTML = renderHeader(activePage);
     const newHdr = container.querySelector('header.hdr');
@@ -758,7 +766,7 @@ function upgradeHeaderToNewNav() {
     sharedFtrPlaceholder.innerHTML = renderFooter();
   }
 
-  // Upgrade subnav pills across any page to clean names + Deals + News
+  // Upgrade subnav pills across any page
   const existingSubnav = document.querySelector('nav.subnav');
   if (existingSubnav) {
     existingSubnav.outerHTML = renderSubnav(activePage);
@@ -1045,52 +1053,13 @@ let spotlightActiveIndex = 0;
 let spotlightActiveCategory = 'all';
 
 function getAllContentItems() {
-  const items = [];
-  
-  // Web Tools & Downloader (ToolNest & Video Engine)
-  const webTools = [
-    { id: 'tool-downloader', title: 'Universal Video Downloader & Trimmer (1080p HD & MP3)', cat: 'tools', tag: 'Downloader', emoji: '⚡', url: 'downloader/' },
-    { id: 'tool-imgpdf', title: 'ImgPDF Suite — All-in-One 47+ Image & PDF Processing Tools', cat: 'tools', tag: 'ImgPDF Suite', emoji: '📄', url: 'imgpdf/' },
-    { id: 'tool-imgpdf-merge', title: 'ImgPDF Merge PDF Online (High-Speed PDF Combiner)', cat: 'tools', tag: 'ImgPDF', emoji: '➕', url: 'imgpdf/pdf/merge' },
-    { id: 'tool-imgpdf-compress', title: 'ImgPDF Compress PDF Online (Smart Optimization)', cat: 'tools', tag: 'ImgPDF', emoji: '🗜️', url: 'imgpdf/pdf/compress' },
-    { id: 'tool-imgpdf-split', title: 'ImgPDF Split PDF Online (Extract & Separate Pages)', cat: 'tools', tag: 'ImgPDF', emoji: '✂️', url: 'imgpdf/pdf/split' },
-    { id: 'tool-imgpdf-image-compress', title: 'ImgPDF Compress Images (JPG, PNG, WebP Batch)', cat: 'tools', tag: 'ImgPDF', emoji: '🖼️', url: 'imgpdf/image/compress' },
-    { id: 'tool-imgpdf-ai-summarize', title: 'ImgPDF AI Document Summarizer (Instant Key Takeaways)', cat: 'tools', tag: 'ImgPDF AI', emoji: '🤖', url: 'imgpdf/ai/summarize-pdf' },
-    { id: 'tool-compress', title: 'Compress Image Online (JPG, PNG, WebP)', cat: 'tools', tag: 'Image Tool', emoji: '🗜️', url: 'tools/compress-image.html' },
-    { id: 'tool-merge', title: 'Merge PDF Files Online (Combine Multiple PDFs)', cat: 'tools', tag: 'PDF Tool', emoji: '📑', url: 'tools/merge-pdf.html' },
-    { id: 'tool-split', title: 'Split PDF Pages Online (Extract Specific Pages)', cat: 'tools', tag: 'PDF Tool', emoji: '✂️', url: 'tools/split-pdf-pages.html' },
-    { id: 'tool-watermark', title: 'Watermark PDF Online (Add Stamp / Confidential Text)', cat: 'tools', tag: 'PDF Tool', emoji: '💧', url: 'tools/watermark-pdf.html' },
-    { id: 'tool-pdf-img', title: 'PDF to Image Converter (High-Resolution JPG / PNG)', cat: 'tools', tag: 'PDF Tool', emoji: '🖼️', url: 'tools/pdf-to-image.html' },
-    { id: 'tool-resize', title: 'Resize Image Online (Custom Dimensions & Aspect Ratio)', cat: 'tools', tag: 'Image Tool', emoji: '📐', url: 'tools/resize-image-online.html' },
-    { id: 'tool-webp', title: 'Convert JPG / PNG to WebP (Lightweight Format)', cat: 'tools', tag: 'Image Tool', emoji: '🔄', url: 'tools/convert-jpg-to-webp.html' },
-    { id: 'tool-csv', title: 'CSV Cleaner & Duplicate Row Remover (100% In-Browser)', cat: 'tools', tag: 'Data Tool', emoji: '📊', url: 'tools/clean-csv.html' },
-    { id: 'tool-ai', title: 'AI Utility Hub (Summarize, Rewrite, Title & Translate)', cat: 'tools', tag: 'AI Tool', emoji: '🤖', url: 'tools/ai.html' }
+  return [
+    { id: 'tool-deals', title: 'TheBhom Deals — Handpicked Daily Loot Deals & Price Drops', cat: 'deals', tag: 'Deals Store', emoji: '🔥', url: '/deals/' },
+    { id: 'tool-downloader', title: 'Universal Video Downloader & Trimmer (1080p Full HD & MP3)', cat: 'downloader', tag: 'Downloader', emoji: '⚡', url: '/downloader/' },
+    { id: 'tool-amazon', title: 'Amazon Top Discounts & Lightning Deals', cat: 'deals', tag: 'Amazon', emoji: '📦', url: '/deals/?store=amazon' },
+    { id: 'tool-flipkart', title: 'Flipkart Big Savings & Flash Offers', cat: 'deals', tag: 'Flipkart', emoji: '🛍️', url: '/deals/?store=flipkart' },
+    { id: 'tool-myntra', title: 'Myntra Fashion, Clothing & Footwear Deals', cat: 'deals', tag: 'Myntra', emoji: '👗', url: '/deals/?store=myntra' }
   ];
-  items.push(...webTools);
-
-  if (window.THEBHOM) {
-    (THEBHOM.WALLPAPERS || []).forEach(w => items.push({ id: w.id, title: w.title, cat: 'wallpapers', tag: w.tag || '4K Wallpaper', emoji: '🖼️', url: 'wallpapers.html#' + w.id }));
-    (THEBHOM.EBOOKS || []).forEach(b => items.push({ id: b.id, title: b.title, cat: 'ebooks', tag: b.category || 'E-Book', emoji: b.emoji || '📚', url: 'ebooks.html#' + b.id }));
-    (THEBHOM.MAGAZINES || []).forEach(m => items.push({ id: m.id, title: m.title, cat: 'magazines', tag: m.category || 'Magazine', emoji: m.emoji || '📰', url: 'magazines.html#' + m.id }));
-    (THEBHOM.TEMPLATES || []).forEach(t => items.push({ id: t.id, title: t.title, cat: 'templates', tag: t.cat || 'Template', emoji: '🎨', url: 'templates.html#' + t.id }));
-    (THEBHOM.CARDS || []).forEach(c => items.push({ id: c.id, title: c.title, cat: 'cards', tag: c.cat || 'Greeting Card', emoji: c.emoji || '💌', url: 'cards.html#' + c.id }));
-  }
-  // Local fallbacks if available
-  if (items.length === webTools.length) {
-    if (typeof ALL_WALLS !== 'undefined') {
-      ALL_WALLS.forEach(w => items.push({ id: w.id, title: w.title, cat: 'wallpapers', tag: w.cat || 'Wallpaper', emoji: '🖼️', url: 'wallpapers.html#' + w.id }));
-    }
-    if (typeof BOOKS !== 'undefined') {
-      BOOKS.forEach(b => items.push({ id: b.id, title: b.title, cat: 'ebooks', tag: b.cat || 'E-Book', emoji: b.emoji || '📚', url: 'ebooks.html#' + b.id }));
-    }
-    if (typeof MAGS !== 'undefined') {
-      MAGS.forEach(m => items.push({ id: m.id, title: m.title, cat: 'magazines', tag: m.cat || 'Magazine', emoji: m.emoji || '📰', url: 'magazines.html#' + m.id }));
-    }
-    if (typeof CARDS_DB !== 'undefined') {
-      CARDS_DB.forEach(c => items.push({ id: c.id, title: c.title, cat: 'cards', tag: c.cat || 'Card', emoji: c.emoji || '💌', url: 'cards.html#' + c.id }));
-    }
-  }
-  return items;
 }
 
 function openSpotlightItem(url, id, cat) {
