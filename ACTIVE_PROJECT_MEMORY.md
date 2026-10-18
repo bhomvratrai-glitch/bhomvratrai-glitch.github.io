@@ -33,6 +33,7 @@
   - Templates (`/templates`)
   - Cards (`/cards`)
   - News Portal (`/news/`)
+  - HVAC Programmatic Doorway Directory (`/directory/` - 1,159 pages permanently deleted)
 - **Preserved Tags & Verification System (100% Retained)**:
   - Google AdSense: `ca-pub-4674566886677472` (Script & Account meta + `ads.txt`).
   - Google Tag Manager: `GTM-K2B22XSW`.
