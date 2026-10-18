@@ -19,30 +19,30 @@
 ---
 
 ## 2. Active Core Structure & Cleaned Ecosystem (October 18, 2026)
-- **Active Core Structure**:
-  - **Main Landing Site**: Root (`/`) at `https://www.thebhom.in/` featuring Deals Hub, Universal Video Downloader, and Knowledge Hub.
+- **Active Core Structure (Ultra-Clean Focus)**:
+  - **Main Landing Site**: Root (`/`) at `https://www.thebhom.in/` featuring Deals Hub and Universal Video Downloader.
   - **Deals Store**: Subdirectory (`/deals/`) at `https://www.thebhom.in/deals/` featuring curated daily loot deals, price drop tracking, and direct affiliate links.
   - **Universal Video Downloader**: Subdirectory (`/downloader/`) at `https://www.thebhom.in/downloader/` supporting 40+ platforms with zero watermarks.
-  - **Knowledge Hub**: In-depth creator & SEO guides in `/articles/` (13 verified high-quality canonical guides).
-- **Completely Eradicated Sections (301 Permanent Redirects to `/`)**:
-  - Web Tools (`/tools/`)
-  - ImgPDF (`/imgpdf/`, `pricing.html`, `checkout.html`, `dashboard.html`, `payment.html`)
-  - Wallpapers (`/wallpapers`)
-  - E-Books (`/ebooks`)
-  - Magazines (`/magazines`)
-  - Templates (`/templates`)
-  - Cards (`/cards`)
-  - News Portal (`/news/`)
-  - HVAC Programmatic Doorway Directory (`/directory/` - 1,159 pages permanently deleted)
-- **Preserved Tags & Verification System (100% Retained)**:
-  - Google AdSense: `ca-pub-4674566886677472` (Script & Account meta + `ads.txt`).
-  - Google Tag Manager: `GTM-K2B22XSW`.
-  - Google Analytics 4: `G-GHVNZWFVQV`.
-  - Pinterest Domain Verification: `027b813eb55f730989b6236aea44ed88`.
-  - Google Search Console Verification: `googlec324d892b7f2bbf5`.
+  - **Company & Policies**: Clean `/about`, `/contact`, `/privacy-policy`, `/terms`, `/disclaimer`.
+- **Completely Eradicated Thin Content Sections (301 Permanent Redirects to `/` or `/deals/`)**:
+  - Articles & Guides (`/articles/` - all 13 articles permanently purged, 301 redirect to `/deals/`)
+  - Image Tools (`/tools/`, compress-image, resize, etc. - 301 redirect to `/`)
+  - Subdomains: `https://toolnest.thebhom.in/` and `https://imgpdf.thebhom.in/` (All GSC prefix removals active)
+  - HVAC Programmatic Doorway Directory (`/directory/` - 1,159 pages deleted, GSC prefix removal active)
+  - Old verticals: `/wallpapers`, `/ebooks`, `/magazines`, `/templates`, `/cards`, `/news/`
+- **Google Search Console Removals Submitted & Active (Oct 18, 2026)**:
+  - `Starts with: https://imgpdf.thebhom.in/` (Processing request)
+  - `Starts with: https://toolnest.thebhom.in/` (Processing request)
+  - `Starts with: https://www.thebhom.in/articles/` (Processing request)
+  - `Starts with: https://www.thebhom.in/directory/` (Processing request)
+  - `https://thebhom.in/product/` (Processing request)
+- **Footer Cleanliness**:
+  - Completely eliminated "Knowledge Hub" and "Image Tools" blocks.
+  - Retained strictly: Downloader, Deals & Categories, Popular Deals & Tags, Company & Policy.
 - **Sitemap & SEO**:
-  - `sitemap.xml` streamlined to 22 high-priority canonical URLs (Root, Deals, Downloader, 5 Policy pages, 13 Articles, Articles Hub).
-  - `robots.txt` cleaned and optimized for Googlebot, Mediapartners-Google, and AdsBot-Google.
+  - `sitemap-main.xml` streamlined down to 18 clean canonical URLs (Root, Deals, 11 Downloader pages, 5 Policy pages).
+  - Deployed to Cloudflare Pages (`https://7822da79.thebhom.pages.dev` / `thebhom.in`).
+  - Edge cache completely purged.
 
 ---
 
