@@ -1,6 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>
+    (function(){
+      try {
+        const p = window.location.pathname.toLowerCase();
+        if (p.startsWith('/product/') || p === '/product' || p === '/deal-of-the-day' || p.startsWith('/best/') || p === '/best') {
+          window.location.replace('/deals/');
+        } else if (p.startsWith('/guides/') || p === '/guides' || p.startsWith('/articles/complete-guide') || p.startsWith('/articles/how-to-choose') || p.startsWith('/articles/how-to-clean') || p.startsWith('/articles/how-to-design') || p.startsWith('/articles/mastering') || p.startsWith('/articles/optimizing') || p.startsWith('/articles/smartphone') || p.startsWith('/articles/the-evolution') || p.startsWith('/articles/understanding-color') || p.startsWith('/articles/effective-hvac') || p.startsWith('/articles/energy-efficient')) {
+          window.location.replace('/articles/');
+        } else if (p.startsWith('/directory/') || p === '/directory' || p.startsWith('/tools/') || p === '/tools' || p.startsWith('/wallpapers') || p.startsWith('/cards') || p.startsWith('/ebooks') || p.startsWith('/magazines') || p.startsWith('/templates') || p.startsWith('/news')) {
+          window.location.replace('/');
+        }
+      } catch(e) {}
+    })();
+  </script>
   <script>(function(){try{const t=localStorage.getItem('thebhom_theme')||'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
   <meta name="google-adsense-account" content="ca-pub-4674566886677472">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4674566886677472" crossorigin="anonymous"></script>
