@@ -472,7 +472,7 @@ def main():
         # 9. Replace the SEO Guide Cards & FAQs with the Tailored ones
         # Find start of seo-hub-wrap and end before AdSense Footer
         seo_start_marker = '<div class="seo-hub-wrap">'
-        footer_marker = '<!-- Mandatory AdSense Footer with Legal Links -->'
+        footer_marker = '<footer class="ftr"'
         
         idx_start = content.find(seo_start_marker)
         idx_footer = content.find(footer_marker)

@@ -532,7 +532,7 @@ def generate_hub_index():
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TheBhom Knowledge Hub: Practical Tech, Design & Productivity Guides</title>
-  <meta name="description" content="Explore 25+ comprehensive, well-researched editorial guides on document tools, PDF compression, color theory, minimalist graphic design, HVAC efficiency, and digital publishing.">
+  <meta name="description" content="Explore 13 comprehensive, well-researched editorial guides on web design, SEO optimization, remote productivity, digital asset management, and energy efficiency.">
   <link rel="canonical" href="https://www.thebhom.in/articles/">
   <meta name="google-adsense-account" content="ca-pub-4674566886677472">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4674566886677472" crossorigin="anonymous"></script>
@@ -553,7 +553,7 @@ def generate_hub_index():
     "@context": "https://schema.org",
     "@type": "CollectionPage",
     "name": "TheBhom Knowledge Hub & Resource Guides",
-    "description": "25 comprehensive technical and creative guides covering document workflows, design systems, digital publishing, and productivity.",
+    "description": "13 comprehensive technical and creative guides covering web typography, SEO best practices, digital asset workflows, and home energy systems.",
     "url": "https://www.thebhom.in/articles/",
     "publisher": {{
       "@type": "Organization",

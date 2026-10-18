@@ -531,12 +531,12 @@ function renderFooter(){
     <div class="footer-grid" style="display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;margin-bottom:2.5rem;">
       
       <div class="f-col">
-        <h5 style="font-size:0.88rem;font-weight:800;color:#111827;margin-bottom:1rem;text-transform:none;letter-spacing:0;">Image Tools</h5>
+        <h5 style="font-size:0.88rem;font-weight:800;color:#111827;margin-bottom:1rem;text-transform:none;letter-spacing:0;">Downloader Tools</h5>
         <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0.6rem;">
-          <li><a href="/tools/compress-image" style="color:#4b5563;text-decoration:none;font-size:0.88rem;">Compress Image</a></li>
-          <li><a href="/tools/resize-image-online" style="color:#4b5563;text-decoration:none;font-size:0.88rem;">Resize Image</a></li>
-          <li><a href="/tools/convert-jpg-to-webp" style="color:#4b5563;text-decoration:none;font-size:0.88rem;">Convert JPG to WebP</a></li>
-          <li><a href="/tools/convert-png-to-jpg" style="color:#4b5563;text-decoration:none;font-size:0.88rem;">Convert PNG to JPG</a></li>
+          <li><a href="/downloader/youtube-shorts-downloader.html" style="color:#4b5563;text-decoration:none;font-size:0.88rem;">YouTube Shorts Downloader</a></li>
+          <li><a href="/downloader/instagram-reels-downloader.html" style="color:#4b5563;text-decoration:none;font-size:0.88rem;">Instagram Reels Downloader</a></li>
+          <li><a href="/downloader/tiktok-video-downloader.html" style="color:#4b5563;text-decoration:none;font-size:0.88rem;">TikTok Video Downloader</a></li>
+          <li><a href="/downloader/youtube-song-downloader.html" style="color:#4b5563;text-decoration:none;font-size:0.88rem;">MP3 Audio Downloader</a></li>
         </ul>
       </div>
 

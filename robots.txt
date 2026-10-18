@@ -18,6 +18,7 @@ User-agent: Mediapartners-Google
 Allow: /
 Disallow: /admin/
 Disallow: /deals/p/
+Disallow: /directory/
 Disallow: /marvel/
 Disallow: /cartoon/
 Disallow: /voices/
@@ -26,6 +27,7 @@ User-agent: AdsBot-Google
 Allow: /
 Disallow: /admin/
 Disallow: /deals/p/
+Disallow: /directory/
 Disallow: /marvel/
 Disallow: /cartoon/
 Disallow: /voices/
