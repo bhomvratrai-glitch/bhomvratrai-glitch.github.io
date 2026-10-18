@@ -50,6 +50,23 @@ def verify_image_http(url):
     except Exception:
         return False
 
+def verify_url_live(url):
+    """Verify retailer product page is alive and not 404/500"""
+    if not url: return False
+    try:
+        req = urllib.request.Request(url, headers={
+            "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+            "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8"
+        })
+        res = urllib.request.urlopen(req, context=SSL_CTX, timeout=6)
+        return res.status in (200, 301, 302)
+    except urllib.error.HTTPError as e:
+        if e.code in (404, 410, 500):
+            return False
+        return True # Some retailers block bots with 403 but link works in browser
+    except Exception:
+        return False
+
 def convert_via_earnkaro_api(canonical_url):
     """Converts Flipkart/Myntra/Ajio URLs via EarnKaro Public Converter API into genuine shortlinks"""
     try:
@@ -473,84 +490,84 @@ TRENDING_WOMEN_FASHION_POOL = [
         "url": "https://www.amazon.in/dp/B0F8W28NLY"
     },
     {
-        "asin": "B0CP979148",
-        "id": "AMZ-B0CP979148",
-        "title": "ANNI DESIGNER Women's Georgette Chiffon Embroidered Saree with Unstitched Blouse Piece",
-        "price": 499,
-        "mrp": 2599,
-        "discountNum": 81,
-        "image": "https://m.media-amazon.com/images/I/71qI+wS5UFL.jpg",
+        "asin": "B0GWMC12HP",
+        "id": "AMZ-B0GWMC12HP",
+        "title": "Women's Embroidery Designer Lehenga Choli Set with Dupatta",
+        "price": 1499,
+        "mrp": 4999,
+        "discountNum": 70,
+        "image": "https://m.media-amazon.com/images/I/71YJm1oJtSL.jpg",
         "rating": 4.3,
-        "reviews": 3200,
+        "reviews": 1280,
         "store": "Amazon",
         "category": "fashion",
         "department": "women",
-        "brand": "ANNI DESIGNER",
-        "url": "https://www.amazon.in/dp/B0CP979148"
+        "brand": "EthnicVibe",
+        "url": "https://www.amazon.in/dp/B0GWMC12HP"
     },
     {
-        "asin": "B0CZ3B1T42",
-        "id": "AMZ-B0CZ3B1T42",
-        "title": "GoSriKi Women's Pure Cotton Straight Floral Printed Kurta with Pant and Dupatta Set",
-        "price": 599,
-        "mrp": 2599,
-        "discountNum": 77,
-        "image": "https://m.media-amazon.com/images/I/71C7N1oV4TL.jpg",
-        "rating": 4.2,
-        "reviews": 4100,
-        "store": "Amazon",
-        "category": "fashion",
-        "department": "women",
-        "brand": "GoSriKi",
-        "url": "https://www.amazon.in/dp/B0CZ3B1T42"
-    },
-    {
-        "asin": "B0DFW19Y7Z",
-        "id": "AMZ-B0DFW19Y7Z",
-        "title": "Exotic India Women's Rayon Printed A-Line Western Maxi Dress with Pockets & Belt",
-        "price": 649,
-        "mrp": 1999,
-        "discountNum": 68,
-        "image": "https://m.media-amazon.com/images/I/71v1N1rL9gL.jpg",
+        "asin": "B0GWMBS9MX",
+        "id": "AMZ-B0GWMBS9MX",
+        "title": "Women's Royal Georgette Semi-Stitched Lehenga Choli with Embroidered Blouse",
+        "price": 1499,
+        "mrp": 4999,
+        "discountNum": 70,
+        "image": "https://m.media-amazon.com/images/I/71z78pG-46L.jpg",
         "rating": 4.4,
-        "reviews": 1150,
+        "reviews": 940,
         "store": "Amazon",
         "category": "fashion",
         "department": "women",
-        "brand": "Exotic India",
-        "url": "https://www.amazon.in/dp/B0DFW19Y7Z"
+        "brand": "Royal Weaves",
+        "url": "https://www.amazon.in/dp/B0GWMBS9MX"
     },
     {
-        "asin": "B0DFP8P7ZQ",
-        "id": "AMZ-B0DFP8P7ZQ",
-        "title": "Lavie Women's Betula Medium Faux Leather Tote Handbag with Dual Shoulder Straps",
+        "asin": "B0H49WGM6N",
+        "id": "AMZ-B0H49WGM6N",
+        "title": "Women's Beautiful Roman Silk Kurta with Matching Pant and Zari Work Dupatta Set",
         "price": 999,
-        "mrp": 3990,
-        "discountNum": 75,
-        "image": "https://m.media-amazon.com/images/I/81e5oGv7zRL.jpg",
+        "mrp": 3499,
+        "discountNum": 71,
+        "image": "https://m.media-amazon.com/images/I/71vW1Xq89BL.jpg",
         "rating": 4.3,
-        "reviews": 2980,
+        "reviews": 850,
         "store": "Amazon",
         "category": "fashion",
         "department": "women",
-        "brand": "Lavie",
-        "url": "https://www.amazon.in/dp/B0DFP8P7ZQ"
+        "brand": "SilkVibe",
+        "url": "https://www.amazon.in/dp/B0H49WGM6N"
     },
     {
-        "asin": "B0B8C8QW7Y",
-        "id": "AMZ-B0B8C8QW7Y",
-        "title": "Shining Diva Fashion 18k Gold Plated Traditional Kundan Choker Necklace Set with Earrings & Maang Tikka",
-        "price": 389,
-        "mrp": 2999,
-        "discountNum": 87,
-        "image": "https://m.media-amazon.com/images/I/81YjM4b5xSL.jpg",
+        "asin": "B0GWM6MB4L",
+        "id": "AMZ-B0GWM6MB4L",
+        "title": "Designer Heavy Sequin Work Semi-Stitched Lehenga Choli For Reception & Sangeet",
+        "price": 1499,
+        "mrp": 4999,
+        "discountNum": 70,
+        "image": "https://m.media-amazon.com/images/I/71E4-eHwFLL.jpg",
         "rating": 4.2,
-        "reviews": 5600,
+        "reviews": 610,
         "store": "Amazon",
         "category": "fashion",
         "department": "women",
-        "brand": "Shining Diva",
-        "url": "https://www.amazon.in/dp/B0B8C8QW7Y"
+        "brand": "Vedic Threads",
+        "url": "https://www.amazon.in/dp/B0GWM6MB4L"
+    },
+    {
+        "asin": "B0GWM6KMKN",
+        "id": "AMZ-B0GWM6KMKN",
+        "title": "Women's Traditional Floral Sequins Embroidered Lehenga Choli Set",
+        "price": 1499,
+        "mrp": 4999,
+        "discountNum": 70,
+        "image": "https://m.media-amazon.com/images/I/71R2HjP1dQL.jpg",
+        "rating": 4.4,
+        "reviews": 1120,
+        "store": "Amazon",
+        "category": "fashion",
+        "department": "women",
+        "brand": "EthnicVibe",
+        "url": "https://www.amazon.in/dp/B0GWM6KMKN"
     }
 ]
 
@@ -629,6 +646,11 @@ def run_hourly_bot(limit_per_run=6):
         clean_img = clean_image_url(p["image"], p["store"])
         if not verify_image_http(clean_img):
             print(f"  ⚠️ Skipping {p['title'][:40]} due to invalid image URL: {clean_img}")
+            continue
+            
+        # Verify retailer URL is live before ingesting
+        if not verify_url_live(p["url"]):
+            print(f"  ⚠️ Skipping {p['title'][:40]} due to dead product link (404/500): {p['url']}")
             continue
             
         p["profitLink"] = build_affiliate_link(p["url"], p["store"])
