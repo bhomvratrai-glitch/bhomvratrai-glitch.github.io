@@ -1,0 +1,66 @@
+name: 🤖 24/7 Hourly Deals & RSS Syndication Bot
+
+on:
+  schedule:
+    # Runs every hour at minute 0 (24 times a day automatically)
+    - cron: '0 * * * *'
+  workflow_dispatch: # Allows 1-click manual trigger anytime from GitHub Actions tab
+
+permissions:
+  contents: write
+
+jobs:
+  run-deals-bot:
+    name: ⚡ Ingest Deals, Generate Pages & Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GH_PAT || secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: 🐍 Setup Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: ⚡ Setup Node.js (for Cloudflare Wrangler Deploy)
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: 🚀 Run Autonomous Deals Ingestion Engine
+        run: |
+          python3 scripts/auto_hourly_deals_bot.py
+
+      - name: 💾 Commit & Push Updates to GitHub
+        run: |
+          git config --local user.name "TheBhom Deals Bot"
+          git config --local user.email "bot@thebhom.in"
+          git add deals/p/ deals/data/catalog.json feed.xml rss.xml women-fashion-feed.xml pinterest-feed.xml sitemap-deals.xml
+          if git diff --staged --quiet; then
+            echo "No new products or feed changes this hour."
+          else
+            git commit -m "feat(bot): hourly deals ingestion, dedicated pages & feeds syndication [skip ci]"
+            git push origin main
+            
+            # Also sync to user-pages repository if configured
+            if [ -n "${{ secrets.GH_PAT }}" ]; then
+              git remote add user-pages-repo "https://bhomvratrai-glitch:${{ secrets.GH_PAT }}@github.com/bhomvratrai-glitch/bhomvratrai-glitch.github.io.git" 2>/dev/null || git remote set-url user-pages-repo "https://bhomvratrai-glitch:${{ secrets.GH_PAT }}@github.com/bhomvratrai-glitch/bhomvratrai-glitch.github.io.git"
+              git push user-pages-repo main || true
+            fi
+          fi
+
+      - name: 🌎 Deploy to Cloudflare Pages
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          if [ -n "$CLOUDFLARE_API_TOKEN" ] && [ -n "$CLOUDFLARE_ACCOUNT_ID" ]; then
+            echo "🚀 Deploying live changes to Cloudflare Pages..."
+            npx -y wrangler pages deploy . --project-name=thebhom --commit-dirty=true
+          else
+            echo "⚠️ Cloudflare credentials not detected, skipping wrangler deploy."
+          fi
