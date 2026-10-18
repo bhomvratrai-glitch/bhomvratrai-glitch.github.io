@@ -14,3 +14,7 @@ http://www.thebhom.in/* https://www.thebhom.in/:splat 301!
 /cards* / 301
 /news/* / 301
 /news / 301
+/pricing* / 301
+/checkout* / 301
+/payment* / 301
+/dashboard* / 301

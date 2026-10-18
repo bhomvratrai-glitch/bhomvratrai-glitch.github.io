@@ -1,59 +1,32 @@
 # TheBhom.in (Full Documentation)
 
-> TheBhom.in is India's premier free digital content platform and web utility ecosystem. The platform serves thousands of curated resources including 4K wallpapers, full-length e-books, glossy digital magazines, graphic design templates, printable greeting cards, and browser-based developer tools.
+> TheBhom.in is a premier Indian platform for curated online shopping deals, flash sale price-drop tracking, and web-based multimedia downloading utilities.
 
 ## Architecture & Overview
 
-TheBhom is built for high speed, zero latency, and privacy-first web performance. All client tools operate in-browser without server upload requirements for personal files. The platform is organized into distinct content sections and dedicated web utilities.
+TheBhom is built for high speed, zero latency, and privacy-first web performance. All client tools operate in-browser without server upload requirements for personal files. The platform is organized into three core divisions:
 
-## Main Content Sections
+1. **TheBhom Deals Store (`/deals/`)**: Handpicked, verified discount deals and price drops from Amazon, Flipkart, Myntra, and top Indian shopping destinations. Includes category filtering for Electronics, Fashion, Home, and Lightning Deals.
+2. **Universal Video Downloader (`/downloader/`)**: High-speed, 1080p Full HD video downloader and audio extractor. Supports downloading from Instagram Reels, YouTube Shorts, TikTok, Facebook, and Twitter/X with zero watermarks.
+3. **Editorial Knowledge Hub (`/articles/`)**: High-quality evergreen guides on technology, SEO, accessibility, and digital creator workflows.
 
-### 1. 4K Wallpapers (wallpapers.html)
-- URL: https://thebhom.in/wallpapers.html
-- Description: Over 10,000+ curated ultra-HD desktop and mobile wallpapers across categories including AMOLED Dark, Nature, Minimalist, Sci-Fi, Cars, Anime, and Abstract 3D.
-- Features: Instant preview, one-click HD download, full-screen viewer, and favorites list.
+## Verification & Trust Standards
 
-### 2. Free E-Books (ebooks.html)
-- URL: https://thebhom.in/ebooks.html
-- Description: Curated library of 1,000+ free digital books covering personal growth, technology, business, marketing, and literature in both English and Hindi.
-- Features: Built-in reader mode, PDF download, reading progress tracker, and book search.
+- **Google AdSense Verified**: ca-pub-4674566886677472
+- **Google Tag Manager**: GTM-K2B22XSW
+- **Google Analytics 4**: G-GHVNZWFVQV
+- **Pinterest Verified**: 027b813eb55f730989b6236aea44ed88
+- **Google Search Console**: Verified domain property `thebhom.in`
 
-### 3. Digital Magazines (magazines.html)
-- URL: https://thebhom.in/magazines.html
-- Description: Monthly digital magazine issues spanning Tech Trends, Business Insider, Fitness & Health, Design & Photography, and World Science.
-- Features: Interactive page-flip layout, offline download, and zoom view.
+## Core URLs & Resources
 
-### 4. Graphic Templates (templates.html)
-- URL: https://thebhom.in/templates.html
-- Description: Professional design templates for Canva, Photoshop, and web editing. Includes Instagram Posts, YouTube Thumbnails, Resumes, and Festival Banners.
-- Features: Multi-format download (PNG, SVG, PDF), color customization presets.
-
-### 5. Greeting Cards (cards.html)
-- URL: https://thebhom.in/cards.html
-- Description: Print-ready, high-resolution foldable greeting cards for anniversaries, birthdays, weddings, Valentine's Day, and Indian festivals.
-- Features: Custom greeting text editing, double-sided fold guidelines, high-DPI export.
-
-### 6. Web Tools & Utilities Suite (tools/index.html)
-- URL: https://thebhom.in/tools/index.html
-- Description: Comprehensive suite of client-side developer, image processing, and PDF manipulation utilities. 100% private in-browser execution with zero server uploads.
-- Key Tools:
-  - [Image Compressor](https://thebhom.in/tools/compress-image.html): Free online image compressor for JPG, PNG, and WebP. Reduces file sizes (KB/MB) with lossy and lossless algorithms without quality degradation.
-  - [PDF Merger & Compiler](https://thebhom.in/tools/merge-pdf.html): No sign up PDF compiler online. Combine, reorder, and merge multiple PDF documents into a single file with zero watermarks.
-  - [CSV Cleaner & Deduplicator](https://thebhom.in/tools/clean-csv.html): Online CSV cleaner to remove duplicate rows, trim whitespace, and clean spreadsheet records without Excel.
-  - [PDF Rotate & Reorder](https://thebhom.in/tools/rotate-pdf.html): Rotate PDF pages 90°, 180°, or 270° and fix orientation instantly.
-  - [PDF Splitter](https://thebhom.in/tools/split-pdf.html): Extract specific page ranges or split multi-page documents into standalone PDFs.
-  - [JSON Formatter & Validator](https://thebhom.in/tools/format-json.html): Clean, format, and validate messy JSON strings with syntax highlighting.
-  - [Base64 Encoder & Decoder](https://thebhom.in/tools/base64.html): Encode and decode text or image files to Base64 in-browser.
-  - [QR Code Generator](https://thebhom.in/tools/qr-code.html): Generate custom high-resolution QR codes for URLs, WiFi credentials, and contact cards.
-
-### 7. Universal Video Downloader (downloader/)
-- URL: https://thebhom.in/downloader/
-- Description: Multi-platform HD/4K video downloader for content creators, researchers, and students.
-- Features: Download Instagram Reels in 1080p, YouTube Shorts/Videos up to 4K, and TikTok clips without watermark. Extract MP3 audio or MP4 video with high-speed direct downloads.
-
-## Legal & Compliance
-
-- Privacy Policy: https://thebhom.in/privacy-policy.html
-- Terms of Service: https://thebhom.in/terms.html
-- Contact & Support: https://thebhom.in/contact.html
-- Sitemap: https://thebhom.in/sitemap.xml
+- Homepage: https://www.thebhom.in/
+- Deals: https://www.thebhom.in/deals/
+- Downloader: https://www.thebhom.in/downloader/
+- Articles: https://www.thebhom.in/articles/
+- About: https://www.thebhom.in/about.html
+- Privacy: https://www.thebhom.in/privacy-policy.html
+- Terms: https://www.thebhom.in/terms.html
+- Disclaimer: https://www.thebhom.in/disclaimer.html
+- Contact: https://www.thebhom.in/contact.html
+- Sitemap: https://www.thebhom.in/sitemap.xml

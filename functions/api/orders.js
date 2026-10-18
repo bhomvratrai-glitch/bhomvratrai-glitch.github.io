@@ -34,7 +34,7 @@ export async function onRequestPost(context) {
     const rawUtr = body.utrNumber || body.utr || body.txnId || '';
     const rawEmail = body.userEmail || body.email || '';
     const rawName = body.userName || body.name || (rawEmail ? rawEmail.split('@')[0] : 'Customer');
-    const rawProduct = body.productName || body.title || body.plan || 'ImgPDF Pro Plan';
+    const rawProduct = body.productName || body.title || body.plan || 'TheBhom Pro';
     const rawProductId = body.productId || (rawProduct.toLowerCase().includes('business') ? 'business' : 'pro');
     const rawAmount = body.amount || 199;
     const userPhone = body.userPhone || body.phone || '';

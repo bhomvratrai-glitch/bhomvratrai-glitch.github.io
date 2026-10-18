@@ -1,22 +1,19 @@
 # TheBhom.in
 
-> TheBhom.in is India's leading free digital content hub and AI utility platform. It provides high-definition 4K wallpapers, full-length e-books, digital magazines, customizable graphic templates, print-ready greeting cards, and browser-based developer and media tools.
+> TheBhom.in is India's leading platform for daily verified shopping loot deals, price drop tracking, and high-speed multimedia downloading utilities.
 
-## Core Content & Tools
+## Core Services
 
-- [TheBhom Home](https://thebhom.in/): Central portal with curated digital resources, trending downloads, and unified category navigation.
-- [Web Tools & Utilities](https://thebhom.in/tools/index.html): Suite of client-side developer, image processing, and PDF conversion utilities.
-- [Video Downloader](https://thebhom.in/downloader/): Multi-platform HD video downloader for educational and social media videos.
-- [4K Wallpapers](https://thebhom.in/wallpapers.html): Curated gallery of ultra-high-resolution wallpapers for desktop and mobile devices.
-- [Free E-Books](https://thebhom.in/ebooks.html): Digital library with full-length e-books across technology, self-help, business, and literature with in-browser reading.
-- [Digital Magazines](https://thebhom.in/magazines.html): Interactive digital magazine reader with multi-category editions and PDF downloads.
-- [Graphic Templates](https://thebhom.in/templates.html): Ready-to-use creative templates for social media posts, thumbnails, business cards, and presentations.
-- [Foldable Greeting Cards](https://thebhom.in/cards.html): Printable, high-resolution greeting cards for birthdays, anniversaries, and Indian festivals.
+- [TheBhom Home](https://www.thebhom.in/): Central portal with featured shopping deals, price drop alerts, and instant video downloading utilities.
+- [Deals & Offers Store](https://www.thebhom.in/deals/): Verified handpicked loot deals, price drop alerts, and flash sales across Amazon, Flipkart, Myntra, and major Indian retailers.
+- [Universal Video Downloader](https://www.thebhom.in/downloader/): Multi-platform 1080p Full HD video downloader and MP3 audio extractor supporting Instagram Reels, YouTube Shorts, TikTok (watermark-free), Facebook, and Twitter/X.
+- [Knowledge Hub & Guides](https://www.thebhom.in/articles/): Comprehensive editorial guides covering digital marketing, web accessibility, and creator productivity.
 
 ## Platform & Policies
 
-- [Pricing & Lifetime Access](https://thebhom.in/pricing.html): Information on lifetime pro tier, commercial licenses, and premium utility access.
-- [Privacy Policy](https://thebhom.in/privacy-policy.html): Complete user privacy policy, cookie policy, and file processing assurances.
-- [Terms of Service](https://thebhom.in/terms.html): Terms and conditions governing the use of TheBhom.in.
-- [About TheBhom](https://thebhom.in/about.html): Background, mission statement, and contact details for TheBhom.in.
-- [XML Sitemap](https://thebhom.in/sitemap.xml): Comprehensive index of all indexed URLs for crawlers and automated agents.
+- [About TheBhom](https://www.thebhom.in/about.html): Mission statement, background, and platform values.
+- [Privacy Policy](https://www.thebhom.in/privacy-policy.html): Complete user privacy policy, cookie disclosures, and data protection assurances.
+- [Terms of Service](https://www.thebhom.in/terms.html): Terms governing the use of TheBhom.in services.
+- [Disclaimer](https://www.thebhom.in/disclaimer.html): Affiliate disclosure and content disclaimers.
+- [Contact Support](https://www.thebhom.in/contact.html): Inquiries, business partnerships, and user support.
+- [XML Sitemap](https://www.thebhom.in/sitemap.xml): Canonical XML index for web crawlers and search engines.

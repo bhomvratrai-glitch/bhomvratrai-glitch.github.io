@@ -1,25 +1,14 @@
 User-agent: Googlebot
 Allow: /
 Allow: /deals/
-Allow: /deals/p/
 Allow: /downloader/
+Allow: /articles/
 Disallow: /admin/
 Disallow: /api/admin
 Disallow: /directory/
 Disallow: /marvel/
 Disallow: /cartoon/
 Disallow: /voices/
-Disallow: /checkout.html
-Disallow: /pricing.html
-Disallow: /dashboard.html
-Disallow: /wallpapers
-Disallow: /ebooks
-Disallow: /magazines
-Disallow: /templates
-Disallow: /cards
-Disallow: /news/
-Disallow: /tools/
-Disallow: /imgpdf/
 
 User-agent: Googlebot-Image
 Allow: /
@@ -31,9 +20,6 @@ Disallow: /deals/p/
 Disallow: /marvel/
 Disallow: /cartoon/
 Disallow: /voices/
-Disallow: /checkout.html
-Disallow: /pricing.html
-Disallow: /dashboard.html
 
 User-agent: AdsBot-Google
 Allow: /
@@ -47,23 +33,13 @@ User-agent: *
 Allow: /
 Allow: /deals/
 Allow: /downloader/
+Allow: /articles/
 Disallow: /admin/
 Disallow: /api/admin
 Disallow: /directory/
 Disallow: /marvel/
 Disallow: /cartoon/
 Disallow: /voices/
-Disallow: /checkout.html
-Disallow: /pricing.html
-Disallow: /dashboard.html
-Disallow: /wallpapers
-Disallow: /ebooks
-Disallow: /magazines
-Disallow: /templates
-Disallow: /cards
-Disallow: /news/
-Disallow: /tools/
-Disallow: /imgpdf/
 
 Sitemap: https://www.thebhom.in/sitemap.xml
 Sitemap: https://www.thebhom.in/sitemap-deals.xml
