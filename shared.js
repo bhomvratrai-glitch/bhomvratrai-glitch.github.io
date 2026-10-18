@@ -68,7 +68,6 @@
     const p = window.location.pathname.toLowerCase();
     if (p.startsWith('/deals')) return 'deals';
     if (p.startsWith('/downloader')) return 'downloader';
-    if (p.startsWith('/articles')) return 'articles';
     if (p.startsWith('/admin')) return 'admin';
     return 'home';
   }
@@ -552,13 +551,13 @@ function renderFooter(){
       </div>
 
       <div class="f-col">
-        <h5 style="font-size:0.88rem;font-weight:800;color:#111827;margin-bottom:1rem;text-transform:none;letter-spacing:0;">Knowledge Hub</h5>
+        <h5 style="font-size:0.88rem;font-weight:800;color:#111827;margin-bottom:1rem;text-transform:none;letter-spacing:0;">Popular Deals & Tags</h5>
         <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0.6rem;">
-          <li><a href="/articles/" style="color:#0284c7;font-weight:700;text-decoration:none;font-size:0.88rem;">📚 All Guides & Articles</a></li>
-          <li><a href="/articles/top-ai-tools-for-freelancers-and-digital-creators" style="color:#4b5563;text-decoration:none;font-size:0.88rem;">Top AI Creator Tools</a></li>
-          <li><a href="/articles/essential-seo-checklist-for-content-creators" style="color:#4b5563;text-decoration:none;font-size:0.88rem;">SEO Checklist</a></li>
-          <li><a href="/articles/minimalist-graphic-design-principles-for-modern-web" style="color:#4b5563;text-decoration:none;font-size:0.88rem;">Modern Web Design</a></li>
-          <li><a href="/articles/safe-file-sharing-and-privacy-best-practices" style="color:#4b5563;text-decoration:none;font-size:0.88rem;">Privacy Best Practices</a></li>
+          <li><a href="/deals/?category=electronics" style="color:#4b5563;text-decoration:none;font-size:0.88rem;">📱 Electronics & Gadgets</a></li>
+          <li><a href="/deals/?category=fashion" style="color:#4b5563;text-decoration:none;font-size:0.88rem;">👗 Fashion & Clothing</a></li>
+          <li><a href="/deals/?category=home-kitchen" style="color:#4b5563;text-decoration:none;font-size:0.88rem;">🏠 Home & Kitchen</a></li>
+          <li><a href="/deals/?tag=under-999" style="color:#4b5563;text-decoration:none;font-size:0.88rem;">🏷️ Deals Under ₹999</a></li>
+          <li><a href="/deals/?tag=top-rated" style="color:#4b5563;text-decoration:none;font-size:0.88rem;">⭐ Top Rated Deals</a></li>
         </ul>
       </div>
 
@@ -1166,11 +1165,11 @@ function getAllContentItems() {
     { id: 'item-amazon', title: 'Amazon Top Discounts & Lightning Deals', cat: 'deals', tag: 'Amazon', emoji: '📦', url: '/deals/?store=amazon' },
     { id: 'item-flipkart', title: 'Flipkart Big Savings & Flash Offers', cat: 'deals', tag: 'Flipkart', emoji: '🛍️', url: '/deals/?store=flipkart' },
     { id: 'item-myntra', title: 'Myntra Fashion, Clothing & Footwear Deals', cat: 'deals', tag: 'Myntra', emoji: '👗', url: '/deals/?store=myntra' },
-    { id: 'art-ai', title: 'Top AI Tools for Freelancers & Digital Creators', cat: 'articles', tag: 'Guides', emoji: '🤖', url: '/articles/top-ai-tools-for-freelancers-and-digital-creators' },
-    { id: 'art-seo', title: 'Essential SEO Checklist for Content Creators', cat: 'articles', tag: 'Guides', emoji: '📈', url: '/articles/essential-seo-checklist-for-content-creators' },
-    { id: 'art-design', title: 'Minimalist Graphic Design Principles for Modern Web', cat: 'articles', tag: 'Guides', emoji: '🎨', url: '/articles/minimalist-graphic-design-principles-for-modern-web' },
-    { id: 'art-privacy', title: 'Safe File Sharing and Privacy Best Practices', cat: 'articles', tag: 'Guides', emoji: '🛡️', url: '/articles/safe-file-sharing-and-privacy-best-practices' },
-    { id: 'art-passive', title: 'Passive Income with Digital Products: Step-by-Step', cat: 'articles', tag: 'Guides', emoji: '💡', url: '/articles/passive-income-with-digital-products-step-by-step' }
+    { id: 'dl-yt-shorts', title: 'YouTube Shorts Downloader & MP4 Video Saver', cat: 'downloader', tag: 'YouTube', emoji: '▶️', url: '/downloader/youtube-shorts-downloader.html' },
+    { id: 'dl-ig-reels', title: 'Instagram Reels & Video Downloader (Full HD)', cat: 'downloader', tag: 'Instagram', emoji: '📸', url: '/downloader/instagram-reels-downloader.html' },
+    { id: 'dl-tiktok', title: 'TikTok Video Downloader Without Watermark', cat: 'downloader', tag: 'TikTok', emoji: '🎵', url: '/downloader/tiktok-video-downloader.html' },
+    { id: 'dl-mp3', title: 'High Quality MP3 Audio & Song Extractor', cat: 'downloader', tag: 'Audio', emoji: '🎧', url: '/downloader/youtube-song-downloader.html' },
+    { id: 'item-electronics', title: 'Electronics, Mobiles & Gadgets Deals', cat: 'deals', tag: 'Electronics', emoji: '📱', url: '/deals/?category=electronics' }
   ];
 }
 
@@ -1203,14 +1202,13 @@ function openSpotlight() {
       <div class="spotlight-modal" onclick="event.stopPropagation()">
         <div class="spotlight-top">
           <span class="spotlight-icon">🔍</span>
-          <input type="text" id="spotlightInput" class="spotlight-input" placeholder="Search Deals, Video Downloader, Guides..." autocomplete="off" />
+          <input type="text" id="spotlightInput" class="spotlight-input" placeholder="Search Deals, Video Downloader, Offers..." autocomplete="off" />
           <span class="spotlight-esc" onclick="closeSpotlight()">ESC</span>
         </div>
         <div class="spotlight-filter-bar">
           <button class="spotlight-chip active" onclick="setSpotlightCat('all', this)">🔥 All</button>
           <button class="spotlight-chip" onclick="setSpotlightCat('deals', this)">🛍️ Loot Deals</button>
           <button class="spotlight-chip" onclick="setSpotlightCat('downloader', this)">⚡ Downloader</button>
-          <button class="spotlight-chip" onclick="setSpotlightCat('articles', this)">📚 Guides</button>
         </div>
         <div class="spotlight-results" id="spotlightResults"></div>
         <div class="spotlight-footer">

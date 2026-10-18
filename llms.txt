@@ -7,7 +7,6 @@
 - [TheBhom Home](https://www.thebhom.in/): Central portal with featured shopping deals, price drop alerts, and instant video downloading utilities.
 - [Deals & Offers Store](https://www.thebhom.in/deals/): Verified handpicked loot deals, price drop alerts, and flash sales across Amazon, Flipkart, Myntra, and major Indian retailers.
 - [Universal Video Downloader](https://www.thebhom.in/downloader/): Multi-platform 1080p Full HD video downloader and MP3 audio extractor supporting Instagram Reels, YouTube Shorts, TikTok (watermark-free), Facebook, and Twitter/X.
-- [Knowledge Hub & Guides](https://www.thebhom.in/articles/): Comprehensive editorial guides covering digital marketing, web accessibility, and creator productivity.
 
 ## Platform & Policies
 

@@ -5,11 +5,9 @@
     (function(){
       try {
         const p = window.location.pathname.toLowerCase();
-        if (p.startsWith('/product/') || p === '/product' || p === '/deal-of-the-day' || p.startsWith('/best/') || p === '/best') {
+        if (p.startsWith('/product/') || p === '/product' || p === '/deal-of-the-day' || p.startsWith('/best/') || p === '/best' || p.startsWith('/articles') || p.startsWith('/guides')) {
           window.location.replace('/deals/');
-        } else if (p.startsWith('/guides/') || p === '/guides' || p.startsWith('/articles/complete-guide') || p.startsWith('/articles/how-to-choose') || p.startsWith('/articles/how-to-clean') || p.startsWith('/articles/how-to-design') || p.startsWith('/articles/mastering') || p.startsWith('/articles/optimizing') || p.startsWith('/articles/smartphone') || p.startsWith('/articles/the-evolution') || p.startsWith('/articles/understanding-color') || p.startsWith('/articles/effective-hvac') || p.startsWith('/articles/energy-efficient')) {
-          window.location.replace('/articles/');
-        } else if (p.startsWith('/directory/') || p === '/directory' || p.startsWith('/tools/') || p === '/tools' || p.startsWith('/wallpapers') || p.startsWith('/cards') || p.startsWith('/ebooks') || p.startsWith('/magazines') || p.startsWith('/templates') || p.startsWith('/news')) {
+        } else if (p.startsWith('/directory') || p.startsWith('/tools') || p.startsWith('/imgpdf') || p.startsWith('/wallpapers') || p.startsWith('/cards') || p.startsWith('/ebooks') || p.startsWith('/magazines') || p.startsWith('/templates') || p.startsWith('/news')) {
           window.location.replace('/');
         }
       } catch(e) {}
@@ -205,7 +203,6 @@
       <a href="/" class="btn-pill btn-primary">🏠 Back to Home</a>
       <a href="/deals/" class="btn-pill" style="border-color:#e11d48;color:#e11d48;font-weight:700;">🔥 Loot Deals & Offers</a>
       <a href="/downloader/" class="btn-pill" style="border-color:#2563eb;color:#2563eb;font-weight:700;">⚡ Universal Downloader</a>
-      <a href="/articles/" class="btn-pill">📚 Knowledge Hub & Guides</a>
     </div>
 
     <div class="footer-note">

@@ -4,11 +4,10 @@
 
 ## Architecture & Overview
 
-TheBhom is built for high speed, zero latency, and privacy-first web performance. All client tools operate in-browser without server upload requirements for personal files. The platform is organized into three core divisions:
+TheBhom is built for high speed, zero latency, and privacy-first web performance. All client tools operate in-browser without server upload requirements for personal files. The platform is organized into two core divisions:
 
 1. **TheBhom Deals Store (`/deals/`)**: Handpicked, verified discount deals and price drops from Amazon, Flipkart, Myntra, and top Indian shopping destinations. Includes category filtering for Electronics, Fashion, Home, and Lightning Deals.
 2. **Universal Video Downloader (`/downloader/`)**: High-speed, 1080p Full HD video downloader and audio extractor. Supports downloading from Instagram Reels, YouTube Shorts, TikTok, Facebook, and Twitter/X with zero watermarks.
-3. **Editorial Knowledge Hub (`/articles/`)**: High-quality evergreen guides on technology, SEO, accessibility, and digital creator workflows.
 
 ## Verification & Trust Standards
 
@@ -23,7 +22,6 @@ TheBhom is built for high speed, zero latency, and privacy-first web performance
 - Homepage: https://www.thebhom.in/
 - Deals: https://www.thebhom.in/deals/
 - Downloader: https://www.thebhom.in/downloader/
-- Articles: https://www.thebhom.in/articles/
 - About: https://www.thebhom.in/about.html
 - Privacy: https://www.thebhom.in/privacy-policy.html
 - Terms: https://www.thebhom.in/terms.html

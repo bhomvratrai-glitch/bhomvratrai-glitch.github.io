@@ -8,8 +8,10 @@ http://www.thebhom.in/* https://www.thebhom.in/:splat 301!
 /deal-of-the-day https://www.thebhom.in/deals/ 301
 /best/* https://www.thebhom.in/deals/ 301
 /best https://www.thebhom.in/deals/ 301
-/guides/* https://www.thebhom.in/articles/ 301
-/guides https://www.thebhom.in/articles/ 301
+/guides/* https://www.thebhom.in/deals/ 301
+/guides https://www.thebhom.in/deals/ 301
+/articles/* https://www.thebhom.in/deals/ 301
+/articles https://www.thebhom.in/deals/ 301
 /sitemap-news.xml https://www.thebhom.in/sitemap.xml 301
 
 # 301 Redirects for removed obsolete sections

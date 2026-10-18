@@ -3,7 +3,6 @@ Allow: /
 Allow: /deals/
 Allow: /deals/p/
 Allow: /downloader/
-Allow: /articles/
 Disallow: /admin/
 Disallow: /api/admin
 Disallow: /directory/
@@ -37,7 +36,6 @@ Allow: /
 Allow: /deals/
 Allow: /deals/p/
 Allow: /downloader/
-Allow: /articles/
 Disallow: /admin/
 Disallow: /api/admin
 Disallow: /directory/
