@@ -1,6 +1,7 @@
 User-agent: Googlebot
 Allow: /
 Allow: /deals/
+Allow: /deals/p/
 Allow: /downloader/
 Allow: /articles/
 Disallow: /admin/
@@ -32,6 +33,7 @@ Disallow: /voices/
 User-agent: *
 Allow: /
 Allow: /deals/
+Allow: /deals/p/
 Allow: /downloader/
 Allow: /articles/
 Disallow: /admin/
