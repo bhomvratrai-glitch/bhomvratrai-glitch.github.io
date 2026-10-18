@@ -2,21 +2,31 @@ https://thebhom.in/* https://www.thebhom.in/:splat 301!
 http://thebhom.in/* https://www.thebhom.in/:splat 301!
 http://www.thebhom.in/* https://www.thebhom.in/:splat 301!
 
+# 301 Redirects for legacy product & deal routes (Eliminating GSC 404s)
+/product/* https://www.thebhom.in/deals/ 301
+/product https://www.thebhom.in/deals/ 301
+/deal-of-the-day https://www.thebhom.in/deals/ 301
+/best/* https://www.thebhom.in/deals/ 301
+/best https://www.thebhom.in/deals/ 301
+/guides/* https://www.thebhom.in/articles/ 301
+/guides https://www.thebhom.in/articles/ 301
+/sitemap-news.xml https://www.thebhom.in/sitemap.xml 301
+
 # 301 Redirects for removed obsolete sections
-/tools/* / 301
-/tools / 301
-/imgpdf/* / 301
-/imgpdf / 301
-/wallpapers* / 301
-/ebooks* / 301
-/magazines* / 301
-/templates* / 301
-/cards* / 301
-/news/* / 301
-/news / 301
-/pricing* / 301
-/checkout* / 301
-/payment* / 301
-/dashboard* / 301
-/directory/* / 301
-/directory / 301
+/tools/* https://www.thebhom.in/ 301
+/tools https://www.thebhom.in/ 301
+/imgpdf/* https://www.thebhom.in/ 301
+/imgpdf https://www.thebhom.in/ 301
+/wallpapers* https://www.thebhom.in/ 301
+/ebooks* https://www.thebhom.in/ 301
+/magazines* https://www.thebhom.in/ 301
+/templates* https://www.thebhom.in/ 301
+/cards* https://www.thebhom.in/ 301
+/news/* https://www.thebhom.in/ 301
+/news https://www.thebhom.in/ 301
+/pricing* https://www.thebhom.in/ 301
+/checkout* https://www.thebhom.in/ 301
+/payment* https://www.thebhom.in/ 301
+/dashboard* https://www.thebhom.in/ 301
+/directory/* https://www.thebhom.in/ 301
+/directory https://www.thebhom.in/ 301
