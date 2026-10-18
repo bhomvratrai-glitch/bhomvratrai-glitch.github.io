@@ -35,8 +35,40 @@ SITEMAP_DEALS = os.path.join(BASE_DIR, "sitemap-deals.xml")
 
 AMAZON_TAG = "bhom120704-21"
 EARNKARO_USER_ID = "5610321"
+EARNKARO_API_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2YTljMzllYTFkYjZhYmEwYjk3YjU0MGEiLCJlYXJua2FybyI6IjU2MTAzMjEiLCJpYXQiOjE3ODg2MjMzNjJ9.Zws8JRh_mHh9mOKIbuRDp-clRopL57Bt657Coli_9NQ"
 
 SSL_CTX = ssl._create_unverified_context()
+HTTP_HEADERS = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"}
+
+def verify_image_http(url):
+    """Verify image returns HTTP 200 OK"""
+    if not url: return False
+    try:
+        req = urllib.request.Request(url, headers=HTTP_HEADERS)
+        res = urllib.request.urlopen(req, context=SSL_CTX, timeout=5)
+        return res.status == 200
+    except Exception:
+        return False
+
+def convert_via_earnkaro_api(canonical_url):
+    """Converts Flipkart/Myntra/Ajio URLs via EarnKaro Public Converter API into genuine shortlinks"""
+    try:
+        req = urllib.request.Request(
+            "https://ekaro-api.affiliaters.in/api/converter/public",
+            data=json.dumps({"deal": canonical_url, "convert_option": "convert_only"}).encode("utf-8"),
+            headers={
+                "Content-Type": "application/json",
+                "Authorization": f"Bearer {EARNKARO_API_TOKEN}",
+                "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"
+            }
+        )
+        res = urllib.request.urlopen(req, context=SSL_CTX, timeout=8)
+        data = json.loads(res.read().decode("utf-8"))
+        if data.get("success") and data.get("data"):
+            return data["data"].strip()
+    except Exception as e:
+        print(f"⚠️ EarnKaro API converter notice for {canonical_url}: {e}")
+    return canonical_url
 
 def slugify(text):
     text = re.sub(r'[^a-zA-Z0-9\s-]', '', text).strip().lower()
@@ -49,7 +81,6 @@ def clean_image_url(url, store="Amazon"):
     if "amazon.com" in url or "amazon.in" in url or "media-amazon" in url:
         return re.sub(r'\._[A-Za-z0-9_,+-]+_\.', '.', url)
     if "flixcart.com" in url:
-        # replace small crop dimensions with 1080x1080
         url = re.sub(r'/image/\d+/\d+/', '/image/1080/1080/', url)
     return url
 
@@ -63,8 +94,7 @@ def build_affiliate_link(dest_url, store="Amazon"):
         new_query = urllib.parse.urlencode(q, doseq=True)
         return urllib.parse.urlunparse(parsed._replace(query=new_query))
     elif any(x in s or x in dest_url for x in ["flipkart", "myntra", "ajio", "nykaa", "tata"]):
-        encoded_dest = urllib.parse.quote(dest_url, safe='')
-        return f"https://trackingv3.linkredirect.in/visitretailer/2?id={EARNKARO_USER_ID}&url={encoded_dest}"
+        return convert_via_earnkaro_api(dest_url)
     return dest_url
 
 def create_product_html(prod):
@@ -594,8 +624,15 @@ def run_hourly_bot(limit_per_run=6):
     
     for p in batch:
         pid = p.get("asin") or p.get("pid") or p.get("id")
+        
+        # Verify image before ingesting
+        clean_img = clean_image_url(p["image"], p["store"])
+        if not verify_image_http(clean_img):
+            print(f"  ⚠️ Skipping {p['title'][:40]} due to invalid image URL: {clean_img}")
+            continue
+            
         p["profitLink"] = build_affiliate_link(p["url"], p["store"])
-        p["cleanImage"] = clean_image_url(p["image"], p["store"])
+        p["cleanImage"] = clean_img
         
         if "discountNum" not in p or p["discountNum"] == 0:
             if p["mrp"] > p["price"]:
@@ -608,6 +645,7 @@ def run_hourly_bot(limit_per_run=6):
         # 1. Generate dedicated HTML page
         fname, canonical_url = create_product_html(p)
         p["dedicatedPage"] = canonical_url
+        p["slug"] = fname.replace(".html", "")
         new_sitemap_urls.append(canonical_url)
         
         # 2. Add to catalog

@@ -1237,7 +1237,23 @@ function createProductCardHtml(item) {
   const isFree = dealPrice === 0;
   const formattedPrice = isFree ? "FREE" : `₹${dealPrice.toLocaleString("en-IN")}`;
   const formattedOriginalPrice = origPrice > dealPrice ? `₹${origPrice.toLocaleString("en-IN")}` : "";
-  const detailUrl = `/deals/p/${item.slug}`;
+  
+  // Robust detailUrl (prevents 404 on missing slug)
+  let detailUrl = "/deals/";
+  if (item.dedicatedPage) {
+    try {
+      const u = new URL(item.dedicatedPage, window.location.origin);
+      detailUrl = u.pathname;
+    } catch (e) {
+      detailUrl = item.dedicatedPage;
+    }
+  } else if (item.slug) {
+    detailUrl = `/deals/p/${item.slug.replace(/\.html$/, "")}`;
+  } else if (item.id || item.pid || item.asin) {
+    const code = (item.id || item.pid || item.asin).toLowerCase();
+    detailUrl = `/deals/p/${code}`;
+  }
+
   const isLowestPrice = (parseInt(item.discount || "0") >= 60) || (dealPrice <= 499 && dealPrice > 0);
   const cleanDiscount = (item.discount && item.discount.length <= 15) ? escapeHtml(item.discount) : "DEAL";
   const buyUrl = item.profitLink || item.url || (item.asin ? `https://www.amazon.in/dp/${item.asin}?tag=bhom120704-21` : detailUrl);
@@ -1248,7 +1264,7 @@ function createProductCardHtml(item) {
       <!-- Top Image Container -->
       <div class="product-thumb-box" style="position:relative;">
         <a href="${detailUrl}" class="thumb-link" title="${escapeHtml(item.title)}">
-          <img class="product-img" src="${item.image}" alt="${escapeHtml(item.title)}" loading="lazy" style="max-height:160px; max-width:160px; object-fit:contain;" onerror="this.onerror=null;this.src='data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200' width='200' height='200'%3E%3Crect width='200' height='200' fill='%23f8fafc' rx='12'/%3E%3Cpath d='M70 80h60v70a10 10 0 0 1-10 10H80a10 10 0 0 1-10-10V80zm10-10a20 20 0 0 1 40 0h-8a12 12 0 0 0-24 0h-8z' fill='%23cbd5e1'/%3E%3Ctext x='100' y='145' font-family='sans-serif' font-size='12' font-weight='600' fill='%2364748b' text-anchor='middle'%3EDeal Item%3C/text%3E%3C/svg%3E';">
+          <img class="product-img" src="${item.image}" alt="${escapeHtml(item.title)}" loading="lazy" style="max-height:160px; max-width:160px; object-fit:contain;" onerror="this.onerror=null;this.src='https://thebhom.in/assets/festive/festive_pin_1.jpg';">
         </a>
         <span class="discount-badge">${cleanDiscount}</span>
         <span class="store-badge ${String(item.store).toLowerCase().replace(/\s+/g, '-')}">${escapeHtml(item.store)}</span>
