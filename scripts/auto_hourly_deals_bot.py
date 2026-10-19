@@ -94,7 +94,7 @@ def slugify(text):
 def clean_image_url(url, store="Amazon"):
     """Extract full-resolution uncropped media url"""
     if not url:
-        return "https://thebhom.in/assets/festive/festive_pin_1.jpg"
+        return ""
     if "amazon.com" in url or "amazon.in" in url or "media-amazon" in url:
         return re.sub(r'\._[A-Za-z0-9_,+-]+_\.', '.', url)
     if "flixcart.com" in url:
@@ -151,6 +151,7 @@ def create_product_html(prod):
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="no-referrer">
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
   <title>{saxutils.escape(prod['title'])} at ₹{prod['price']:,} ({discount_str}) - TheBhom Deals</title>
   <meta name="description" content="Get {saxutils.escape(prod['title'])} at ₹{prod['price']:,} with {discount_str}. Verified lowest price on {store_name}, authentic specs, ratings, and direct buy link.">
@@ -276,7 +277,7 @@ def create_product_html(prod):
     <div style="background: #fff; border-radius: 12px; padding: 24px; border: 1px solid #e0e0e0; display: flex; flex-direction: column; gap: 24px; box-shadow: 0 4px 16px rgba(0,0,0,0.03);">
       <div style="display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-start;">
         <div style="flex: 1; min-width: 280px; max-width: 420px; text-align: center; background: #f8fafc; padding: 24px; border-radius: 8px;">
-          <img src="{clean_img}" alt="{saxutils.escape(prod['title'])}" style="max-width: 100%; max-height: 420px; object-fit: contain; border-radius: 6px;">
+          <img src="{clean_img}" alt="{saxutils.escape(prod['title'])}" referrerpolicy="no-referrer" style="max-width: 100%; max-height: 420px; object-fit: contain; border-radius: 6px;">
         </div>
         <div style="flex: 2; min-width: 300px; display: flex; flex-direction: column; gap: 12px;">
           <span style="font-size: 13px; font-weight: 700; color: #2563eb; text-transform: uppercase;">{prod.get('category', 'Fashion').upper()} • {store_name.upper()}</span>
@@ -1054,8 +1055,10 @@ def run_hourly_bot(limit_per_run=12):
         processed_batch.append(p)
         
         # 2. Promote to top of catalog (remove duplicate if re-promoting)
-        p_id_str = str(pid).lower()
-        catalog = [item for item in catalog if str(item.get("id") or item.get("asin") or item.get("pid")).lower() != p_id_str]
+        p["image"] = clean_img
+        p["cleanImage"] = clean_img
+        p_id_str = str(pid).lower().replace("amz-", "").replace("fk-", "").replace("myn-", "")
+        catalog = [item for item in catalog if str(item.get("id") or item.get("asin") or item.get("pid") or "").lower().replace("amz-", "").replace("fk-", "").replace("myn-", "") != p_id_str]
         catalog.insert(0, p)
         print(f"  + Added/Promoted [{p['store']}]: {p['title'][:55]}... at ₹{p['price']:,}")
         

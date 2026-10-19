@@ -1232,6 +1232,15 @@ function renderProducts() {
   container.innerHTML = filtered.map(item => createProductCardHtml(item)).join("");
 }
 
+function handleCardImgError(imgEl, fallbackUrl) {
+  if (fallbackUrl && imgEl.src !== fallbackUrl) {
+    imgEl.src = fallbackUrl;
+    return;
+  }
+  imgEl.onerror = null;
+  imgEl.src = 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160"><rect width="100%" height="100%" fill="%23f8fafc"/><circle cx="80" cy="80" r="32" fill="%23f1f5f9"/><text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" font-size="28">🛍️</text><text x="50%" y="78%" dominant-baseline="middle" text-anchor="middle" fill="%2394a3b8" font-size="11" font-weight="700" font-family="-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif">TheBhom</text></svg>';
+}
+
 // Create Flipkart/Amazon Style Compact Product Card
 function createProductCardHtml(item) {
   const dealPrice = Number(item.dealPrice ?? item.price ?? 0);
@@ -1259,6 +1268,8 @@ function createProductCardHtml(item) {
   const isLowestPrice = (parseInt(item.discount || "0") >= 60) || (dealPrice <= 499 && dealPrice > 0);
   const cleanDiscount = (item.discount && item.discount.length <= 15) ? escapeHtml(item.discount) : "DEAL";
   const buyUrl = item.profitLink || item.url || (item.asin ? `https://www.amazon.in/dp/${item.asin}?tag=bhom120704-21` : detailUrl);
+  const primaryImg = item.cleanImage || item.image || "";
+  const fallbackImg = (item.image && item.cleanImage && item.image !== item.cleanImage) ? item.image : "";
 
   return `
     <article class="product-card" data-id="${item.id}">
@@ -1266,7 +1277,7 @@ function createProductCardHtml(item) {
       <!-- Top Image Container -->
       <div class="product-thumb-box" style="position:relative;">
         <a href="${detailUrl}" class="thumb-link" title="${escapeHtml(item.title)}">
-          <img class="product-img" src="${item.image}" alt="${escapeHtml(item.title)}" loading="lazy" style="max-height:160px; max-width:160px; object-fit:contain;" onerror="this.onerror=null;this.src='https://thebhom.in/assets/festive/festive_pin_1.jpg';">
+          <img class="product-img" src="${primaryImg}" alt="${escapeHtml(item.title)}" loading="lazy" referrerpolicy="no-referrer" style="max-height:160px; max-width:160px; object-fit:contain;" onerror="handleCardImgError(this, '${escapeHtml(fallbackImg)}')">
         </a>
         <span class="discount-badge">${cleanDiscount}</span>
         <span class="store-badge ${String(item.store).toLowerCase().replace(/\s+/g, '-')}">${escapeHtml(item.store)}</span>
