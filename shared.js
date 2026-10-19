@@ -288,6 +288,7 @@ function renderHeader(activePage=''){
     <ul class="hdr-nav">
       <li><a href="/deals/" class="hdr-nav-link ${activePage==='deals'?'active':''}" title="TheBhom Deals"><span class="hdr-nav-ic" style="color:#f59e0b;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"/><circle cx="7" cy="7" r="1.5"/></svg></span><span class="hdr-nav-txt" style="color:#f59e0b;font-weight:700;">Deals</span></a></li>
       <li><a href="/downloader/" class="hdr-nav-link ${activePage==='downloader'?'active':''}" title="Universal Video Downloader"><span class="hdr-nav-ic" style="color:#0891b2;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0891b2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span><span class="hdr-nav-txt" style="color:#0891b2;font-weight:700;">Downloader</span></a></li>
+      <li><button onclick="window.openFavDrawer()" class="hdr-nav-link" style="background:none;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:6px;font:inherit;" title="Saved Items"><span class="hdr-nav-ic" style="color:#e11d48;"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></span><span class="hdr-nav-txt" style="color:#e11d48;font-weight:700;">Saved</span><span class="fav-badge fav-count-badge" style="background:#e11d48;color:#fff;font-size:11px;font-weight:700;padding:1px 6px;border-radius:12px;min-width:18px;text-align:center;">0</span></button></li>
     </ul>
   </nav>
   <div class="hdr-right">
@@ -317,6 +318,7 @@ function renderHeader(activePage=''){
   <a href="/">🏠 Home</a>
   <a href="/deals/" style="color:#f59e0b;font-weight:700;">🔥 Deals</a>
   <a href="/downloader/" style="color:#0891b2;font-weight:700;">⚡ Downloader</a>
+  <a href="#" onclick="window.openFavDrawer();return false;" style="color:#e11d48;font-weight:700;">❤️ Saved Items (<span class="fav-count-badge">0</span>)</a>
   <a href="/about">ℹ️ About Us</a>
   <a href="/contact">📞 Contact</a>
   <a href="#" onclick="openSpotlight();return false;" style="color:#2563eb;font-weight:700;">🔍 Search (Cmd+K)</a>
@@ -907,30 +909,15 @@ function initShared(){
   window.renderFavDrawer();
   window.updateFavBadges();
 
-  // Floating saved button
-  if (!document.getElementById('favFloatBtn')) {
-    const fb = document.createElement('button');
-    fb.id = 'favFloatBtn';
-    fb.className = 'fav-btn-float';
-    fb.innerHTML = `❤️ Saved <span class="fav-badge fav-count-badge">0</span>`;
-    fb.onclick = window.openFavDrawer;
-    document.body.appendChild(fb);
-    window.updateFavBadges();
-  }
-
-  // Floating Spotlight shortcut button on mobile/desktop
-  if (!document.getElementById('spotlightFloatBtn')) {
-    const sb = document.createElement('button');
-    sb.id = 'spotlightFloatBtn';
-    sb.style.cssText = 'position:fixed;bottom:20px;right:90px;z-index:9990;background:#111128;border:1px solid rgba(124,58,237,0.5);color:#c084fc;font-weight:700;border-radius:50px;padding:8px 16px;cursor:pointer;font-size:.78rem;box-shadow:0 8px 24px rgba(0,0,0,0.6);display:flex;align-items:center;gap:6px;';
-    sb.innerHTML = `🔍 Search <kbd style="background:rgba(0,0,0,0.4);padding:1px 5px;border-radius:4px;font-size:.65rem;border:1px solid rgba(255,255,255,0.2);">⌘K</kbd>`;
-    sb.onclick = window.openSpotlight;
-    document.body.appendChild(sb);
-  }
+  // Purge legacy floating buttons & fake activity tickers if present
+  ['favFloatBtn', 'spotlightFloatBtn', 'activityTicker'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.remove();
+  });
+  document.querySelectorAll('.fav-btn-float, .activity-ticker').forEach(el => el.remove());
 
   // Init features
   initSpotlight();
-  initActivityTicker();
   initQuoteHighlighter();
   applyLanguage(currentLang);
 
@@ -1639,54 +1626,10 @@ document.addEventListener('keydown', (e) => {
 });
 
 
-// ============================================================
-// SOCIAL PROOF LIVE ACTIVITY TICKER
-// ============================================================
-const TICKER_ACTIVITIES = [
-  { city: 'Mumbai', action: '4K Cyberpunk Tokyo Wallpaper', type: 'downloaded 📱' },
-  { city: 'Delhi', action: 'Autonomous AI Agents 2026', type: 'started reading 📚' },
-  { city: 'Bengaluru', action: 'Instagram Carousel Masterpack', type: 'customized 🎨' },
-  { city: 'Jaipur', action: 'Royal Gold Anniversary Card', type: 'personalized 💌' },
-  { city: 'Pune', action: 'Solopreneur 2026 Blueprint', type: 'downloaded PDF 📚' },
-  { city: 'Hyderabad', action: '4K Cosmic Nebula Wallpaper', type: 'saved to Favorites ❤️' },
-  { city: 'Ahmedabad', action: 'TechVision AI Magazine', type: 'read full issue 📰' },
-  { city: 'Kolkata', action: 'Minimalist Business Card Pack', type: 'exported 🎨' },
-  { city: 'Chandigarh', action: 'Heartfelt Rose Foldable Card', type: 'shared on WhatsApp 💬' }
-];
-
+// Social proof activity ticker permanently removed per user directive
 function initActivityTicker() {
-  if (document.getElementById('activityTicker')) return;
-  const ticker = document.createElement('div');
-  ticker.className = 'activity-ticker';
-  ticker.id = 'activityTicker';
-  ticker.innerHTML = `
-    <div class="ticker-avatar">⚡</div>
-    <div class="ticker-content">
-      <div class="ticker-title" id="tickerTitle">Someone from Mumbai</div>
-      <div class="ticker-meta" id="tickerMeta">Downloaded 4K Wallpaper • Just now</div>
-    </div>
-    <button class="ticker-close" onclick="this.parentElement.classList.remove('show')">✕</button>
-  `;
-  document.body.appendChild(ticker);
-
-  let idx = 0;
-  function showNextTicker() {
-    const act = TICKER_ACTIVITIES[idx % TICKER_ACTIVITIES.length];
-    idx++;
-    const tTitle = document.getElementById('tickerTitle');
-    const tMeta = document.getElementById('tickerMeta');
-    if (tTitle && tMeta) {
-      tTitle.textContent = `Someone from ${act.city}`;
-      tMeta.textContent = `${act.type} "${act.action}" • Just now`;
-    }
-    ticker.classList.add('show');
-    setTimeout(() => {
-      ticker.classList.remove('show');
-    }, 5500);
-  }
-
-  setTimeout(showNextTicker, 6000);
-  setInterval(showNextTicker, 30000);
+  const el = document.getElementById('activityTicker');
+  if (el) el.remove();
 }
 
 // ============================================================

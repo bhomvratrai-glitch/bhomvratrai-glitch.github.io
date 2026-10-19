@@ -783,9 +783,8 @@ header.hdr .hdr-right, .hdr-right {
 .pwa-btn:hover{transform:translateY(-1px);box-shadow:0 4px 15px rgba(236,72,153,0.45);}
 
 /* ===== UNIVERSAL FAVORITES DRAWER ===== */
-.fav-btn-float{position:fixed;bottom:24px;left:24px;z-index:990;background:linear-gradient(135deg,#f43f5e,#ec4899);color:#fff;border:none;border-radius:50px;padding:10px 18px;font-size:0.85rem;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:8px;box-shadow:0 8px 25px rgba(244,63,94,0.45);transition:var(--t);}
-.fav-btn-float:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(244,63,94,0.6);}
-.fav-badge{background:#fff;color:#f43f5e;font-size:0.75rem;padding:2px 8px;border-radius:50px;font-weight:800;}
+.fav-btn-float, #spotlightFloatBtn, .activity-ticker, #activityTicker{display:none !important;visibility:hidden !important;pointer-events:none !important;opacity:0 !important;position:absolute !important;top:-9999px !important;}
+.fav-badge{background:#e11d48;color:#fff;font-size:0.75rem;padding:2px 8px;border-radius:50px;font-weight:800;}
 
 .fav-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.75);backdrop-filter:blur(6px);z-index:9998;opacity:0;pointer-events:none;transition:opacity 0.3s ease;}
 .fav-overlay.open{opacity:1;pointer-events:auto;}
@@ -881,16 +880,9 @@ header.hdr .hdr-right, .hdr-right {
 .iphone-widget-date{font-size:0.85rem;color:rgba(255,255,255,0.9);margin-top:4px;font-weight:600;text-shadow:0 1px 4px rgba(0,0,0,0.7);}
 
 /* ============================================================
-   SOCIAL PROOF LIVE ACTIVITY TICKER
+   SOCIAL PROOF LIVE ACTIVITY TICKER (DISABLED)
    ============================================================ */
-.activity-ticker{position:fixed;bottom:24px;left:24px;z-index:9990;background:rgba(18,18,36,0.95);backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,0.12);border-radius:50px;padding:8px 18px 8px 10px;display:flex;align-items:center;gap:10px;box-shadow:0 12px 35px rgba(0,0,0,0.6);transform:translateY(150%);transition:transform 0.4s cubic-bezier(0.16,1,0.3,1);pointer-events:none;}
-.activity-ticker.show{transform:translateY(0);pointer-events:auto;}
-.ticker-avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#a855f7,#ec4899);display:flex;align-items:center;justify-content:center;font-size:0.9rem;font-weight:800;color:#fff;}
-.ticker-content{font-size:0.78rem;line-height:1.35;}
-.ticker-title{font-weight:700;color:#fff;}
-.ticker-meta{color:#94a3b8;font-size:0.7rem;}
-.ticker-close{background:none;border:none;color:#64748b;font-size:0.9rem;cursor:pointer;padding:2px 4px;margin-left:4px;}
-.ticker-close:hover{color:#fff;}
+.activity-ticker, .activity-ticker.show{display:none !important;visibility:hidden !important;pointer-events:none !important;opacity:0 !important;}
 
 /* ============================================================
    SMART QUOTE HIGHLIGHTER TOOLTIP
