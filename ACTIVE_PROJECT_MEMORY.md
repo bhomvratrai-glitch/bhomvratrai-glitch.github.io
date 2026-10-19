@@ -81,3 +81,31 @@
   - Deployed to Cloudflare Pages (`https://1f1ae057.thebhom.pages.dev` / `thebhom.in`) and purged edge cache.
   - Pinged IndexNow API for instant crawling by Bing, Yahoo, and Yandex.
 
+---
+
+## 5. Autonomous Hourly Women's Clothing Deals Bot (`scripts/auto_hourly_deals_bot.py`)
+- **Direct Flipshope API (`/api/prices/getrecentpricedrop`)**:
+  - Connects to: `https://flipshope.com/deals?subcategory=dresses-leggings-maternity_wear-women_ethnicwear-women_jackets-women_jeans-women_shorts-women_topwear-women_winterwear-makeup`
+  - Targets subcategories: Dresses (`301`), Leggings (`304`), Maternity (`305`), Skirts (`315`), Ethnicwear (`316`), Innerwear/Nightwear (`317`), Jackets (`318`), Jeans (`319`), Shorts (`320`), Topwear (`321`), Winterwear (`322`), Heels (`504`), Jewellery (`505`), Ethnic Footwear (`514`), Sandals (`515`), Shoes (`516`), Makeup (`804`).
+  - Ingests 32-64 live women's clothing & beauty deals per call with zero bot blocks.
+- **Affiliate Tagging Gate**:
+  - Amazon: Direct `tag=bhom120704-21` (100% direct bank payout).
+  - Flipkart/Myntra/Ajio: EK Affiliate / EarnKaro shortlinks (`5610321` via `affiliaters.in` API).
+- **Dedicated SEO Landing Pages**:
+  - Automatically generates `/deals/p/{slug}-{pid}.html` for every product.
+  - Embedded with Schema.org `Product` JSON-LD, GA4 analytics (`G-GHVNZWFVQV`), AdSense, and responsive affiliate Buy buttons.
+- **Pinterest Organic SEO Formatting (Strict Non-Spam Directives)**:
+  - Title: Full, clean, natural product name (zero "Loot", "% OFF", "Price Drop", or price prefixes).
+  - Description: Rich organic fashion copy detailing fabric, silhouette, occasions (festivals, wedding functions, casual outings, office wear), pairing/styling tips, and targeted Pinterest category hashtags (`#WomensFashion #EthnicWear #KurtiDesign #SareeLove #LehengaCholi #OOTD #FashionInspo`).
+  - Feeds: Syndicates to `women-fashion-feed.xml` and `pinterest-feed.xml`.
+- **Self-Healing Verification Audit Engine (`verify_and_self_heal`)**:
+  - Runs at the end of every bot execution:
+    1. Audits dedicated HTML pages existence & size (>500B); auto-regenerates missing ones on the fly.
+    2. Verifies affiliate tracking parameters (`bhom120704-21` / `5610321`).
+    3. Validates XML syntax for all 5 feed/sitemap files via `ElementTree`; auto-repairs namespace mismatches.
+    4. Guarantees 0 spam words in Pinterest feeds.
+    5. Confirms image and link reachability.
+    6. Submits new URLs to IndexNow API (202 OK).
+- **Cloud Automation**: Runs 24/7 on GitHub Actions (`.github/workflows/hourly_deals_bot.yml`) on cron `0 * * * *`.
+
+
