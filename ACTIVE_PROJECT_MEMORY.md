@@ -139,3 +139,21 @@
   - **Catalog Cleaned & Deduplicated**: Purged 37 generic Desidime placeholders and 47 duplicate products from `deals/data/catalog.json` (8,728 active unique products).
   - **Surgical Fallback & Image Hygiene**: `deals/js/app.js` now prioritizes `item.cleanImage` with full uncropped CDN resolution, adds `referrerpolicy="no-referrer"`, and uses a clean SVG fallback in case of genuine image failure.
   - **Hourly Bot Deduplication Protected**: Updated `scripts/auto_hourly_deals_bot.py` to strictly normalize product IDs and prevent re-insertion duplication.
+
+- **Flipshope 12-Category Exact Quotas Automation Engine**:
+  - Configured `FLIPSHOPE_CATEGORIES_CONFIG` in `scripts/auto_hourly_deals_bot.py` with exact subcategory ID mapping:
+    - **Women ethnicwear** (`[316]`): 10 products/hour
+    - **Dresses** (`[301]`): 10 products/hour
+    - **Women jackets** (`[318]`): 5 products/hour
+    - **Women jeans** (`[319]`): 5 products/hour
+    - **Women shorts** (`[320]`): 5 products/hour
+    - **Women topwear** (`[321]`): 5 products/hour
+    - **Women winterwear** (`[322]`): 5 products/hour
+    - **Makeup** (`[804]`): 5 products/hour
+    - **Leggings** (`[304]`): 5 products/hour
+    - **Heels** (`[504]`): 5 products/hour
+    - **Stylist bags** (`[511]`): 5 products/hour
+    - **Women sandals** (`[514, 515]`): 5 products/hour
+  - Total Target: Exactly 70 curated, high-converting products per run.
+  - Automated ingestion test verified: Collected 70/70 items across all 12 categories, created 70 dedicated HTML pages, updated `catalog.json` (8,810 total products), prepended to RSS feeds & sitemap, triggered IndexNow search engine ping (202 OK), and pushed commit to GitHub `main`.
+
