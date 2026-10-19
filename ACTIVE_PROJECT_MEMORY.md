@@ -108,4 +108,24 @@
     6. Submits new URLs to IndexNow API (202 OK).
 - **Cloud Automation**: Runs 24/7 on GitHub Actions (`.github/workflows/hourly_deals_bot.yml`) on cron `0 * * * *`.
 
+---
+
+## 6. Pinterest Traffic Bridge & Google AdSense Monetization
+- **100% Pinterest Site Bridge**:
+  - `women-fashion-feed.xml` & `pinterest-feed.xml` point 100% of pin links directly to `https://www.thebhom.in/deals/p/...`.
+  - Drives massive high-intent organic social referral traffic into `thebhom.in`, recorded in GA4 (`G-GHVNZWFVQV`).
+  - Guarantees zero affiliate link bans from Pinterest; builds authoritative DA 94 backlink profile for Google SEO.
+- **Pinterest Domain Verification & Rich Pins**:
+  - Injected `<meta name="p:domain_verify" content="027b813eb55f730989b6236aea44ed88">` across all 9,800+ product pages.
+  - OpenGraph Product meta tags (`og:site_name`, `product:price:amount`, `product:price:currency`, `product:availability`, `product:brand`) and Schema.org Product JSON-LD activate automatic Pinterest Rich Pins with live price badges.
+- **2-Way Social Authority Backlink**:
+  - Product pages feature responsive **"Save on Pinterest"** button and official profile follow links (`in.pinterest.com/bhomvrat/`).
+- **Google AdSense Dual-Ad Slots Architecture**:
+  - Injected into all 9,806 dedicated product landing pages:
+    - **Top Slot (5470514139)**: Responsive Display banner right below breadcrumbs.
+    - **Bottom Slot (9101298657)**: In-Article Fluid banner right before `</main>`.
+    - Labeled with standard compliance indicators (`Advertisement` & `Sponsored Deal Alert`).
+  - Accelerated AdSense Approval Signal: Real Pinterest referral traffic arriving on pages loaded with active AdSense tags and `ads.txt` authorization.
+
+
 
