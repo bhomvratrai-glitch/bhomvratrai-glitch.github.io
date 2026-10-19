@@ -122,6 +122,11 @@ def create_product_html(prod):
     filepath = os.path.join(DEALS_P_DIR, filename)
     canonical_url = f"https://www.thebhom.in/deals/p/{filename}"
     
+    if "profitLink" not in prod:
+        prod["profitLink"] = build_affiliate_link(prod.get("url", ""), prod.get("store", "Amazon"))
+    if "image" not in prod:
+        prod["image"] = prod.get("cleanImage", "")
+        
     clean_img = clean_image_url(prod["image"], prod["store"])
     discount_str = f"{prod['discountNum']}% OFF" if "discountNum" in prod and prod['discountNum'] > 0 else prod.get("discount", "SPECIAL PRICE")
     
@@ -305,7 +310,7 @@ def create_product_html(prod):
     return filename, canonical_url
 
 def fetch_flipshope_deals():
-    """Scrapes latest real-time women's clothing & fashion deals from Flipshope across multiple categories & searches"""
+    """Scrapes latest real-time women's clothing & fashion deals from Flipshope across direct API & subcategory URLs"""
     items = []
     seen_pids = set()
     
@@ -315,24 +320,108 @@ def fetch_flipshope_deals():
         "laptop", "oled", "ssd", "ram", "intel", "processor", "tablet", "mouse",
         "keyboard", "cable", "charger", "earbuds", "headphone", "speaker", "tv",
         "idol", "murti", "brass", "shiva", "ganesha", "pooja", "god", "mandir",
-        "men ", "men's", "male ", "boys ", "beard", "shaving", "trimmer"
+        "men ", "men's", "male ", "boys ", "beard", "shaving", "trimmer", "cleaner", "drain", "downlight", "microwave"
     ]
     
     # Positive women's fashion keywords
     WOMEN_KW = [
         "women", "woman", "saree", "sari", "kurti", "kurta", "lehenga", "anarkali",
         "dress", "gown", "skirt", "palazzo", "dupatta", "top", "crop top", "corset",
-        "tunic", "bra", "lingerie", "handbag", "jewellery", "jewelry", "earring",
-        "necklace", "jhumka", "bangle", "heel", "sandal", "trouser", "pants"
+        "tunic", "bra", "bralette", "camisole", "lingerie", "handbag", "jewellery", "jewelry", "earring",
+        "necklace", "jhumka", "bangle", "heel", "sandal", "trouser", "pants", "night suit", "makeup"
     ]
 
+    # METHOD 1: Direct Flipshope Subcategory API (High Volume Ingestion: 32-64 items per call)
+    # Matches: https://flipshope.com/deals?subcategory=dresses-leggings-maternity_wear-women_ethnicwear-women_jackets-women_jeans-women_shorts-women_topwear-women_winterwear-makeup
+    # Subcategories: Dresses(301), Leggings(304), Maternity(305), Skirts(315), Ethnicwear(316),
+    # Innerwear/Nightwear(317), Jackets(318), Jeans(319), Shorts(320), Topwear(321), Winterwear(322),
+    # Heels(504), Jewellery(505), Ethnic Footwear(514), Sandals(515), Shoes(516), Makeup(804)
+    WOMEN_SUB_CATS = [301, 304, 305, 315, 316, 317, 318, 319, 320, 321, 322, 504, 505, 514, 515, 516, 804]
+    
+    for page in [0, 1]:
+        try:
+            api_url = "https://flipshope.com/api/prices/getrecentpricedrop"
+            api_payload = {
+                "page": page,
+                "sid_arr": [],
+                "cat_arr": [],
+                "sub_cat_arr": WOMEN_SUB_CATS,
+                "limit": 50
+            }
+            api_headers = {
+                "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+                "Content-Type": "application/json",
+                "Referer": "https://flipshope.com/deals?subcategory=dresses-leggings-maternity_wear-women_ethnicwear-women_jackets-women_jeans-women_shorts-women_topwear-women_winterwear-makeup",
+                "Origin": "https://flipshope.com"
+            }
+            req = urllib.request.Request(api_url, data=json.dumps(api_payload).encode("utf-8"), headers=api_headers, method="POST")
+            res = urllib.request.urlopen(req, context=SSL_CTX, timeout=8)
+            api_data = json.loads(res.read().decode("utf-8"))
+            deals = api_data.get("data", [])
+            print(f"  ⚡ Flipshope API (page {page}): received {len(deals)} women's clothing deals.")
+            
+            for d in deals:
+                t = d.get("title", "")
+                t_lower = t.lower()
+                
+                if any(x in t_lower for x in EXCLUDE_KW):
+                    continue
+                
+                store_name = d.get("store_name", "amazon").capitalize()
+                pid = str(d.get("PID", ""))
+                if not pid or not t:
+                    continue
+                clean_pid = pid.lower()
+                if clean_pid in seen_pids:
+                    continue
+                seen_pids.add(clean_pid)
+                
+                price = int(d.get("price", 0))
+                mrp = int(d.get("mrp", price))
+                if mrp <= price:
+                    mrp = int(price * 1.8)
+                disc = int(((mrp - price) / mrp) * 100)
+                
+                if store_name.lower() == "amazon":
+                    store_url = f"https://www.amazon.in/dp/{pid}"
+                    full_pid = f"AMZ-{pid}"
+                elif store_name.lower() == "flipkart":
+                    store_url = f"https://www.flipkart.com/product/p/itme?pid={pid}"
+                    full_pid = f"FK-{pid}"
+                elif store_name.lower() == "myntra":
+                    store_url = f"https://www.myntra.com/{pid}"
+                    full_pid = f"MYN-{pid}"
+                else:
+                    store_url = f"https://www.amazon.in/dp/{pid}"
+                    full_pid = f"AMZ-{pid}"
+                
+                items.append({
+                    "asin": pid,
+                    "id": full_pid,
+                    "title": t.replace("...more", "").strip(),
+                    "price": price,
+                    "mrp": mrp,
+                    "discountNum": disc,
+                    "image": clean_image_url(d.get("imgurl", "")),
+                    "rating": 4.3,
+                    "reviews": 920,
+                    "store": store_name,
+                    "category": "fashion",
+                    "department": "women",
+                    "brand": d.get("brand", store_name),
+                    "url": store_url
+                })
+        except Exception as e:
+            print(f"  ⚠️ Flipshope API notice (page {page}): {e}")
+
+    # METHOD 2: Fallback target URLs (HTML SSR parsing)
     target_urls = [
+        "https://flipshope.com/deals?subcategory=dresses-leggings-maternity_wear-women_ethnicwear-women_jackets-women_jeans-women_shorts-women_topwear-women_winterwear-makeup",
         "https://flipshope.com/deals?category=3",
         "https://flipshope.com/deals?search=saree",
         "https://flipshope.com/deals?search=kurti",
         "https://flipshope.com/deals?search=lehenga",
         "https://flipshope.com/deals?search=dress",
-        "https://flipshope.com/deals?search=women",
         "https://flipshope.com/deals"
     ]
 
@@ -350,11 +439,9 @@ def fetch_flipshope_deals():
                 t = d.get("title", "")
                 t_lower = t.lower()
                 
-                # Check negative exclusions (unconditional: non-fashion items never allowed)
                 if any(x in t_lower for x in EXCLUDE_KW):
                     continue
                 
-                # Match women's clothing keywords or subcategory
                 is_women = any(k in t_lower for k in WOMEN_KW) or (str(d.get("category")) == "3" and d.get("sub_cat_id") in [301, 304, 305, 315, 316, 317, 318, 319, 320, 321, 322])
                 
                 if is_women:
@@ -371,7 +458,6 @@ def fetch_flipshope_deals():
                     mrp = int(d.get("mrp", price))
                     if mrp <= price:
                         mrp = int(price * 1.8)
-                    
                     disc = int(((mrp - price) / mrp) * 100)
                     
                     if store_name.lower() == "amazon":
@@ -926,6 +1012,7 @@ def run_hourly_bot(limit_per_run=12):
     new_feed_items = []
     new_pinterest_items = []
     new_sitemap_urls = []
+    processed_batch = []
     
     for p in batch:
         pid = p.get("asin") or p.get("pid") or p.get("id")
@@ -952,11 +1039,11 @@ def run_hourly_bot(limit_per_run=12):
                 p["discountNum"] = 0
                 p["discount"] = "SPECIAL PRICE"
                 
-        # 1. Generate dedicated HTML page
         fname, canonical_url = create_product_html(p)
         p["dedicatedPage"] = canonical_url
         p["slug"] = fname.replace(".html", "")
         new_sitemap_urls.append(canonical_url)
+        processed_batch.append(p)
         
         # 2. Promote to top of catalog (remove duplicate if re-promoting)
         p_id_str = str(pid).lower()
@@ -1055,10 +1142,10 @@ def run_hourly_bot(limit_per_run=12):
         print(f"⚠️ IndexNow ping notice: {e}")
 
     # 7. Self-Healing & Comprehensive Verification Audit
-    verify_and_self_heal(batch, catalog)
+    verify_and_self_heal(processed_batch, catalog)
 
-    print(f"\n🎉 Successfully processed and syndicated {len(batch)} products across all channels!")
-    return len(batch)
+    print(f"\n🎉 Successfully processed and syndicated {len(processed_batch)} products across all channels!")
+    return len(processed_batch)
 
 if __name__ == "__main__":
     count = run_hourly_bot(limit_per_run=12)
