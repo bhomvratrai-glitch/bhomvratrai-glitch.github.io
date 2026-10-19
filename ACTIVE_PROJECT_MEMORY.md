@@ -180,15 +180,17 @@
 - **Omnichannel Ecosystem Backlink Integration (44,000+ Backlinks Injected)**:
   - **Integrated Channels**:
     1. **Amazon Influencer Storefront**: `https://www.amazon.in/shop/bhom120704` (Curated Fashion & Home Finds)
-    2. **Whop Coloring Books**: `https://whop.com/omrai-cute-animals/` (Cute Animals Printable AI Art Books)
+    2. **Whop Coloring Books**: `https://cute-animals-pages.whop.site/` (Cute Animals Printable AI Art Books)
     3. **Pinterest Official Profile**: `https://in.pinterest.com/bhomvrat/` (@bhomvrat Curated Loot Boards)
     4. **Instagram Fashion Deals**: `https://www.instagram.com/fashion_deals1207/` (@fashion_deals1207 Daily Reels)
-    5. **Facebook Fashion Deals**: `https://www.facebook.com/fashiondeals1207` (Community Updates)
+    5. **Facebook Fashion Deals**: `https://www.facebook.com/profile.php?id=61595491710213` (Fashion Deals Page)
+    6. **Facebook Sci FI**: `https://www.facebook.com/profile.php?id=100089719570335` (Sci FI Universe Page)
   - **Placement Locations**:
-    - `shared.js` (`renderFooter()`): Global 5th column "Official Stores & Socials" + interactive pill strip in `footer-bottom` across all static tools and downloader pages.
+    - `shared.js` (`renderFooter()`): Global 5th column "Official Stores & Socials" + interactive pill strip in `footer-bottom` across the entire `thebhom.in` ecosystem.
+    - `downloader/index.html` & all 10 specialized downloader subpages: Added responsive official social & stores badge strip in footer.
     - `deals/index.html`: Elevated `.ecommerce-footer` with multi-brand gradient badge row.
-    - `scripts/generate_flipshope_style_page.py` & `deals/p/` (all 8,810 product pages): Added "Official Stores, Curated Collections & Communities" responsive card grid + footer links strip across the entire catalog.
-  - **Automated Pipeline**: Future hourly bot runs via `scripts/auto_hourly_deals_bot.py` will automatically bundle these exact backlinks into newly indexed deals.
+    - `scripts/generate_flipshope_style_page.py` & `deals/p/` (all 8,878 product pages): Added "Official Stores, Curated Collections & Communities" responsive card grid + footer links strip across the entire catalog.
+  - **Automated Pipeline**: Future hourly bot runs via `scripts/auto_hourly_deals_bot.py` and `scripts/generate_downloader_subpages.py` automatically bundle these exact backlinks into all pages.
 
 ---
 

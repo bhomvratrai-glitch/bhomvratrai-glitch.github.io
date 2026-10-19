@@ -4,3 +4,4 @@ _worker.bundle
 __pycache__/
 *.pyc
 node_modules/
+GEMINI.md
