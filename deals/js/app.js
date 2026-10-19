@@ -1054,7 +1054,9 @@ document.addEventListener("DOMContentLoaded", () => {
 // Load Catalog
 async function initCatalog() {
   try {
-    const res = await fetch("/deals/data/catalog.json?v20261012_v2");
+    // Dynamic 5-minute cachebuster so browser always receives fresh hourly deals
+    const cacheBuster = Math.floor(Date.now() / 300000);
+    const res = await fetch(`/deals/data/catalog.json?v=${cacheBuster}`);
     if (!res.ok) throw new Error("Catalog fetch error");
     catalog = await res.json();
   } catch (err) {

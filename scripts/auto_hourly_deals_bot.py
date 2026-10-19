@@ -623,14 +623,30 @@ def run_hourly_bot(limit_per_run=6):
             candidates.append(it)
             existing_pids.add(clean_pid)
             
-    print(f"🎯 Unprocessed Candidates Available: {len(candidates)}")
+    print(f"🎯 Direct Candidates Available: {len(candidates)}")
     
+    # Source C: Autonomous Rotation Engine from Catalog Database (Guarantees fresh hourly deals 24/7)
+    if len(candidates) < limit_per_run:
+        print(f"🔄 Selecting fresh high-discount verified deals from catalog database...")
+        for p in catalog[15:]:
+            t = p.get("title", "").lower()
+            disc = p.get("discountNum", 0)
+            img = p.get("image") or p.get("cleanImage")
+            is_women_fashion = any(k in t for k in ["women", "woman", "saree", "kurti", "dress", "lehenga", "top", "gown", "heel", "jewel", "handbag"]) or p.get("department") == "women"
+            if is_women_fashion and disc >= 50 and img:
+                cand_ids = {str(c.get("id") or c.get("asin") or c.get("pid")).lower() for c in candidates}
+                p_id_val = str(p.get("id") or p.get("asin") or p.get("pid")).lower()
+                if p_id_val not in cand_ids:
+                    candidates.append(p)
+                    if len(candidates) >= limit_per_run:
+                        break
+
     if not candidates:
-        print("✅ All candidate products are already up-to-date in the catalog! No new items required this hour.")
+        print("⚠️ No candidates available.")
         return 0
 
     batch = candidates[:limit_per_run]
-    print(f"🚀 Ingesting {len(batch)} fresh products in this hourly run...\n")
+    print(f"🚀 Ingesting & Syndicating {len(batch)} fresh products in this hourly run...\n")
     
     now_rfc822 = datetime.datetime.now(datetime.timezone.utc).strftime("%a, %d %b %Y %H:%M:%S GMT")
     today_str = datetime.date.today().isoformat()
@@ -670,9 +686,11 @@ def run_hourly_bot(limit_per_run=6):
         p["slug"] = fname.replace(".html", "")
         new_sitemap_urls.append(canonical_url)
         
-        # 2. Add to catalog
+        # 2. Promote to top of catalog (remove duplicate if re-promoting)
+        p_id_str = str(pid).lower()
+        catalog = [item for item in catalog if str(item.get("id") or item.get("asin") or item.get("pid")).lower() != p_id_str]
         catalog.insert(0, p)
-        print(f"  + Added [{p['store']}]: {p['title'][:55]}... at ₹{p['price']:,}")
+        print(f"  + Added/Promoted [{p['store']}]: {p['title'][:55]}... at ₹{p['price']:,}")
         
         # 3. Format for Discover RSS Feed
         disc_text = f"{p['discountNum']}% OFF"
