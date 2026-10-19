@@ -734,89 +734,32 @@ TRENDING_WOMEN_FASHION_POOL = [
     }
 ]
 
+try:
+    from scripts.reindex_pinterest_seo import TAXONOMY, classify, clean_title as clean_pin_title
+except ImportError:
+    from reindex_pinterest_seo import TAXONOMY, classify, clean_title as clean_pin_title
+
 def generate_pinterest_seo(prod):
     """
     Generates high-converting, 100% compliant Pinterest SEO metadata:
     - NO spam words: strips 'Loot', '% OFF', 'Price Drop', 'Deal', discounts.
     - Title: Full, clean, natural product name for search query matching.
-    - Description: Organic fashion copy highlighting style, fabric, occasion, styling tips,
-      and categorized hashtags for Pinterest search & category feed algorithms.
+    - Description: Organic category-native fashion/beauty copy highlighting style, occasion,
+      craftsmanship, styling tips, and precisely targeted hashtags for Pinterest search.
     """
     raw_title = prod.get("title", "").strip()
+    clean_title = clean_pin_title(raw_title)
     
-    # 1. Clean Title - remove spam / discount / price phrases
-    clean_title = re.sub(r'(?i)\b(loot|deal|deals|discount|\d+%\s*off|price\s*drop|offer|sale|under\s*₹?\d+|flat\s*\d+%)\b', '', raw_title)
-    clean_title = re.sub(r'[\(\[\{][^\)\]\}]*[\)\]\}]', '', clean_title) # remove bracketed spam
-    clean_title = re.sub(r'[⚡🔥💥✨🛍️🎉🏷️]', '', clean_title) # remove emojis
-    clean_title = re.sub(r'\s+', ' ', clean_title).strip(' -:,|')
-    
-    # If cleaned title is too short, fall back to raw title stripped of emojis
-    if len(clean_title) < 20:
-        clean_title = re.sub(r'[⚡🔥💥✨🛍️🎉🏷️]', '', raw_title).strip()
-    
-    # Cap title cleanly at word boundary under 95 chars (Pinterest optimal title length is 60-100)
-    if len(clean_title) > 95:
-        clean_title = clean_title[:95].rsplit(' ', 1)[0]
-    clean_title = re.sub(r'(?i)\b(with|for|and|in|at|of|the|a|an)\s*$', '', clean_title).strip(' -:,|')
-        
-    title_lower = clean_title.lower()
-    
-    # 2. Determine Fashion & Beauty Category & SEO Keywords
-    if any(k in title_lower for k in ["saree", "sari"]):
-        cat_name = "Designer Saree"
-        cat_hashtags = "#SareeLove #IndianSaree #SareeCollection #EthnicSaree #PartyWearSaree"
-        occasion = "festivals, wedding functions, pooja ceremonies, and formal ethnic occasions"
-        pair_tip = "Pair with statement jhumkas, an embroidered blouse, and traditional mojaris or embellished heels."
-    elif any(k in title_lower for k in ["kurti", "kurta"]):
-        cat_name = "Stylish Kurti & Kurta Set"
-        cat_hashtags = "#KurtiDesign #KurtaSet #IndianKurti #DailyEthnic #CottonKurti"
-        occasion = "daily office wear, festive gatherings, college, and casual day outings"
-        pair_tip = "Pair with oxidized silver earrings, a matching dupatta, and comfortable kolhapuris or flats."
-    elif any(k in title_lower for k in ["lehenga", "choli"]):
-        cat_name = "Embroidered Lehenga Choli"
-        cat_hashtags = "#LehengaCholi #BridalLehenga #WeddingWear #FestiveOutfit #DesignerLehenga"
-        occasion = "receptions, sangeet nights, weddings, and grand festive parties"
-        pair_tip = "Pair with heavy kundan jewellery, an ornate clutch, and high block heels."
-    elif any(k in title_lower for k in ["anarkali", "gown"]):
-        cat_name = "Floor Length Anarkali Gown"
-        cat_hashtags = "#AnarkaliSuit #IndianGown #AnarkaliDress #EthnicGown #FestiveFashion"
-        occasion = "family celebrations, evening parties, festive pujas, and weddings"
-        pair_tip = "Pair with dangling chandelier earrings, dewy glam makeup, and elegant metallic sandals."
-    elif any(k in title_lower for k in ["dress", "maxi", "midi"]):
-        cat_name = "Women's Western Dress"
-        cat_hashtags = "#WomensDress #WesternWear #SummerOutfit #MaxiDress #PartyDress"
-        occasion = "casual brunches, weekend vacations, dinner dates, and evening parties"
-        pair_tip = "Pair with classic strap heels or sneakers, a minimalist tote bag, and delicate accessories."
-    elif any(k in title_lower for k in ["top", "shirt", "corset", "tunic"]):
-        cat_name = "Chic Women's Top"
-        cat_hashtags = "#WomensTop #OfficeWear #CasualOutfit #KoreanFashion #StreetStyle"
-        occasion = "workdays, college presentations, casual meetups, and travel days"
-        pair_tip = "Pair with high-waist parallel trousers, denim jeans, or a structured midi skirt."
-    elif any(k in title_lower for k in ["pant", "trouser", "palazzo", "legging"]):
-        cat_name = "Women's Parallel Trousers & Pants"
-        cat_hashtags = "#WomenTrousers #PalazzoPants #KoreanPants #FormalWear #ComfortableStyle"
-        occasion = "office formals, meetings, casual brunches, and versatile everyday styling"
-        pair_tip = "Pair with a tucked-in linen shirt, a fitted crop top, or an ethnic short kurti."
-    elif any(k in title_lower for k in ["lipstick", "makeup", "foundation", "serum", "eyeliner", "kajal", "blush", "mascara", "concealer"]):
-        cat_name = "Luxury Beauty & Makeup Essential"
-        cat_hashtags = "#MakeupLovers #BeautyEssentials #LipstickJunkie #IndianBeauty #GlamLook #BeautyTips"
-        occasion = "daily beauty routines, festive touch-ups, glam party looks, and everyday glow"
-        pair_tip = "Apply on clean, prepped skin and blend seamlessly for a long-lasting, radiant finish."
-    elif any(k in title_lower for k in ["jewellery", "jewelry", "earring", "stud", "necklace", "jhumka", "bangle", "choker", "bracelet"]):
-        cat_name = "Handcrafted Designer Jewellery"
-        cat_hashtags = "#JewelleryDesign #IndianJewellery #JhumkaLove #BridalJewellery #FashionJewellery"
-        occasion = "weddings, festive gatherings, party evenings, and elegant traditional functions"
-        pair_tip = "Pair with silk sarees, regal lehengas, or contemporary fusion ethnic wear."
-    elif any(k in title_lower for k in ["heel", "sandal", "mojari", "flat", "kolhapuri", "wedge", "footwear"]):
-        cat_name = "Women's Footwear & Sandals"
-        cat_hashtags = "#WomensFootwear #HeelsLove #EthnicFootwear #ComfortableHeels #FashionShoes"
-        occasion = "festive occasions, wedding functions, casual outings, and stylish party evenings"
-        pair_tip = "Pair with ethnic suits, flowy maxi dresses, or sleek trousers for all-day comfort."
-    else:
-        cat_name = "Women's Fashion Apparel"
-        cat_hashtags = "#WomensFashion #IndianWear #EthnicOutfit #OOTD #FashionInspo"
-        occasion = "versatile celebrations, family gatherings, and everyday elegance"
-        pair_tip = "Pair with matching accessories, footwear, and subtle styling for a graceful look."
+    cat = classify(clean_title)
+    if not cat:
+        cat = {
+            "id": "fashion_apparel",
+            "name": "Women's Fashion Apparel",
+            "occasion": "versatile celebrations, family gatherings, and everyday elegance",
+            "craftsmanship": "Crafted with soft comfortable fabric, clean stitching, and versatile styling",
+            "styling": "Pair with your favorite accessories, footwear, and minimal styling for a graceful look.",
+            "hashtags": "#WomensFashion #OOTD #FashionInspo #DailyStyle #IndianFashion"
+        }
         
     store_name = prod.get("store", "Amazon").capitalize()
     brand_name = prod.get("brand", "").strip()
@@ -828,10 +771,10 @@ def generate_pinterest_seo(prod):
 
     description = (
         f"{lead_str} "
-        f"A beautifully tailored {cat_name} crafted for women seeking comfort, refined tailoring, and timeless style. "
-        f"Ideal for {occasion}. Features premium breathable fabric and high quality finishing. {pair_tip} "
+        f"An authentic {cat['name']} crafted for women seeking effortless elegance, refined tailoring, and modern style. "
+        f"Ideal for {cat['occasion']}. {cat['craftsmanship']}. {cat['styling']} "
         f"Available on {store_name} with verified doorstep delivery and authentic quality assurance. "
-        f"{cat_hashtags} #IndianFashion #StyleInspiration #EthnicStyle"
+        f"{cat['hashtags']}"
     )
     
     return clean_title, description
