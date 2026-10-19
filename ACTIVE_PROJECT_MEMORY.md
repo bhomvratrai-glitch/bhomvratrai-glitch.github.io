@@ -127,5 +127,12 @@
     - Labeled with standard compliance indicators (`Advertisement` & `Sponsored Deal Alert`).
   - Accelerated AdSense Approval Signal: Real Pinterest referral traffic arriving on pages loaded with active AdSense tags and `ads.txt` authorization.
 
+- **Pinterest Surgical 26-Category Taxonomy & Non-Spam SEO Engine (`reindex_pinterest_seo.py`)**:
+  - **Zero Promo Words in Titles**: 100% purged all terms like "Loot", "Deal", "% OFF", "Discounts", "Price Drop", "Today Only", "Save ₹". Titles contain strictly the clean brand + product name.
+  - **Strict Multi-Category Taxonomy**: Classifies products into 26 distinct fashion & beauty segments (Sarees, Kurtas, Western Dresses, Skirts, Tops, Shirts, Trousers, Jeans, Shorts, Jackets, Sweaters, Heels, Flats, Sneakers, Bags, Earrings, Necklaces, Bracelets, Face Makeup, Lip Makeup, Eye Makeup, Skincare, Fragrances, Lingerie/Sleepwear, Co-ord Sets, Accessories).
+  - **Category-Native Copy**: Zero mismatched descriptions (clothing gets fabric & drape, jewellery gets kundan & polish, shoes get cushioned insoles, cosmetics get blendable formula & skin finish).
+  - **Surgical Hashtag Matching**: Skirts only get `#WomensSkirt #MidiSkirt #WesternOutfit` (never `#IndianWear`), tops only get top tags, cosmetics only get cosmetic tags — ensuring maximum Pinterest search CTR and algorithmic push.
+  - **Live Deployed**: `pinterest-feed.xml` (1,276 items) and `women-fashion-feed.xml` (625 items) live on Cloudflare Pages and synced to GitHub.
+
 
 
