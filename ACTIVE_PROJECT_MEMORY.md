@@ -134,5 +134,8 @@
   - **Surgical Hashtag Matching**: Skirts only get `#WomensSkirt #MidiSkirt #WesternOutfit` (never `#IndianWear`), tops only get top tags, cosmetics only get cosmetic tags — ensuring maximum Pinterest search CTR and algorithmic push.
   - **Live Deployed**: `pinterest-feed.xml` (1,276 items) and `women-fashion-feed.xml` (625 items) live on Cloudflare Pages and synced to GitHub.
 
-
-
+- **Deals Main Page Image & Deduplication Engine**:
+  - **Root Cause Resolved**: Fixed missing `<meta name="referrer" content="no-referrer">` in `deals/index.html` and removed hardcoded `festive_pin_1.jpg` onerror fallback in `deals/js/app.js`, which caused CDN 403 Forbidden blocks to display the same red lehenga photo across products.
+  - **Catalog Cleaned & Deduplicated**: Purged 37 generic Desidime placeholders and 47 duplicate products from `deals/data/catalog.json` (8,728 active unique products).
+  - **Surgical Fallback & Image Hygiene**: `deals/js/app.js` now prioritizes `item.cleanImage` with full uncropped CDN resolution, adds `referrerpolicy="no-referrer"`, and uses a clean SVG fallback in case of genuine image failure.
+  - **Hourly Bot Deduplication Protected**: Updated `scripts/auto_hourly_deals_bot.py` to strictly normalize product IDs and prevent re-insertion duplication.
