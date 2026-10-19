@@ -338,7 +338,7 @@ def fetch_flipshope_deals():
     # Heels(504), Jewellery(505), Ethnic Footwear(514), Sandals(515), Shoes(516), Makeup(804)
     WOMEN_SUB_CATS = [301, 304, 305, 315, 316, 317, 318, 319, 320, 321, 322, 504, 505, 514, 515, 516, 804]
     
-    for page in [0, 1]:
+    for page in [0, 1, 2]:
         try:
             api_url = "https://flipshope.com/api/prices/getrecentpricedrop"
             api_payload = {
@@ -357,7 +357,7 @@ def fetch_flipshope_deals():
             req = urllib.request.Request(api_url, data=json.dumps(api_payload).encode("utf-8"), headers=api_headers, method="POST")
             res = urllib.request.urlopen(req, context=SSL_CTX, timeout=8)
             api_data = json.loads(res.read().decode("utf-8"))
-            deals = api_data.get("data", [])
+            deals = api_data if isinstance(api_data, list) else api_data.get("data", [])
             print(f"  ⚡ Flipshope API (page {page}): received {len(deals)} women's clothing deals.")
             
             for d in deals:
@@ -713,10 +713,11 @@ def generate_pinterest_seo(prod):
     # Cap title cleanly at word boundary under 95 chars (Pinterest optimal title length is 60-100)
     if len(clean_title) > 95:
         clean_title = clean_title[:95].rsplit(' ', 1)[0]
+    clean_title = re.sub(r'(?i)\b(with|for|and|in|at|of|the|a|an)\s*$', '', clean_title).strip(' -:,|')
         
     title_lower = clean_title.lower()
     
-    # 2. Determine Fashion Category & SEO Keywords
+    # 2. Determine Fashion & Beauty Category & SEO Keywords
     if any(k in title_lower for k in ["saree", "sari"]):
         cat_name = "Designer Saree"
         cat_hashtags = "#SareeLove #IndianSaree #SareeCollection #EthnicSaree #PartyWearSaree"
@@ -747,11 +748,26 @@ def generate_pinterest_seo(prod):
         cat_hashtags = "#WomensTop #OfficeWear #CasualOutfit #KoreanFashion #StreetStyle"
         occasion = "workdays, college presentations, casual meetups, and travel days"
         pair_tip = "Pair with high-waist parallel trousers, denim jeans, or a structured midi skirt."
-    elif any(k in title_lower for k in ["pant", "trouser", "palazzo"]):
+    elif any(k in title_lower for k in ["pant", "trouser", "palazzo", "legging"]):
         cat_name = "Women's Parallel Trousers & Pants"
         cat_hashtags = "#WomenTrousers #PalazzoPants #KoreanPants #FormalWear #ComfortableStyle"
         occasion = "office formals, meetings, casual brunches, and versatile everyday styling"
         pair_tip = "Pair with a tucked-in linen shirt, a fitted crop top, or an ethnic short kurti."
+    elif any(k in title_lower for k in ["lipstick", "makeup", "foundation", "serum", "eyeliner", "kajal", "blush", "mascara", "concealer"]):
+        cat_name = "Luxury Beauty & Makeup Essential"
+        cat_hashtags = "#MakeupLovers #BeautyEssentials #LipstickJunkie #IndianBeauty #GlamLook #BeautyTips"
+        occasion = "daily beauty routines, festive touch-ups, glam party looks, and everyday glow"
+        pair_tip = "Apply on clean, prepped skin and blend seamlessly for a long-lasting, radiant finish."
+    elif any(k in title_lower for k in ["jewellery", "jewelry", "earring", "stud", "necklace", "jhumka", "bangle", "choker", "bracelet"]):
+        cat_name = "Handcrafted Designer Jewellery"
+        cat_hashtags = "#JewelleryDesign #IndianJewellery #JhumkaLove #BridalJewellery #FashionJewellery"
+        occasion = "weddings, festive gatherings, party evenings, and elegant traditional functions"
+        pair_tip = "Pair with silk sarees, regal lehengas, or contemporary fusion ethnic wear."
+    elif any(k in title_lower for k in ["heel", "sandal", "mojari", "flat", "kolhapuri", "wedge", "footwear"]):
+        cat_name = "Women's Footwear & Sandals"
+        cat_hashtags = "#WomensFootwear #HeelsLove #EthnicFootwear #ComfortableHeels #FashionShoes"
+        occasion = "festive occasions, wedding functions, casual outings, and stylish party evenings"
+        pair_tip = "Pair with ethnic suits, flowy maxi dresses, or sleek trousers for all-day comfort."
     else:
         cat_name = "Women's Fashion Apparel"
         cat_hashtags = "#WomensFashion #IndianWear #EthnicOutfit #OOTD #FashionInspo"
@@ -762,8 +778,12 @@ def generate_pinterest_seo(prod):
     brand_name = prod.get("brand", "").strip()
     brand_mention = f"by {brand_name}" if brand_name and brand_name.lower() not in ["amazon", "flipkart", "myntra", "store"] else ""
 
+    lead_str = f"{clean_title} {brand_mention}".strip()
+    if not lead_str.endswith("."):
+        lead_str += "."
+
     description = (
-        f"{clean_title} {brand_mention}. "
+        f"{lead_str} "
         f"A beautifully tailored {cat_name} crafted for women seeking comfort, refined tailoring, and timeless style. "
         f"Ideal for {occasion}. Features premium breathable fabric and high quality finishing. {pair_tip} "
         f"Available on {store_name} with verified doorstep delivery and authentic quality assurance. "
@@ -934,11 +954,12 @@ def run_hourly_bot(limit_per_run=12):
                 existing_pids.add(str(item[k]).lower())
                 existing_pids.add(str(item[k]).replace("amz-", "").replace("fk-", "").replace("myn-", "").lower())
     
-    # Check existing HTML files in deals/p/
+    # Check existing HTML files in deals/p/ (extract PID from end of filename)
     for fname in os.listdir(DEALS_P_DIR):
         if fname.endswith(".html"):
-            for part in fname.replace(".html", "").split("-"):
-                existing_pids.add(part.lower())
+            slug_pid = fname.replace(".html", "").split("-")[-1].lower()
+            existing_pids.add(slug_pid)
+            existing_pids.add(slug_pid.replace("amz-", "").replace("fk-", "").replace("myn-", ""))
     
     print(f"📦 Existing Catalog Database: {len(catalog)} products tracked.")
     
