@@ -1259,10 +1259,10 @@ function createProductCardHtml(item) {
       detailUrl = item.dedicatedPage;
     }
   } else if (item.slug) {
-    detailUrl = `/deals/p/${item.slug.replace(/\.html$/, "")}`;
+    detailUrl = `/deals/p/${item.slug.replace(/\.html$/, "")}.html`;
   } else if (item.id || item.pid || item.asin) {
     const code = (item.id || item.pid || item.asin).toLowerCase();
-    detailUrl = `/deals/p/${code}`;
+    detailUrl = `/deals/p/${code}.html`;
   }
 
   const isLowestPrice = (parseInt(item.discount || "0") >= 60) || (dealPrice <= 499 && dealPrice > 0);
