@@ -759,7 +759,7 @@ def verify_and_self_heal(batch, catalog):
                 
     audit_results.append(f"✅ Affiliate Attribution: {tag_ok}/{len(batch)} verified with active user tracking ({AMAZON_TAG} / {EARNKARO_USER_ID})")
 
-    # 3. XML Feeds Syntax Audit
+    # 3. XML Feeds Syntax Audit & Auto-Healing
     xml_files = [
         ("Google Discover Feed", FEED_XML),
         ("Standard RSS Feed", RSS_XML),
@@ -774,6 +774,22 @@ def verify_and_self_heal(batch, catalog):
                 ET.parse(xf)
                 xml_ok += 1
             except Exception as e:
+                # Auto-heal namespace mismatches
+                try:
+                    c = open(xf, "r", encoding="utf-8").read()
+                    if "unbound prefix" in str(e):
+                        if "<media:content" in c and "xmlns:media=" not in c:
+                            c = c.replace("<rss ", '<rss xmlns:media="http://search.yahoo.com/mrss/" ')
+                        if "<ns0:link" in c:
+                            c = c.replace("<ns0:link", "<atom:link").replace("xmlns:ns0=", "xmlns:atom=")
+                        with open(xf, "w", encoding="utf-8") as f:
+                            f.write(c)
+                        ET.parse(xf)
+                        xml_ok += 1
+                        print(f"  🔧 Auto-healed XML namespaces in {os.path.basename(xf)}")
+                        continue
+                except Exception:
+                    pass
                 audit_results.append(f"❌ {label} ({os.path.basename(xf)}): XML Parse Error: {e}")
         else:
             audit_results.append(f"⚠️ {label}: File not found ({xf})")
