@@ -66,67 +66,106 @@ const subcategoryMap = {
 // ==========================================================================
 // 1. Intelligent Classification Engine (Zero Cross-Category Leaks)
 // ==========================================================================
+function cleanString(str) {
+  return String(str || "")
+    .replace(/&#39;/g, "'")
+    .replace(/&amp;/g, "&")
+    .replace(/&quot;/g, "\"")
+    .toLowerCase();
+}
+
+const pureMenBrandsRegex = /\b(wrogn|rare rabbit|mr bowerbird|jack & jones|jack and jones|mango man|peter england|blackberrys|louis philippe|arrow|mufti|snitch|dennis lingo|highlander|locomotive|flying machine|indian terrain|souragya|the indian garage|crazymonk|kook n keech|us polo|u\.s\. polo|sleepz by raymond|park avenue|aeropostale|french connection|beardo|the man company|bombay shaving|ustraa|old spice)\b/i;
+
+const pureWomenBrandsRegex = /\b(biba|libas|aurelia|sangria|anouk|varanga|kalini|global desi|forever 21|vero moda|only\b|sassafras|street 9|tokyo talkies|athena|berrylush|lino perros|caprese|baggit|lavie|miraggio|zouk|giva|shaya|enamor|zivame|clovia)\b/i;
+
 function classifyProduct(p) {
-  const title = (p.title || "").toLowerCase();
-  const brand = (p.brand || "").toLowerCase();
-  const rawCat = (p.category || "").toLowerCase();
-  const subCat = (p.subCategory || "").toLowerCase();
-  const dept = (p.department || "").toLowerCase();
+  const title = cleanString(p.title);
+  const brand = cleanString(p.brand);
+  const rawCat = cleanString(p.category);
+  const subCat = cleanString(p.subCategory);
+  const dept = cleanString(p.department);
   const fullText = `${title} ${brand} ${subCat} ${dept}`;
 
-  // 1. Footwear check (Excluding bootcut jeans)
-  if (/\b(shoes?|sneakers?|sandals?|heels?|slides|slippers?|boots?|loafers?|crocs|footwear|flats|wedges|clogs|jutties?)\b/i.test(fullText)) {
+  // 1. FOOTWEAR (Exclude bootcut jeans)
+  if (/\b(shoes?|sneakers?|sandals?|heels?|slides|slippers?|boots?|loafers?|crocs|footwear|flats|wedges|clogs|jutties?|flip[- ]flops?|moccasins?|oxfords?|derby|stiletto)\b/i.test(fullText)) {
     if (!/\b(boot\s*cut|bootcut)\b/i.test(fullText)) {
       return "footwear";
     }
   }
 
-  // 2. Electronics & Audio
-  if (/\b(speaker|soundbar|smartwatch|smart\s*watch|earbuds?|headphones?|airpods?|tws|projector|tripod|microphone|mouse|keyboard|monitor|gimbal|power\s*strip)\b/i.test(fullText)) {
-    return "electronics";
-  }
+  // GENDER & APPAREL DETECTION
+  const hasExplicitFemaleWord = /\b(women|womens|woman|women's|women’s|ladies|lady|girl|girls)\b/i.test(`${title} ${brand} ${subCat}`);
+  const hasExplicitMaleWord = /\b(men|mens|man|men's|men’s|gentleman|gentlemen|male|boy|boys)\b/i.test(`${title} ${brand} ${subCat}`);
 
-  // 3. Mobiles & Tech Accessories
-  if (/\b(back\s*cover|phone\s*case|tempered\s*glass|power\s*bank|powerbank|mobile\s*holder|mobile\s*stand|fast\s*charger|charging\s*cable|type[- ]c\s*cable|lightning\s*cable)\b/i.test(fullText)) {
-    return "mobiles";
-  }
+  const isPureMenBrand = pureMenBrandsRegex.test(`${brand} ${title}`);
+  const isPureWomenBrand = pureWomenBrandsRegex.test(brand);
 
-  // 4. STRICT MEN CHECK (Must override incorrect scraped 'women' department tags)
-  const isPureMen = /\b(men|mens|man|men's|men’s|gentlemen|male)\b/i.test(title) && !/\b(women|womens|woman|women's|women’s)\b/i.test(title);
-  const isBoyOnly = /\b(boy|boys)\b/i.test(title) && !/\b(girl|girls)\b/i.test(title);
-  if (isPureMen || isBoyOnly || (dept === "men" && !/\b(women|womens|woman)\b/i.test(title))) {
-    return "men";
-  }
+  // Female Traditional Garments & Jewellery
+  const isFemaleApparelOrJewel = /\b(saree|sari|kurti|anarkali|lehenga|blouse|dupatta|crop\s*top|dress|dresses|gown|skirt|jumpsuit|bra\b|panty|panties|lingerie|chikankari|maternity|choli|salwar|palazzo|sharara|kaftan|nighty|nightgown|camisole|mangalsutra|choker|necklace|earrings?|jhumka|studs?|bangles?|bracelet|anklet|nose\s*pin|pendant|jewellery|jewelry|handbag|sling\s*bag|tote\s*bag|shoulder\s*bag|clutch|purse|potli)\b/i.test(`${title} ${subCat}`);
 
-  // 5. STRICT WOMEN CHECK
-  const isExplicitWomen = /\b(women|womens|woman|women's|women’s|ladies|lady|girl|girls)\b/i.test(title) ||
-    /\b(saree|sari|kurti|kurta\s*set|anarkali|lehenga|blouse|dupatta|crop\s*top|dress|dresses|gown|skirt|bra|panty|lingerie|chikankari)\b/i.test(title);
-  if (isExplicitWomen || (dept === "women" && !isPureMen)) {
+  // Male Traditional Garments & Accessories
+  const isMaleGarment = /\b(polo collar|nehru jacket|sherwani|bandhgala|boxer shorts|cufflinks?|beard|shaving|aftershave|riding gloves|driving gloves|tailored jacket|suit with trousers|waistcoat|chinos|trackpants|joggers|distressed jeans|loose straight fit|men\s*wallet|men\s*watch|men\s*kurta|men\s*t-?shirt|men\s*shirt)\b/i.test(title);
+
+  // If female apparel or pure women brand, prevent false matches with electronics or home
+  if ((isFemaleApparelOrJewel || isPureWomenBrand || hasExplicitFemaleWord) && !hasExplicitMaleWord && !isMaleGarment) {
     return "women";
   }
 
-  // 6. Home, Kitchen & Gifts
-  if (/\b(rakhi|gift\s*combo|chocolate\s*combo)\b/i.test(fullText)) {
-    return "home";
+  // 2. ELECTRONICS & COMPUTERS (Refined - exclude tie-ups, cover-ups)
+  if (/\b(speaker|soundbar|smartwatch|smart\s*watch|earbuds?|headphones?|airpods?|tws|headset|laptop|desktop|monitor|all[- ]in[- ]one|macbook|chromebook|notebook\s*pc|tablet|ipad|kindle|printer|scanner|webcam|hard\s*drive|hard\s*disk|hdd|ssd|pen\s*drive|flash\s*drive|pendrive|memory\s*card|sd\s*card|ram\b|motherboard|gpu|graphics\s*card|processor|power\s*strip|extension\s*cord|projector|tripod|microphone|gimbal|drone|camera|dslr|lens|ring\s*light|cctv|security\s*camera|router|wifi\b|repeater|dongle)\b/i.test(fullText)) {
+    return "electronics";
   }
-  if (rawCat === "home" || rawCat === "kitchen" || /\b(kitchen|cookware|frying\s*pan|saucepan|pressure\s*cooker|storage\s*box|container|water\s*bottle|flask|curtain|bedsheet|blanket|pillow|towel|wall\s*clock|wall\s*decor|idol|statue|diya|candle|mop|cleaner\s*spray|egg\s*holder|organizer|umbrella)\b/i.test(fullText)) {
+  if (/\b(online ups|line interactive ups|ups inverter|ups for home)\b/i.test(fullText)) {
+    return "electronics";
+  }
+
+  // 3. MOBILES & ACCESSORIES
+  if (/\b(smartphone|mobile\s*phone|iphone|samsung galaxy|redmi|realme|oneplus|vivo|oppo|poco|motorola|iqoo|back\s*cover|phone\s*case|tempered\s*glass|screen\s*protector|mobile\s*skin|phone\s*holder|mobile\s*holder|mobile\s*stand|car\s*mount|fast\s*charger|wall\s*charger|charging\s*cable|type[- ]c\s*cable|lightning\s*cable|usb[- ]c|power\s*bank|powerbank|otg\s*adapter)\b/i.test(fullText)) {
+    return "mobiles";
+  }
+
+  // 4. BEAUTY & PERSONAL CARE (Grouped under Women in deals nav if not male)
+  if (rawCat === "beauty" || /\b(lipstick|kajal|eyeliner|mascara|eyeshadow|foundation|concealer|compact\s*powder|blush|highlighter|makeup|lip\s*gloss|lip\s*balm|nail\s*polish|nail\s*oil|primer|makeup\s*remover|face\s*wash|face\s*scrub|face\s*pack|face\s*mask|sheet\s*mask|serum|sunscreen|moisturi[sz]er|day\s*cream|night\s*cream|body\s*lotion|lotion|body\s*wash|shower\s*gel|soap\b|beauty\s*bar|shampoo|conditioner|hair\s*oil|hair\s*serum|hair\s*mask|hair\s*color|hair\s*dryer|straightener|curler|perfume|deodorant|eau de|body\s*mist|body\s*spray|roll[- ]on)\b/i.test(fullText)) {
+    if (!hasExplicitMaleWord && !isPureMenBrand && !isMaleGarment) {
+      return "women";
+    }
+  }
+
+  // 5. HOME APPLIANCES, KITCHEN, LIVING & CLEANING
+  if (/\b(washing\s*machine|refrigerator|fridge|microwave|chimney|mixer\s*grinder|blender|juicer|grinder|induction|cooktop|air\s*fryer|toaster|sandwich\s*maker|water\s*purifier|geyser|water\s*heater|vacuum\s*cleaner|iron\b|steam\s*iron|air\s*cooler|ceiling\s*fan|exhaust\s*fan|room\s*heater|humidifier|coffee\s*maker|kettle|electric\s*kettle|cookware|frying\s*pan|saucepan|pressure\s*cooker|kadai|tawa|casserole|lunch\s*box|tiffin|thermos|water\s*bottle|flask|mug|cup\b|plate|bowl|cutlery|spoon|fork|knife|knives|chopper|peeler|cutting\s*board|storage\s*box|container|spice\s*box|jar\b|rack\b|shelf|shelves|hanger|detergent|dishwash|cleaning\s*spray|cleaner\s*spray|mop\b|broom|scrubber|sponge|toilet\s*cleaner|bidet|toilet|bathroom|sink|faucet|tap\b|towel|doormat|curtain|bedsheet|bed\s*cover|blanket|pillow|mattress|quilt|rug\b|rugs|carpet|runner|wall\s*clock|wall\s*decor|wall\s*art|painting|idol|statue|murti|diya|candle|candle\s*stand|lamp|fairy\s*light|string\s*light|led\s*bulb|umbrella|stationery|fountain\s*pen|notebook|diary|lego|toy\b|toys|board\s*game|puzzle|gift\s*combo|chocolate\s*box|chocolate\s*combo)\b/i.test(fullText)) {
     if (!/\b(t-?shirt|shirt|pant|jeans|dress|saree|kurti|suit)\b/i.test(fullText)) {
       return "home";
     }
   }
 
-  // 7. Beauty & Grooming
-  if (rawCat === "beauty" || /\b(kajal|lipstick|makeup|perfume|deodorant|eau de|body\s*spray|face\s*wash|serum|lotion|sunscreen|shampoo|conditioner|cream|moisturi[sz]er|hair\s*oil|rollon)\b/i.test(fullText)) {
-    return "beauty";
+  // Strict Men Routing:
+  if ((hasExplicitMaleWord && !hasExplicitFemaleWord) || (isPureMenBrand && !hasExplicitFemaleWord) || (isMaleGarment && !hasExplicitFemaleWord)) {
+    return "men";
   }
 
-  // Fallbacks
+  // Strict Women Routing:
+  if (hasExplicitFemaleWord && !hasExplicitMaleWord) {
+    return "women";
+  }
+
+  // Department fallbacks (protect against raw data errors)
   if (dept === "men") return "men";
-  if (dept === "women") return "women";
-  if (rawCat === "footwear") return "footwear";
+
+  if (dept === "women") {
+    // If it is a neutral piece of clothing (t-shirt, shirt, jacket, jeans, shorts, sweater) from a sports/mens/unisex brand with NO female keywords, don't dump into women!
+    if (/\b(jacket|blazer|t-?shirt|shirt|shorts|jeans|sweater|hoodie|sweatshirt|joggers|trackpants)\b/i.test(title)) {
+      if (/\b(adidas|puma|gap|levis|under armour|roadster|hrx|bewakoof|reebok|asics|wildcraft|dky|glitchez|h&m|the indian garage|stormborn|nobero)\b/i.test(`${brand} ${title}`)) {
+        return "men";
+      }
+    }
+    return "women";
+  }
+
+  // Raw category fallbacks
+  if (rawCat === "home" || rawCat === "kitchen") return "home";
   if (rawCat === "electronics" || rawCat === "tech") return "electronics";
   if (rawCat === "mobiles") return "mobiles";
-  if (rawCat === "home" || rawCat === "kitchen") return "home";
+  if (rawCat === "footwear") return "footwear";
 
   return "fashion";
 }
