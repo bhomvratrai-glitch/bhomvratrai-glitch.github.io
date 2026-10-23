@@ -51,12 +51,16 @@
 
 ---
 
-## 3. Telegram Deals Pipeline
-- **Bot**: `@thebhom_live_bot` ("TheBhom News and Deals", ID `8866349662`)
-- **Target Channel**: `@thebhom_deals`
-- **User Telegram Account**: `bhom1207` (ID `1063182415`)
+## 3. Telegram & WhatsApp Deals Syndication Pipeline
+- **Telegram Channel**: `Loot Deals & Offers India 🛍️ TheBhom` (`https://t.me/+UhSD6hAJe7NhODM1`)
+- **Telegram Bot**: `@thebhom_live_bot` ("TheBhom News and Deals", ID `8866349662`)
 - **Broadcaster Script**: `scripts/telegram_broadcaster.py`
-  - Sends high-resolution product cards with bold discount pricing and direct store affiliate links (`fktr.in` / Amazon tag `bhom120704-21`).
+  - High-resolution product cards with bold discount pricing, 1-click direct retailer buy buttons (`bhom120704-21` / EarnKaro `5610321`), and TheBhom price history links.
+- **WhatsApp Deals Broadcaster**: `scripts/whatsapp_broadcaster.py`
+  - Formats verified highest-discount loot drops from `deals/data/catalog.json` with 1-click Amazon (`bhom120704-21`) and EarnKaro affiliate links.
+  - State tracked in `scripts/whatsapp_posted.json` to prevent duplicates.
+  - Automated 24/7 in GitHub Actions workflow `.github/workflows/hourly_deals_bot.yml`.
+  - Admin phone number (`7987761789`) is 100% hidden by WhatsApp Channels architecture.
 
 ---
 
