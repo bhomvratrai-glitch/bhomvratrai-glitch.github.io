@@ -20,7 +20,10 @@ STATE_FILE = os.path.join(BASE_DIR, 'scripts', 'telegram_posted.json')
 SITE_URL = "https://thebhom.in"
 
 def load_credentials():
-    creds = {}
+    creds = {
+        'TELEGRAM_BOT_TOKEN': os.environ.get('TELEGRAM_BOT_TOKEN', '8866349662:AAEYDu8ENkAL-um1OCeKwPxZ4MvM9CqfYY0'),
+        'TELEGRAM_CHANNEL_ID': os.environ.get('TELEGRAM_CHANNEL_ID', '-1004358353540')
+    }
     if os.path.exists(CRED_FILE):
         with open(CRED_FILE, 'r', encoding='utf-8') as f:
             for line in f:
@@ -50,7 +53,7 @@ def telegram_api(token, method, payload):
     import ssl
     url = f"https://api.telegram.org/bot{token}/{method}"
     data = json.dumps(payload).encode('utf-8')
-    req = urllib.request.Request(url, data=data, headers={'Content-Type': 'application/json'})
+    req = urllib.request.Request(url, data=data, headers={'Content-Type': 'application/json', 'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)'})
     ctx = ssl._create_unverified_context()
     try:
         with urllib.request.urlopen(req, context=ctx, timeout=15) as resp:
