@@ -57,6 +57,7 @@
 - **Broadcaster Script**: `scripts/telegram_broadcaster.py`
   - High-resolution product cards with bold discount pricing, 1-click direct retailer buy buttons (`bhom120704-21` / EarnKaro `5610321`), and TheBhom price history links.
 - **WhatsApp Deals Broadcaster**: `scripts/whatsapp_broadcaster.py`
+  - **Official WhatsApp Channel**: [TheBhom Deals](https://whatsapp.com/channel/0029Vb9DmoaEKyZLLKtLdc2I) (`https://whatsapp.com/channel/0029Vb9DmoaEKyZLLKtLdc2I`)
   - Formats verified highest-discount loot drops from `deals/data/catalog.json` with 1-click Amazon (`bhom120704-21`) and EarnKaro affiliate links.
   - State tracked in `scripts/whatsapp_posted.json` to prevent duplicates.
   - Automated 24/7 in GitHub Actions workflow `.github/workflows/hourly_deals_bot.yml`.

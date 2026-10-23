@@ -17,7 +17,7 @@ BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 CATALOG_PATH = os.path.join(BASE_DIR, "deals", "data", "catalog.json")
 STATE_FILE = os.path.join(BASE_DIR, "scripts", "whatsapp_posted.json")
 SITE_URL = "https://thebhom.in"
-DEFAULT_WA_CHANNEL = "https://whatsapp.com/channel/thebhom"
+DEFAULT_WA_CHANNEL = "https://whatsapp.com/channel/0029Vb9DmoaEKyZLLKtLdc2I"
 
 def get_posted_ids():
     if os.path.exists(STATE_FILE):
