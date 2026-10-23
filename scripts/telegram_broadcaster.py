@@ -74,44 +74,48 @@ def verify_bot(token):
     return False, None
 
 def get_latest_deals():
-    deals_dir = os.path.join(BASE_DIR, 'deals', 'p')
+    catalog_path = os.path.join(BASE_DIR, 'deals', 'data', 'catalog.json')
     deals = []
-    if not os.path.exists(deals_dir):
-        return deals
-    
-    files = [os.path.join(deals_dir, f) for f in os.listdir(deals_dir) if f.endswith('.html')]
-    files.sort(key=lambda x: os.path.getmtime(x), reverse=True)
-    
-    for fpath in files[:30]:
+    if os.path.exists(catalog_path):
         try:
-            with open(fpath, 'r', encoding='utf-8') as f:
-                html = f.read()
+            with open(catalog_path, 'r', encoding='utf-8') as f:
+                items = json.load(f)
             
-            name_m = re.search(r'"name"\s*:\s*"([^"]+)"', html)
-            price_m = re.search(r'"price"\s*:\s*([0-9.]+)', html)
-            store_url_m = re.search(r'"url"\s*:\s*"(https://[^"]+)"', html)
-            img_m = re.search(r'<meta property="og:image" content="([^"]+)"', html)
-            desc_m = re.search(r'<meta property="og:description" content="([^"]+)"', html)
+            # Prioritize high discount verified loot drops
+            items_sorted = sorted(items, key=lambda x: (int(x.get('discountNum', 0) or 0)), reverse=True)
             
-            slug = os.path.basename(fpath).replace('.html', '')
-            name = name_m.group(1).strip() if name_m else slug
-            price = price_m.group(1).strip() if price_m else ''
-            store_url = store_url_m.group(1).strip() if store_url_m else f"{SITE_URL}/deals/p/{slug}.html"
-            img = img_m.group(1).strip() if img_m else f"{SITE_URL}/assets/og-default.jpg"
-            desc = desc_m.group(1).strip() if desc_m else ''
-            
-            deals.append({
-                'id': f"deal_{slug}",
-                'type': 'deal',
-                'title': name,
-                'price': price,
-                'store_url': store_url,
-                'page_url': f"{SITE_URL}/deals/p/{slug}.html",
-                'desc': desc,
-                'image': img
-            })
-        except Exception:
-            continue
+            for it in items_sorted[:120]:
+                title = it.get('title', '').strip()
+                price = str(it.get('price', '')).strip()
+                mrp = str(it.get('mrp', '')).strip()
+                discount = it.get('discountNum', 0)
+                store = it.get('store', 'Store').strip()
+                direct_url = it.get('profitLink') or it.get('url', '')
+                
+                # Enforce Amazon affiliate tag
+                if 'amazon.in' in direct_url and 'tag=' not in direct_url:
+                    sep = '&' if '?' in direct_url else '?'
+                    direct_url = f"{direct_url}{sep}tag=bhom120704-21"
+                
+                page_url = it.get('dedicatedPage') or f"{SITE_URL}/deals/"
+                img = it.get('cleanImage') or it.get('image') or f"{SITE_URL}/assets/og-default.jpg"
+                pid = it.get('id') or it.get('asin') or re.sub(r'[^a-zA-Z0-9]', '', title)[:20]
+                
+                deals.append({
+                    'id': f"deal_{pid}",
+                    'type': 'deal',
+                    'title': title,
+                    'price': price,
+                    'mrp': mrp,
+                    'discount': discount,
+                    'store': store,
+                    'store_url': direct_url,
+                    'page_url': page_url,
+                    'image': img
+                })
+            return deals
+        except Exception as e:
+            print(f"[⚠️ Error loading catalog.json]: {e}")
     return deals
 
 def get_latest_news():
@@ -150,24 +154,34 @@ def get_latest_news():
 
 def broadcast_deal(token, channel, deal):
     title = deal['title']
-    price_str = f"₹{deal['price']}" if deal['price'] else "Great Price Drop"
-    desc = deal['desc'][:200] + '...' if len(deal['desc']) > 200 else deal['desc']
+    price = deal.get('price', '')
+    mrp = deal.get('mrp', '')
+    discount = deal.get('discount', 0)
+    store = deal.get('store', 'Store')
     store_url = deal['store_url']
     page_url = deal['page_url']
     img = deal['image']
     
+    price_str = f"₹{price}" if price else "Loot Price"
+    mrp_str = f" ~₹{mrp}~" if mrp and mrp != price else ""
+    disc_str = f" (🔥 {discount}% OFF)" if discount else ""
+    
     caption = (
         f"🔥 *LOOT DEAL ALERT | THEBHOM*\n\n"
-        f"🛍️ *{title}*\n"
-        f"💰 *Deal Price: {price_str}*\n\n"
-        f"⚡ {desc}\n\n"
-        f"👉 [लूट डील यहाँ से खरीदें]({store_url})\n"
-        f"🌐 [TheBhom Deals पर और ऑफर्स देखें]({SITE_URL}/deals/)"
+        f"🛍️ *{title}*\n\n"
+        f"💰 *Deal Price: {price_str}*{mrp_str}{disc_str}\n"
+        f"🏪 *Store:* {store}\n\n"
+        f"⚡ *1-Click Direct Store Purchase:*\n"
+        f"👉 [⚡ Buy Directly on {store}]({store_url})\n\n"
+        f"🌐 *Check Price History & Tracker:*\n"
+        f"👉 [View on TheBhom Site]({page_url})\n\n"
+        f"📢 *Join Group:* [Loot Deals India](https://t.me/+UhSD6hAJe7NhODM1)"
     )
     
     buttons = [
-        [{"text": f"🔥 Buy Now at {price_str}", "url": store_url}],
-        [{"text": "🛍️ All Today's Deals (TheBhom)", "url": f"{SITE_URL}/deals/"}]
+        [{"text": f"⚡ Buy on {store} ({price_str})", "url": store_url}],
+        [{"text": "🌐 Check Price History on TheBhom", "url": page_url}],
+        [{"text": "📢 Join TheBhom Deals Channel", "url": "https://t.me/+UhSD6hAJe7NhODM1"}]
     ]
     
     photo_payload = {

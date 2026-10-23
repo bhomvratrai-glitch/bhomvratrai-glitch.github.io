@@ -3,6 +3,8 @@ http://thebhom.in/* https://www.thebhom.in/:splat 301!
 http://www.thebhom.in/* https://www.thebhom.in/:splat 301!
 
 # 301 Redirects for legacy product & deal routes (Eliminating GSC 404s)
+/deals/p/mini-uv-protection-capsule-umbrella-b0hcvk32qj.html https://www.thebhom.in/deals/p/mini-uv-protection-capsule-umbrella-fs-amazon-b0hcvk32qj.html 301
+/deals/p/portable-mini-electric-juicer-blender-b0h5r3f1yc.html https://www.amazon.in/dp/B0H5R3F1YC?tag=bhom120704-21 302
 /product/* https://www.thebhom.in/deals/ 301
 /product https://www.thebhom.in/deals/ 301
 /deal-of-the-day https://www.thebhom.in/deals/ 301
