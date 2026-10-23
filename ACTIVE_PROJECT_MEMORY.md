@@ -22,14 +22,11 @@
 - **Active Core Structure (Ultra-Clean Focus)**:
   - **Main Landing Site**: Root (`/`) at `https://www.thebhom.in/` featuring Deals Hub and Universal Video Downloader.
   - **Deals Store**: Subdirectory (`/deals/`) at `https://www.thebhom.in/deals/` featuring curated daily loot deals, price drop tracking, and direct affiliate links.
-    - **October 23, 2026 Major Upgrade**:
-      - Universal typography switched to **Cambria serif** across all headers, cards, price tags, and modals.
-      - **iLovePDF Clean Aesthetic**: `#f7f9fc` off-white canvas, `#ffffff` pure white cards with `16px-20px` border-radius, soft shadows, `#e11d48` signature rose-red deal accent, `#2563eb` modern blue accents.
-      - **Official Vector SVG Store Logos**: Amazon (with curved smile), Flipkart (blue/yellow bag), Myntra (vibrant M), Ajio (bold block) on filter pills and every product card.
-      - **Dynamic Sub-Category Drawer**: Active category reveals subcategories (Kurtas, Sarees, Dresses, Tops, Jeans, Sneakers, Smartwatches, etc.).
-      - **Zero-Leakage Intelligent Categorization**: Verified 0 men's products in women's fashion and 0 women's in men's fashion across 9,301 catalog items.
-      - **Exact 1-to-1 Link Resolution**: Every product verified to connect strictly to its exact store URL (`profitLink` / `asin` link with `tag=bhom120704-21`).
-      - **Flipshope-Style Product Intelligence Modal**: Interactive AI Deal Score (`98/100`), genuine price drop narrative, savings breakdown, and direct store checkout CTA with zero fake app download clutter.
+    - **October 23, 2026 Layout Restoration & Zero-Leak Milestone**:
+      - Restored original compact screenshot layout (2 commits prior): compact horizontal category pills strip, announcement ticker (`⚡ DEALS OF THE DAY`), and dual high-converting card buttons (Orange **`Buy Now →`** + White/Blue **`See Details`**).
+      - Universal typography in **Cambria serif** across all headers, product cards, price strips, discount badges, and buttons.
+      - **Zero-Leakage Intelligent Categorization Engine**: Scanned all 9,301 catalog items; eliminated menswear leakage in Women's Fashion (e.g. Mr Bowerbird blazers, Wrogn, Monte Carlo, SleepZ by Raymond).
+      - Double-verified live in production at `https://www.thebhom.in/deals/` with `HTTP/2 200 OK`.
   - **Universal Video Downloader**: Subdirectory (`/downloader/`) at `https://www.thebhom.in/downloader/` supporting 40+ platforms with zero watermarks.
   - **Company & Policies**: Clean `/about`, `/contact`, `/privacy-policy`, `/terms`, `/disclaimer`.
 - **Completely Eradicated Thin Content Sections (301 Permanent Redirects to `/` or `/deals/`)**:
