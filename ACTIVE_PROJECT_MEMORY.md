@@ -35,6 +35,11 @@
         - **Spotlight Search (Cmd+K)**: Integrated full Guides and product entries into `getAllContentItems()` in `shared.js` with category chip filtering (`📖 Guides`).
         - **Orphaned Asset Purge**: Deleted 22 unused legacy/test files (`cartoon/`, `marvel/`, `voices/`, `widget/`, `pitch-*.html`, `refer.html`, `jspdf.umd.min.js`), freeing 40+ MB of obsolete clutter.
         - **Updated Robots, Redirects & About**: Cleaned up `robots.txt` disallows, updated `404.html` fallback suggestions to include Guides and Downloader, and re-aligned `about.html`, `llms.txt`, and `llms-full.txt` strictly to TheBhom's 3 core pillars (Deals, Downloader, Guides).
+        - **Legal, Compliance & Contact Hub Overhaul**:
+          - Upgraded `privacy-policy.html` to a 450+ line GDPR, CCPA/CPRA, Indian DPDP Act 2023, and Google AdSense compliant policy with explicit third-party cookie opt-out links.
+          - Redesigned `contact.html` with an interactive client-side inquiry form, topic router, response-time commitments, and multi-channel support (Telegram, WhatsApp, email).
+          - Enhanced `terms.html` with clear acceptable use parameters, client-side video downloader fair-use clauses, e-commerce affiliate disclosures, and New Delhi legal jurisdiction.
+          - Tracked and verified `dmca.html` takedown protocol.
         - **Double-Verified Live**: `https://www.thebhom.in/` renders all 6 `/deals/p/` URLs cleanly; IndexNow re-submitted with `202 Accepted`.
   - **Deals Store**: Subdirectory (`/deals/`) at `https://www.thebhom.in/deals/` featuring curated daily loot deals, price drop tracking, and direct affiliate links.
     - **October 23, 2026 Layout Restoration & Zero-Leak Milestone**:

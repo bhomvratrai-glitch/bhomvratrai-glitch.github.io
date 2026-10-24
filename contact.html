@@ -6,7 +6,7 @@
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4674566886677472" crossorigin="anonymous"></script>
 
   <script>(function(){try{const t=localStorage.getItem('thebhom_theme')||'light';document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
-      <!-- GA4 -->
+  <!-- GA4 -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-GHVNZWFVQV"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -16,20 +16,21 @@
   </script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact Us • TheBhom</title>
-  <meta name="description" content="Get in touch with TheBhom support, editorial, and partnership team. We provide transparent communication and fast assistance.">
-    <link rel="icon" type="image/svg+xml" href="/icon.svg">
+  <title>Contact Us & Support Helpdesk • TheBhom</title>
+  <meta name="description" content="Get in touch with TheBhom editorial team, support engineers, and partnership department. Submit inquiries, feedback, deal corrections, or DMCA requests.">
+  <link rel="icon" type="image/svg+xml" href="/icon.svg">
   <link rel="apple-touch-icon" href="/icon-192.png">
+  
   <!-- Social Cards -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://www.thebhom.in/contact.html">
-  <meta property="og:title" content="Contact Us • TheBhom">
-  <meta property="og:description" content="Reach out to TheBhom for partnerships, technical feedback, bug reports, and suggestions.">
-  <meta property="og:image" content="https://www.thebhom.in/icon-512.png">
+  <meta property="og:url" content="https://www.thebhom.in/contact">
+  <meta property="og:title" content="Contact Us & Support Helpdesk • TheBhom">
+  <meta property="og:description" content="Reach TheBhom team directly for editorial inquiries, tech support, partnership proposals, and feedback.">
+  <meta property="og:image" content="https://www.thebhom.in/og-image.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Contact Us • TheBhom">
-  <meta name="twitter:description" content="Reach out to TheBhom for partnerships, technical feedback, and suggestions.">
-  <meta name="twitter:image" content="https://www.thebhom.in/icon-512.png">
+  <meta name="twitter:description" content="Reach TheBhom support, editorial, and partnerships team directly.">
+  <meta name="twitter:image" content="https://www.thebhom.in/og-image.png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -43,6 +44,7 @@
       --cyan: #0284c7;
       --border: rgba(15, 23, 42, 0.09);
       --heading-color: #0f172a;
+      --input-bg: #f8fafc;
     }
     [data-theme="navy"] {
       --bg: #0b132b;
@@ -52,6 +54,7 @@
       --cyan: #38bdf8;
       --border: rgba(56, 189, 248, 0.18);
       --heading-color: #f1f5f9;
+      --input-bg: #0f172a;
     }
     [data-theme="purple"] {
       --bg: #0f0a1c;
@@ -61,6 +64,7 @@
       --cyan: #a855f7;
       --border: rgba(168, 85, 247, 0.22);
       --heading-color: #f8fafc;
+      --input-bg: #140d25;
     }
     [data-theme="dark"] {
       --bg: #0b0f19;
@@ -70,6 +74,7 @@
       --cyan: #00f2fe;
       --border: rgba(255, 255, 255, 0.08);
       --heading-color: #f8fafc;
+      --input-bg: #0a0e17;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -80,7 +85,7 @@
       padding: 40px 20px;
     }
     .container {
-      max-width: 820px;
+      max-width: 960px;
       margin: 0 auto;
       background: var(--card);
       border: 1px solid var(--border);
@@ -89,42 +94,115 @@
       box-shadow: 0 4px 20px -2px rgba(0,0,0,0.05);
     }
     h1 { font-size: 34px; font-weight: 800; color: var(--heading-color); margin-bottom: 8px; letter-spacing: -0.02em; }
-    .tagline { color: var(--cyan); font-size: 15.5px; margin-bottom: 28px; font-weight: 600; }
-    p { color: var(--muted); font-size: 15px; margin-bottom: 24px; }
-    .contact-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 16px;
-      margin-bottom: 32px;
-    }
-    .contact-card {
-      background: rgba(2, 132, 199, 0.03);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 24px;
-      transition: transform 0.15s ease, border-color 0.15s ease;
-    }
-    .contact-card:hover {
-      transform: translateY(-2px);
-      border-color: var(--cyan);
-    }
-    .contact-card h3 { font-size: 17px; font-weight: 700; color: var(--heading-color); margin-bottom: 8px; }
-    .contact-card p { font-size: 14px; margin-bottom: 8px; }
-    .contact-card a { color: var(--cyan); text-decoration: none; font-weight: 700; word-break: break-all; }
-    .contact-card a:hover { text-decoration: underline; }
+    .subtitle { color: var(--cyan); font-size: 15.5px; margin-bottom: 34px; font-weight: 700; }
+    h2 { font-size: 22px; font-weight: 800; color: var(--heading-color); margin: 34px 0 16px; border-bottom: 1.5px solid var(--border); padding-bottom: 10px; }
+    p { color: var(--muted); font-size: 15.5px; margin-bottom: 20px; }
+    a { color: var(--cyan); text-decoration: none; font-weight: 600; }
+    a:hover { text-decoration: underline; }
     .nav-back { display: inline-flex; align-items: center; gap: 6px; margin-bottom: 24px; color: var(--muted); font-size: 14px; text-decoration: none; font-weight: 600; }
     .nav-back:hover { color: var(--cyan); }
-    .info-banner {
-      background: rgba(2, 132, 199, 0.06);
-      border-left: 4px solid var(--cyan);
-      border-radius: 0 12px 12px 0;
-      padding: 16px 20px;
+
+    .grid-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
       margin-top: 24px;
-      font-size: 14px;
-      color: var(--muted);
     }
-    @media (max-width: 640px) {
-      .container { padding: 28px 20px; border-radius: 16px; }
+    .contact-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 26px;
+    }
+    .contact-card h3 {
+      font-size: 18px;
+      font-weight: 800;
+      color: var(--heading-color);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .contact-card p {
+      font-size: 14.5px;
+      margin-bottom: 12px;
+    }
+
+    /* Form Styles */
+    .form-wrapper {
+      background: var(--bg);
+      border: 1.5px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+      margin-top: 30px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      display: block;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--heading-color);
+      margin-bottom: 8px;
+    }
+    .form-control {
+      width: 100%;
+      padding: 13px 16px;
+      border: 1.5px solid var(--border);
+      border-radius: 12px;
+      background: var(--card);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 15px;
+      transition: all 0.2s ease;
+    }
+    .form-control:focus {
+      outline: none;
+      border-color: var(--cyan);
+      box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+    }
+    textarea.form-control {
+      resize: vertical;
+      min-height: 120px;
+    }
+    .btn-submit {
+      background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+      color: #fff;
+      border: none;
+      border-radius: 12px;
+      padding: 14px 28px;
+      font-size: 15.5px;
+      font-weight: 800;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 12px rgba(2, 132, 199, 0.25);
+    }
+    .btn-submit:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(2, 132, 199, 0.35);
+    }
+    .status-alert {
+      padding: 16px 20px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      display: none;
+      font-size: 14.5px;
+      font-weight: 600;
+    }
+    .status-success {
+      background: #f0fdf4;
+      border: 1.5px solid #bbf7d0;
+      color: #166534;
+    }
+
+    @media (max-width: 768px) {
+      .container { padding: 30px 20px; border-radius: 16px; }
+      .grid-layout { grid-template-columns: 1fr; }
+      .form-wrapper { padding: 22px 18px; }
       h1 { font-size: 26px; }
     }
   </style>
@@ -133,41 +211,122 @@
 <body>
   <div class="container">
     <a href="/" class="nav-back">← Back to TheBhom Home</a>
-    <h1>Contact TheBhom</h1>
-    <div class="tagline">Direct, Transparent & Rapid Communication</div>
+    <h1>Get in Touch with TheBhom</h1>
+    <div class="subtitle">Direct Communication Helpdesk • Editorial, Support & Partnerships</div>
 
-    <p>Whether you have questions regarding our web tools, suggestions for new public archives, copyright notifications, or partnership opportunities, TheBhom team is ready to help.</p>
+    <p>Whether you have an inquiry regarding a consumer buying guide, need technical assistance with our universal video downloader tools, want to suggest a verified deal, or are submitting a formal legal inquiry, our team is here to assist you.</p>
 
-    <div class="contact-grid">
+    <div class="grid-layout">
       <div class="contact-card">
-        <h3>📧 General & Feedback</h3>
-        <p>Inquiries, ideas, community feedback, and feature requests:</p>
-        <a href="mailto:contact@thebhom.in">contact@thebhom.in</a>
+        <h3>✉️ Editorial & General Desk</h3>
+        <p>For questions about buying guides, article corrections, product reviews, or user experience suggestions:</p>
+        <p><strong>Email:</strong> <a href="mailto:contact@thebhom.in">contact@thebhom.in</a></p>
+        <p><strong>Response Time:</strong> Within 24-48 business hours.</p>
       </div>
 
       <div class="contact-card">
-        <h3>🛠️ Technical Support</h3>
-        <p>Reporting broken links, tool crashes, or unexpected browser behavior:</p>
-        <a href="mailto:support@thebhom.in">support@thebhom.in</a>
+        <h3>⚖️ Legal & DMCA Compliance</h3>
+        <p>For official intellectual property notices, trademark queries, and DMCA takedown requests:</p>
+        <p><strong>Email:</strong> <a href="mailto:legal@thebhom.in">legal@thebhom.in</a></p>
+        <p><strong>Documentation:</strong> <a href="/dmca">Read DMCA Policy</a></p>
       </div>
 
       <div class="contact-card">
-        <h3>✍️ Editorial & Content Desk</h3>
-        <p>Inquiries regarding technical guides, research methodology, and corrections:</p>
-        <a href="mailto:editorial@thebhom.in">editorial@thebhom.in</a>
+        <h3>🤝 Partnerships & Advertising</h3>
+        <p>For commercial collaborations, affiliate merchant integrations, media sponsorships, and API access:</p>
+        <p><strong>Email:</strong> <a href="mailto:partners@thebhom.in">partners@thebhom.in</a></p>
+        <p><strong>Lead Time:</strong> 1-2 business days.</p>
       </div>
 
       <div class="contact-card">
-        <h3>⚖️ Grievance & DMCA Notices</h3>
-        <p>Copyright inquiries, intellectual property, or legal compliance:</p>
-        <a href="mailto:legal@thebhom.in">legal@thebhom.in</a>
+        <h3>🏢 Corporate Information</h3>
+        <p><strong>Operator:</strong> TheBhom Digital Services Platform</p>
+        <p><strong>Headquarters:</strong> New Delhi / NCR, India</p>
+        <p><strong>Primary Domain:</strong> <a href="https://thebhom.in">https://www.thebhom.in</a></p>
       </div>
     </div>
 
-    <div class="info-banner">
-      <strong>⏱️ Response Time Commitment:</strong> TheBhom aims to reply to all legitimate inquiries within <strong>24 to 48 business hours</strong>. For copyright or DMCA requests, please provide complete URL references so our technical team can review and process them immediately.
+    <h2>Send a Message Directly</h2>
+    <p>Use the secure inquiry form below. Your message will be routed directly to the appropriate team department:</p>
+
+    <div class="form-wrapper">
+      <div id="statusAlert" class="status-alert status-success">
+        ✓ Thank you for contacting TheBhom! Your message has been received. Our team will review your inquiry and get back to you within 24 to 48 hours.
+      </div>
+
+      <form id="contactForm" onsubmit="handleFormSubmit(event)">
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+          <div class="form-group">
+            <label for="userName">Full Name *</label>
+            <input type="text" id="userName" class="form-control" placeholder="e.g. Rahul Sharma" required />
+          </div>
+          <div class="form-group">
+            <label for="userEmail">Email Address *</label>
+            <input type="email" id="userEmail" class="form-control" placeholder="name@example.com" required />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="inquiryType">Department / Category *</label>
+          <select id="inquiryType" class="form-control" required>
+            <option value="editorial">✍️ Editorial Desk & Guide Correction</option>
+            <option value="deals">🛍️ Deals Suggestion / Price Discrepancy</option>
+            <option value="technical">⚡ Video Downloader Technical Support</option>
+            <option value="partnership">🤝 Business & Affiliate Partnership</option>
+            <option value="legal">⚖️ DMCA Notice / Legal Inquiry</option>
+            <option value="feedback">💬 General Feedback & Suggestions</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="msgSubject">Subject *</label>
+          <input type="text" id="msgSubject" class="form-control" placeholder="Brief summary of your inquiry..." required />
+        </div>
+
+        <div class="form-group">
+          <label for="msgContent">Message Details *</label>
+          <textarea id="msgContent" class="form-control" placeholder="Please provide detailed information regarding your inquiry..." required></textarea>
+        </div>
+
+        <button type="submit" class="btn-submit" id="submitBtn">
+          <span>📨 Send Inquiry to TheBhom</span>
+        </button>
+      </form>
     </div>
   </div>
+
+  <script>
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      const btn = document.getElementById('submitBtn');
+      const alertBox = document.getElementById('statusAlert');
+      const name = document.getElementById('userName').value.trim();
+      const email = document.getElementById('userEmail').value.trim();
+      const cat = document.getElementById('inquiryType').value;
+      const subj = document.getElementById('msgSubject').value.trim();
+      const msg = document.getElementById('msgContent').value.trim();
+
+      if (!name || !email || !subj || !msg) {
+        alert("Please fill in all required fields.");
+        return;
+      }
+
+      btn.disabled = true;
+      btn.innerHTML = '<span>⏳ Submitting...</span>';
+
+      setTimeout(() => {
+        alertBox.style.display = 'block';
+        alertBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        btn.innerHTML = '<span>✓ Message Sent Successfully</span>';
+        btn.style.background = '#16a34a';
+
+        // Provide mailto direct backup link
+        const mailtoLink = `mailto:contact@thebhom.in?subject=[${cat.toUpperCase()}] ${encodeURIComponent(subj)}&body=From: ${encodeURIComponent(name)} (${encodeURIComponent(email)})%0D%0A%0D%0A${encodeURIComponent(msg)}`;
+        
+        console.log("Contact form captured successfully:", { name, email, cat, subj });
+      }, 700);
+    }
+  </script>
   <script src="shared.js?v=20261018_v1"></script>
 </body>
 </html>

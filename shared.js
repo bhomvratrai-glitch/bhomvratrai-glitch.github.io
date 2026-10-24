@@ -580,13 +580,14 @@ function renderFooter(){
       </div>
 
       <div class="f-col">
-        <h5 style="font-size:0.88rem;font-weight:800;color:#111827;margin-bottom:1rem;text-transform:none;letter-spacing:0;">Company & Policy</h5>
+        <h5 style="font-size:0.88rem;font-weight:800;color:#111827;margin-bottom:1rem;text-transform:none;letter-spacing:0;">Company &amp; Policy</h5>
         <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:0.6rem;">
           <li><a href="/about" style="color:#4b5563;text-decoration:none;font-size:0.88rem;">About Us</a></li>
           <li><a href="/contact" style="color:#4b5563;text-decoration:none;font-size:0.88rem;">Contact Us</a></li>
           <li><a href="/privacy-policy" style="color:#4b5563;text-decoration:none;font-size:0.88rem;">Privacy Policy</a></li>
           <li><a href="/terms" style="color:#4b5563;text-decoration:none;font-size:0.88rem;">Terms of Service</a></li>
           <li><a href="/disclaimer" style="color:#4b5563;text-decoration:none;font-size:0.88rem;">Disclaimer</a></li>
+          <li><a href="/dmca" style="color:#dc2626;text-decoration:none;font-size:0.88rem;font-weight:700;">⚖️ DMCA / Copyright</a></li>
         </ul>
       </div>
 
@@ -618,14 +619,20 @@ function renderFooter(){
       </a>
     </div>
 
-    <div class="footer-bottom" style="border-top:1px solid #e5e7eb;padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-size:0.85rem;color:#4b5563;">
-      <div style="display:flex;align-items:center;gap:8px;">
-        <div style="width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg, #e11d48, #be123c);color:#fff;display:grid;place-items:center;font-weight:900;font-size:0.85rem;">TB</div>
-        <span style="font-weight:700;color:#111827;">TheBhom</span>
+    <div class="footer-bottom" style="border-top:1px solid #e5e7eb;padding-top:1.5rem;display:flex;flex-direction:column;gap:10px;font-size:0.85rem;color:#4b5563;">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <div style="width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg, #e11d48, #be123c);color:#fff;display:grid;place-items:center;font-weight:900;font-size:0.85rem;">TB</div>
+          <span style="font-weight:700;color:#111827;">TheBhom</span>
+        </div>
+        <div>&copy; ${new Date().getFullYear()} TheBhom. All rights reserved. Free Educational &amp; Digital Utilities Hub.</div>
+        <div style="font-size:0.8rem;color:#4b5563;">🔒 Client-side browser processing. Files are never stored on external servers.</div>
       </div>
-      <div>&copy; ${new Date().getFullYear()} TheBhom. All rights reserved. Free Educational & Digital Utilities Hub.</div>
-      <div style="font-size:0.8rem;color:#4b5563;">🔒 Client-side browser processing. Files are never stored on external servers.</div>
+      <div style="background:#fef3c7;border:1px solid #fde68a;border-radius:8px;padding:10px 16px;font-size:0.78rem;color:#92400e;line-height:1.5;">
+        <strong>📢 Affiliate Disclosure:</strong> TheBhom participates in the Amazon Associates Program, Flipkart Partner Program, and Myntra Affiliate Program. As an affiliate, we earn a small commission from qualifying purchases at <strong>no extra cost to you</strong>. This helps us keep the platform free for everyone. All product recommendations are based on genuine research and editorial opinion.
+      </div>
     </div>
+
   </div>
 </footer>
 <div class="toast-box" id="toastBox"></div>
