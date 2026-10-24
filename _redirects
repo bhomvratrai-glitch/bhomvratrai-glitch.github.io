@@ -32,3 +32,9 @@ http://www.thebhom.in/* https://www.thebhom.in/:splat 301!
 /dashboard* https://www.thebhom.in/ 301
 /directory/* https://www.thebhom.in/ 301
 /directory https://www.thebhom.in/ 301
+
+# Subdirectory PWA manifest rewrites
+/guides/manifest.json /manifest.json 200
+/deals/manifest.json /manifest.json 200
+/downloader/manifest.json /manifest.json 200
+
