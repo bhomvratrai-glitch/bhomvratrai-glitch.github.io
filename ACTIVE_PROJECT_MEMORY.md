@@ -112,6 +112,12 @@
   - Added Guides to top header nav (`/guides/`), mobile drawer, homepage platform cards, and footer links.
   - Updated `sitemap-main.xml` with 11 new URLs and pinged IndexNow API.
   - Double-verified live in production at `https://www.thebhom.in/guides/` and `https://www.thebhom.in/guides/top-10-smartwatches-under-2000` with `HTTP/2 200 OK`.
+- [x] Homepage Portal Transformation & Advanced Social SEO Gate (Oct 24, 2026):
+  - Replaced directory homepage with working Hero Quick Downloader bar, Live Loot Deals feed, and Featured Buying Guides.
+  - Generated high-resolution 1200x630 branded `og-image.png` using PIL and wired Open Graph + Twitter summary_large_image cards across `/`, `/deals/`, and `/downloader/`.
+  - Added strict CSS media query `@media(min-width:881px){.mob-nav{display:none !important;}}` in `shared.css` to prevent duplicate menu DOM inspection.
+  - Cleared obsolete `/guides` redirect from `404.html` so real 404s respond cleanly.
+  - Double-verified live on production: `https://www.thebhom.in/og-image.png` (HTTP 200 OK) and live homepage DOM verified.
 
 ---
 
