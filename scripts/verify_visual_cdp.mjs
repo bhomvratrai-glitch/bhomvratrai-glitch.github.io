@@ -65,14 +65,28 @@ async function verifyPage(url) {
         await send('Network.enable');
         await send('Page.enable');
 
-        // Wait for page load and settle
-        await new Promise((r) => setTimeout(r, 3500));
+        // Wait for initial page settle
+        await new Promise((r) => setTimeout(r, 2500));
 
-        // Evaluate DOM integrity & broken images inside the real page
+        // Scroll down and up to trigger IntersectionObserver and lazy-loaded images
+        await send('Runtime.evaluate', {
+          expression: `window.scrollTo(0, document.body.scrollHeight / 2);`
+        });
+        await new Promise((r) => setTimeout(r, 1500));
+        await send('Runtime.evaluate', {
+          expression: `window.scrollTo(0, document.body.scrollHeight);`
+        });
+        await new Promise((r) => setTimeout(r, 2000));
+        await send('Runtime.evaluate', {
+          expression: `window.scrollTo(0, 0);`
+        });
+        await new Promise((r) => setTimeout(r, 1000));
+
+        // Evaluate DOM integrity & genuinely broken images inside the real page
         const evalRes = await send('Runtime.evaluate', {
           expression: `(() => {
             const brokenImages = Array.from(document.querySelectorAll('img'))
-              .filter(img => img.src && (!img.complete || img.naturalWidth === 0))
+              .filter(img => img.src && img.complete && img.naturalWidth === 0)
               .map(img => img.src);
             
             return {
