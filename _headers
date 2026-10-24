@@ -1,3 +1,34 @@
+# 1-Year Cache for Versioned & Static Assets (Fixes Lighthouse "Use efficient cache lifetimes")
+/*.png
+  Cache-Control: public, max-age=31536000, immutable
+/*.jpg
+  Cache-Control: public, max-age=31536000, immutable
+/*.jpeg
+  Cache-Control: public, max-age=31536000, immutable
+/*.webp
+  Cache-Control: public, max-age=31536000, immutable
+/*.avif
+  Cache-Control: public, max-age=31536000, immutable
+/*.svg
+  Cache-Control: public, max-age=31536000, immutable
+/*.ico
+  Cache-Control: public, max-age=31536000, immutable
+/*.woff2
+  Cache-Control: public, max-age=31536000, immutable
+/*.woff
+  Cache-Control: public, max-age=31536000, immutable
+
+# Cache CSS and JS
+/*.css
+  Cache-Control: public, max-age=31536000, immutable
+/*.js
+  Cache-Control: public, max-age=31536000, immutable
+/deals/js/*
+  Cache-Control: public, max-age=31536000, immutable
+/deals/data/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Special SEO and AI Crawler files
 /llms.txt
   Content-Type: text/plain; charset=utf-8
   Access-Control-Allow-Origin: *
@@ -17,3 +48,23 @@
   Content-Type: text/plain; charset=utf-8
   Access-Control-Allow-Origin: *
   Cache-Control: public, max-age=86400
+
+/manifest.json
+  Content-Type: application/manifest+json; charset=utf-8
+  Access-Control-Allow-Origin: *
+  Cache-Control: public, max-age=86400
+
+/sitemap.xml
+  Content-Type: application/xml; charset=utf-8
+  Cache-Control: public, max-age=86400
+
+# HTML documents: Revalidate to serve latest updates
+/*.html
+  Cache-Control: public, max-age=0, must-revalidate
+
+# Global Security Headers (Improves Best Practices Score)
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: SAMEORIGIN
+  Referrer-Policy: strict-origin-when-cross-origin
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload

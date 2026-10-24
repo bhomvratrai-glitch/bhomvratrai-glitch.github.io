@@ -618,13 +618,13 @@ function renderFooter(){
       </a>
     </div>
 
-    <div class="footer-bottom" style="border-top:1px solid #e5e7eb;padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-size:0.85rem;color:#6b7280;">
+    <div class="footer-bottom" style="border-top:1px solid #e5e7eb;padding-top:1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;font-size:0.85rem;color:#4b5563;">
       <div style="display:flex;align-items:center;gap:8px;">
         <div style="width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg, #e11d48, #be123c);color:#fff;display:grid;place-items:center;font-weight:900;font-size:0.85rem;">TB</div>
         <span style="font-weight:700;color:#111827;">TheBhom</span>
       </div>
       <div>&copy; ${new Date().getFullYear()} TheBhom. All rights reserved. Free Educational & Digital Utilities Hub.</div>
-      <div style="font-size:0.8rem;color:#9ca3af;">🔒 Client-side browser processing. Files are never stored on external servers.</div>
+      <div style="font-size:0.8rem;color:#4b5563;">🔒 Client-side browser processing. Files are never stored on external servers.</div>
     </div>
   </div>
 </footer>
