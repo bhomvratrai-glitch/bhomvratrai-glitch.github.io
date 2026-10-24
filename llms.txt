@@ -1,18 +1,19 @@
 # TheBhom.in
 
-> TheBhom.in is India's leading platform for daily verified shopping loot deals, price drop tracking, and high-speed multimedia downloading utilities.
+> TheBhom.in is India's leading platform for daily verified shopping loot deals, price drop tracking, editorial buying guides, and high-speed multimedia downloading utilities.
 
 ## Core Services
 
-- [TheBhom Home](https://www.thebhom.in/): Central portal with featured shopping deals, price drop alerts, and instant video downloading utilities.
+- [TheBhom Home](https://www.thebhom.in/): Central portal with featured shopping deals, price drop alerts, editorial guides, and instant video downloading utilities.
 - [Deals & Offers Store](https://www.thebhom.in/deals/): Verified handpicked loot deals, price drop alerts, and flash sales across Amazon, Flipkart, Myntra, and major Indian retailers.
 - [Universal Video Downloader](https://www.thebhom.in/downloader/): Multi-platform 1080p Full HD video downloader and MP3 audio extractor supporting Instagram Reels, YouTube Shorts, TikTok (watermark-free), Facebook, and Twitter/X.
+- [Guides & Editorial Reviews](https://www.thebhom.in/guides/): In-depth smart buying guides, gadget reviews, price tracking strategies, and multimedia tutorials.
 
 ## Platform & Policies
 
-- [About TheBhom](https://www.thebhom.in/about.html): Mission statement, background, and platform values.
-- [Privacy Policy](https://www.thebhom.in/privacy-policy.html): Complete user privacy policy, cookie disclosures, and data protection assurances.
-- [Terms of Service](https://www.thebhom.in/terms.html): Terms governing the use of TheBhom.in services.
-- [Disclaimer](https://www.thebhom.in/disclaimer.html): Affiliate disclosure and content disclaimers.
-- [Contact Support](https://www.thebhom.in/contact.html): Inquiries, business partnerships, and user support.
+- [About TheBhom](https://www.thebhom.in/about): Mission statement, background, and platform values.
+- [Privacy Policy](https://www.thebhom.in/privacy-policy): Complete user privacy policy, cookie disclosures, and data protection assurances.
+- [Terms of Service](https://www.thebhom.in/terms): Terms governing the use of TheBhom.in services.
+- [Disclaimer](https://www.thebhom.in/disclaimer): Affiliate disclosure and content disclaimers.
+- [Contact Support](https://www.thebhom.in/contact): Inquiries, business partnerships, and user support.
 - [XML Sitemap](https://www.thebhom.in/sitemap.xml): Canonical XML index for web crawlers and search engines.

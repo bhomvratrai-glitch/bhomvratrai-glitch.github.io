@@ -7,7 +7,7 @@
         const p = window.location.pathname.toLowerCase();
         if (p.startsWith('/deals/p/') || p.startsWith('/product/') || p === '/product' || p === '/deal-of-the-day' || p.startsWith('/best/') || p === '/best') {
           window.location.replace('/deals/');
-        } else if (p.startsWith('/directory') || p.startsWith('/tools') || p.startsWith('/imgpdf') || p.startsWith('/wallpapers') || p.startsWith('/cards') || p.startsWith('/ebooks') || p.startsWith('/magazines') || p.startsWith('/templates') || p.startsWith('/news')) {
+        } else if (p.startsWith('/directory') || p.startsWith('/tools') || p.startsWith('/imgpdf') || p.startsWith('/wallpapers') || p.startsWith('/cards') || p.startsWith('/ebooks') || p.startsWith('/magazines') || p.startsWith('/templates') || p.startsWith('/news') || p.startsWith('/cartoon') || p.startsWith('/marvel') || p.startsWith('/voices') || p.startsWith('/widget') || p.startsWith('/refer') || p.startsWith('/pitch')) {
           window.location.replace('/');
         }
       } catch(e) {}
@@ -203,6 +203,7 @@
       <a href="/" class="btn-pill btn-primary">🏠 Back to Home</a>
       <a href="/deals/" class="btn-pill" style="border-color:#e11d48;color:#e11d48;font-weight:700;">🔥 Loot Deals & Offers</a>
       <a href="/downloader/" class="btn-pill" style="border-color:#2563eb;color:#2563eb;font-weight:700;">⚡ Universal Downloader</a>
+      <a href="/guides/" class="btn-pill" style="border-color:#059669;color:#059669;font-weight:700;">📖 Guides & Reviews</a>
     </div>
 
     <div class="footer-note">

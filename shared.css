@@ -1,5 +1,5 @@
 /* ===== THEME DEFINITIONS ===== */
-/* ImgPDF Standard Light Mode (Default) */
+/* TheBhom Standard Light Mode (Default) */
 :root, [data-theme="light"] {
   --primary: #e5322d;
   --primary-light: #ef4444;
@@ -32,7 +32,7 @@
   --r-sm: 8px;
   --t: all 0.2s cubic-bezier(0.4,0,0.2,1);
 
-  /* ImgPDF Category Tokens */
+  /* TheBhom Category Tokens */
   --c-organize: #e5322d;
   --c-optimize: #f59e0b;
   --c-convert-to: #16a34a;
@@ -535,7 +535,7 @@ header.hdr .hdr-right, .hdr-right {
 .pg-btn{width:38px;height:38px;border-radius:8px;border:1px solid var(--border);background:transparent;color:var(--text2);font-family:'Inter','Poppins',sans-serif;font-size:.85rem;cursor:pointer;transition:var(--t);display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-card);}
 .pg-btn:hover,.pg-btn.on{background:var(--primary);border-color:var(--primary);color:#fff;}
 
-/* ===== ImgPDF Components ===== */
+/* ===== TheBhom Card Components ===== */
 .tool-card {
   position: relative;
   border-radius: 14px;
@@ -896,7 +896,7 @@ header.hdr .hdr-right, .hdr-right {
 .quote-tooltip-btn:hover{background:#7c3aed;}
 
 /* ============================================================
-   ROMANTIC BGM MUSIC PLAYER (CARDS)
+   BGM MUSIC PLAYER
    ============================================================ */
 .bgm-btn{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:20px;background:rgba(236,72,153,0.18);border:1px solid rgba(236,72,153,0.4);color:#f472b6;font-size:0.78rem;font-weight:700;cursor:pointer;transition:var(--t);}
 .bgm-btn:hover,.bgm-btn.playing{background:#ec4899;color:#fff;box-shadow:0 0 16px rgba(236,72,153,0.6);}
@@ -974,14 +974,14 @@ header.hdr .hdr-right, .hdr-right {
 .pin-creator{display:flex;align-items:center;gap:6px;}
 .pin-avatar{width:20px;height:20px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--accent));display:flex;align-items:center;justify-content:center;font-size:0.6rem;font-weight:800;color:#fff;}
 
-/* Color Swatches Palette Bar (Wallpapers) */
+/* Color Swatches Palette Bar */
 .color-swatch-bar{display:flex;gap:8px;align-items:center;padding:10px 2rem;overflow-x:auto;scrollbar-width:none;}
 .color-swatch-bar::-webkit-scrollbar{display:none;}
 .color-dot{width:24px;height:24px;border-radius:50%;border:2px solid rgba(255,255,255,0.2);cursor:pointer;transition:transform 0.2s ease,border-color 0.2s ease;flex-shrink:0;}
 .color-dot:hover,.color-dot.active{transform:scale(1.25);border-color:#fff;}
 
 /* ============================================================
-   AMAZON KINDLE STYLE E-BOOK STOREFRONT MODAL
+   PRODUCT STOREFRONT MODAL
    ============================================================ */
 .amz-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.88);backdrop-filter:blur(14px);z-index:99998;display:none;align-items:center;justify-content:center;padding:1.5rem 1rem;}
 .amz-modal-overlay.open{display:flex;}

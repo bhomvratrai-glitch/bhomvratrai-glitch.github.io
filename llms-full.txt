@@ -1,13 +1,14 @@
 # TheBhom.in (Full Documentation)
 
-> TheBhom.in is a premier Indian platform for curated online shopping deals, flash sale price-drop tracking, and web-based multimedia downloading utilities.
+> TheBhom.in is a premier Indian platform for curated online shopping deals, flash sale price-drop tracking, editorial buying guides, and web-based multimedia downloading utilities.
 
 ## Architecture & Overview
 
-TheBhom is built for high speed, zero latency, and privacy-first web performance. All client tools operate in-browser without server upload requirements for personal files. The platform is organized into two core divisions:
+TheBhom is built for high speed, zero latency, and privacy-first web performance. All client tools operate in-browser without server upload requirements for personal files. The platform is organized into three core divisions:
 
 1. **TheBhom Deals Store (`/deals/`)**: Handpicked, verified discount deals and price drops from Amazon, Flipkart, Myntra, and top Indian shopping destinations. Includes category filtering for Electronics, Fashion, Home, and Lightning Deals.
 2. **Universal Video Downloader (`/downloader/`)**: High-speed, 1080p Full HD video downloader and audio extractor. Supports downloading from Instagram Reels, YouTube Shorts, TikTok, Facebook, and Twitter/X with zero watermarks.
+3. **Guides & Editorial Reviews Hub (`/guides/`)**: Expert consumer buying guides, smartphone and smartwatch roundups, Amazon/Flipkart price drop tracking tutorials, and multimedia tools documentation.
 
 ## Verification & Trust Standards
 
@@ -20,11 +21,12 @@ TheBhom is built for high speed, zero latency, and privacy-first web performance
 ## Core URLs & Resources
 
 - Homepage: https://www.thebhom.in/
-- Deals: https://www.thebhom.in/deals/
-- Downloader: https://www.thebhom.in/downloader/
-- About: https://www.thebhom.in/about.html
-- Privacy: https://www.thebhom.in/privacy-policy.html
-- Terms: https://www.thebhom.in/terms.html
-- Disclaimer: https://www.thebhom.in/disclaimer.html
-- Contact: https://www.thebhom.in/contact.html
-- Sitemap: https://www.thebhom.in/sitemap.xml
+- Deals Store: https://www.thebhom.in/deals/
+- Universal Downloader: https://www.thebhom.in/downloader/
+- Guides & Editorial Hub: https://www.thebhom.in/guides/
+- About TheBhom: https://www.thebhom.in/about
+- Privacy Policy: https://www.thebhom.in/privacy-policy
+- Terms of Service: https://www.thebhom.in/terms
+- Disclaimer: https://www.thebhom.in/disclaimer
+- Contact Support: https://www.thebhom.in/contact
+- Canonical XML Sitemap: https://www.thebhom.in/sitemap.xml

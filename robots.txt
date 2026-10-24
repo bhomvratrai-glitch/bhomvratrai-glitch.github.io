@@ -3,12 +3,9 @@ Allow: /
 Allow: /deals/
 Allow: /deals/p/
 Allow: /downloader/
+Allow: /guides/
 Disallow: /admin/
-Disallow: /api/admin
-Disallow: /directory/
-Disallow: /marvel/
-Disallow: /cartoon/
-Disallow: /voices/
+Disallow: /api/
 
 User-agent: Googlebot-Image
 Allow: /
@@ -16,32 +13,21 @@ Allow: /
 User-agent: Mediapartners-Google
 Allow: /
 Disallow: /admin/
-Disallow: /deals/p/
-Disallow: /directory/
-Disallow: /marvel/
-Disallow: /cartoon/
-Disallow: /voices/
+Disallow: /api/
 
 User-agent: AdsBot-Google
 Allow: /
 Disallow: /admin/
-Disallow: /deals/p/
-Disallow: /directory/
-Disallow: /marvel/
-Disallow: /cartoon/
-Disallow: /voices/
+Disallow: /api/
 
 User-agent: *
 Allow: /
 Allow: /deals/
 Allow: /deals/p/
 Allow: /downloader/
+Allow: /guides/
 Disallow: /admin/
-Disallow: /api/admin
-Disallow: /directory/
-Disallow: /marvel/
-Disallow: /cartoon/
-Disallow: /voices/
+Disallow: /api/
 
 Sitemap: https://www.thebhom.in/sitemap.xml
 Sitemap: https://www.thebhom.in/sitemap-deals.xml
