@@ -692,7 +692,7 @@ if ('serviceWorker' in navigator) {
   if(!document.querySelector('link[rel="manifest"]')){
     const m = document.createElement('link');
     m.rel = 'manifest';
-    m.href = 'manifest.json';
+    m.href = '/manifest.json';
     document.head.appendChild(m);
   }
   if(!document.querySelector('meta[name="theme-color"]')){
@@ -704,7 +704,7 @@ if ('serviceWorker' in navigator) {
   if(!document.querySelector('link[rel="apple-touch-icon"]')){
     const ti = document.createElement('link');
     ti.rel = 'apple-touch-icon';
-    ti.href = 'icon-192.png';
+    ti.href = '/icon-192.png';
     document.head.appendChild(ti);
   }
 })();
