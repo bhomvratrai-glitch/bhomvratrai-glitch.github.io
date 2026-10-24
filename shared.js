@@ -1180,6 +1180,18 @@ function getAllContentItems() {
   return [
     { id: 'item-deals', title: 'TheBhom Deals — Handpicked Daily Loot Deals & Price Drops', cat: 'deals', tag: 'Deals Store', emoji: '🔥', url: '/deals/' },
     { id: 'item-downloader', title: 'Universal Video Downloader & Trimmer (1080p Full HD & MP3)', cat: 'downloader', tag: 'Downloader', emoji: '⚡', url: '/downloader/' },
+    { id: 'item-guides', title: 'TheBhom Editorial Buying Guides & Video Tutorials', cat: 'guides', tag: 'Guides Hub', emoji: '📖', url: '/guides/' },
+    { id: 'guide-smartwatch', title: 'Top 10 Best Smartwatches Under ₹2,000 (Tested Battery & AMOLED)', cat: 'guides', tag: 'Tech Guide', emoji: '⌚', url: '/guides/top-10-smartwatches-under-2000.html' },
+    { id: 'guide-tws', title: 'Best TWS Earbuds Under ₹1,500 with Active Noise Cancellation (ANC)', cat: 'guides', tag: 'Audio Guide', emoji: '🎧', url: '/guides/best-tws-earbuds-under-1500-anc.html' },
+    { id: 'guide-price-track', title: 'How to Track Real Price Drops on Amazon & Flipkart (Avoid Fake Sales)', cat: 'guides', tag: 'Shopping Guide', emoji: '📉', url: '/guides/how-to-track-real-amazon-flipkart-price-drops.html' },
+    { id: 'guide-ig-reels', title: 'How to Download Instagram Reels with Audio Directly to Gallery', cat: 'guides', tag: 'Video Tutorial', emoji: '📸', url: '/guides/download-instagram-reels-with-audio-gallery.html' },
+    { id: 'guide-yt-mp3', title: 'Convert YouTube Videos to High Quality 320kbps MP3 Audio', cat: 'guides', tag: 'Audio Tutorial', emoji: '🎵', url: '/guides/convert-youtube-video-to-mp3-320kbps.html' },
+    { id: 'deal-powerbank', title: '15W Fast Charging 10000mAh Power Bank (₹527 - 73% OFF)', cat: 'deals', tag: 'Amazon Deal', emoji: '🔋', url: '/deals/p/15w-fast-charging-10000mah-power-bank-with-type-c--fs-amazon-b0flxvqr5r.html' },
+    { id: 'deal-smartwatch', title: 'Ai+ NovaWatch AMOLED Bluetooth Calling Smartwatch (₹1,499 - 66% OFF)', cat: 'deals', tag: 'Flipkart Deal', emoji: '⌚', url: '/deals/p/ai-novawatch-active-9mm-slim-173-amoled-display-bt-fs-flipkart-smwhjhukphmzbqxq.html' },
+    { id: 'deal-charger', title: '100W Fast Charger Adapter & Type-C Cable Combo (₹699 - 65% OFF)', cat: 'deals', tag: 'Amazon Deal', emoji: '⚡', url: '/deals/p/100w-fast-charger-adapter-usb-a-to-type-c-cable-co-fs-amazon-b0gh86tbh3.html' },
+    { id: 'deal-earrings', title: 'Rubans 22K Gold-Plated Zircon Drop Earrings (₹372 - 88% OFF)', cat: 'deals', tag: 'Myntra Deal', emoji: '✨', url: '/deals/p/22k-mehandi-gold-plated-crystal-zircon-studded-tra-fs-myntra-31133316.html' },
+    { id: 'deal-saree', title: 'Paithani Soft Silk Saree with Rich Golden Zari (₹999 - 66% OFF)', cat: 'deals', tag: 'Amazon Deal', emoji: '👗', url: '/deals/p/a-pethani-silk-saree-perot-using-silk-yarn-and-emb-amz-b0hgmj7xdc.html' },
+    { id: 'deal-earphones', title: 'Ambrane Type-C In-Ear Earphones with Mic (₹199 - 66% OFF)', cat: 'deals', tag: 'Amazon Deal', emoji: '🎧', url: '/deals/p/ambrane-wired-type-c-in-ear-earphones-with-in-line-fs-amazon-b0ckbyhs8s.html' },
     { id: 'item-amazon', title: 'Amazon Top Discounts & Lightning Deals', cat: 'deals', tag: 'Amazon', emoji: '📦', url: '/deals/?store=amazon' },
     { id: 'item-flipkart', title: 'Flipkart Big Savings & Flash Offers', cat: 'deals', tag: 'Flipkart', emoji: '🛍️', url: '/deals/?store=flipkart' },
     { id: 'item-myntra', title: 'Myntra Fashion, Clothing & Footwear Deals', cat: 'deals', tag: 'Myntra', emoji: '👗', url: '/deals/?store=myntra' },
@@ -1228,6 +1240,7 @@ function openSpotlight() {
           <button class="spotlight-chip active" onclick="setSpotlightCat('all', this)">🔥 All</button>
           <button class="spotlight-chip" onclick="setSpotlightCat('deals', this)">🛍️ Loot Deals</button>
           <button class="spotlight-chip" onclick="setSpotlightCat('downloader', this)">⚡ Downloader</button>
+          <button class="spotlight-chip" onclick="setSpotlightCat('guides', this)">📖 Guides</button>
         </div>
         <div class="spotlight-results" id="spotlightResults"></div>
         <div class="spotlight-footer">
