@@ -41,6 +41,14 @@ jobs:
           python3 scripts/telegram_broadcaster.py || true
           python3 scripts/whatsapp_broadcaster.py || true
 
+      - name: 📱 Broadcast to WhatsApp Channel (24/7 Cloud Session)
+        env:
+          WA_SESSION_BASE64: ${{ secrets.WA_SESSION_BASE64 }}
+        run: |
+          if [ -n "$WA_SESSION_BASE64" ]; then
+            cd scripts/wa_cloud && npm install --omit=dev && node broadcast_cloud.mjs || true
+          fi
+
       - name: 💾 Commit & Push Updates to GitHub
         run: |
           git config --local user.name "TheBhom Deals Bot"

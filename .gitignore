@@ -4,4 +4,7 @@ _worker.bundle
 __pycache__/
 *.pyc
 node_modules/
+scripts/wa_cloud/auth/
+scripts/wa_cloud/node_modules/
+scripts/wa_cloud/*.tar.gz
 GEMINI.md
