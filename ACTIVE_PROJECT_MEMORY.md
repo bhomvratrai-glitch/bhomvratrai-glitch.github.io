@@ -30,6 +30,12 @@
       - Every Hinglish guide includes `<html lang="hi-Latn">`, a 10-Second Quick Answer box for Google Position 0 Featured Snippets, conversational FAQs, HowTo/FAQPage Schema.org markup, and an above-the-fold interactive quick download widget.
       - Enriched `/downloader/` and `/downloader/hi/` with exact conversational colloquial questions and contextual cross-links to the guides, creating a powerful bidirectional SEO internal linking silo.
       - Double-verified live in production with `HTTP/2 200 OK` across all guide routes and submitted to IndexNow (`HTTP/2 202 Accepted`).
+      - **Site-Wide Navigation & Asset Cleanliness Overhaul**:
+        - **Dedicated Product Links**: Replaced generic query links on Homepage Trending Loot section with 6 real, dedicated product landing pages (`/deals/p/...`), complete with clean URL routing, verified pricing, and high-res imagery.
+        - **Spotlight Search (Cmd+K)**: Integrated full Guides and product entries into `getAllContentItems()` in `shared.js` with category chip filtering (`📖 Guides`).
+        - **Orphaned Asset Purge**: Deleted 22 unused legacy/test files (`cartoon/`, `marvel/`, `voices/`, `widget/`, `pitch-*.html`, `refer.html`, `jspdf.umd.min.js`), freeing 40+ MB of obsolete clutter.
+        - **Updated Robots, Redirects & About**: Cleaned up `robots.txt` disallows, updated `404.html` fallback suggestions to include Guides and Downloader, and re-aligned `about.html`, `llms.txt`, and `llms-full.txt` strictly to TheBhom's 3 core pillars (Deals, Downloader, Guides).
+        - **Double-Verified Live**: `https://www.thebhom.in/` renders all 6 `/deals/p/` URLs cleanly; IndexNow re-submitted with `202 Accepted`.
   - **Deals Store**: Subdirectory (`/deals/`) at `https://www.thebhom.in/deals/` featuring curated daily loot deals, price drop tracking, and direct affiliate links.
     - **October 23, 2026 Layout Restoration & Zero-Leak Milestone**:
       - Restored original compact screenshot layout (2 commits prior): compact horizontal category pills strip, announcement ticker (`⚡ DEALS OF THE DAY`), and dual high-converting card buttons (Orange **`Buy Now →`** + White/Blue **`See Details`**).
