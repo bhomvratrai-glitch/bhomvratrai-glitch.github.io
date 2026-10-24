@@ -288,6 +288,7 @@ function renderHeader(activePage=''){
     <ul class="hdr-nav">
       <li><a href="/deals/" class="hdr-nav-link ${activePage==='deals'?'active':''}" title="TheBhom Deals"><span class="hdr-nav-ic" style="color:#f59e0b;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2H2v10l9.29 9.29c.94.94 2.48.94 3.42 0l6.58-6.58c.94-.94.94-2.48 0-3.42L12 2Z"/><circle cx="7" cy="7" r="1.5"/></svg></span><span class="hdr-nav-txt" style="color:#f59e0b;font-weight:700;">Deals</span></a></li>
       <li><a href="/downloader/" class="hdr-nav-link ${activePage==='downloader'?'active':''}" title="Universal Video Downloader"><span class="hdr-nav-ic" style="color:#0891b2;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#0891b2" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span><span class="hdr-nav-txt" style="color:#0891b2;font-weight:700;">Downloader</span></a></li>
+      <li><a href="/guides/" class="hdr-nav-link ${activePage==='guides'?'active':''}" title="Buying Guides & Tutorials"><span class="hdr-nav-ic" style="color:#10b981;"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg></span><span class="hdr-nav-txt" style="color:#10b981;font-weight:700;">Guides</span></a></li>
       <li><button onclick="window.openFavDrawer()" class="hdr-nav-link" style="background:none;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:6px;font:inherit;" title="Saved Items"><span class="hdr-nav-ic" style="color:#e11d48;"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></span><span class="hdr-nav-txt" style="color:#e11d48;font-weight:700;">Saved</span><span class="fav-badge fav-count-badge" style="background:#e11d48;color:#fff;font-size:11px;font-weight:700;padding:1px 6px;border-radius:12px;min-width:18px;text-align:center;">0</span></button></li>
     </ul>
   </nav>
@@ -318,6 +319,7 @@ function renderHeader(activePage=''){
   <a href="/">🏠 Home</a>
   <a href="/deals/" style="color:#f59e0b;font-weight:700;">🔥 Deals</a>
   <a href="/downloader/" style="color:#0891b2;font-weight:700;">⚡ Downloader</a>
+  <a href="/guides/" style="color:#10b981;font-weight:700;">📖 Guides & Reviews</a>
   <a href="#" onclick="window.openFavDrawer();return false;" style="color:#e11d48;font-weight:700;">❤️ Saved Items (<span class="fav-count-badge">0</span>)</a>
   <a href="/about">ℹ️ About Us</a>
   <a href="/contact">📞 Contact</a>
@@ -550,6 +552,7 @@ function renderFooter(){
           <li><a href="/deals/?store=flipkart" style="color:#4b5563;text-decoration:none;font-size:0.88rem;">🛍️ Flipkart Deals</a></li>
           <li><a href="/deals/?store=myntra" style="color:#4b5563;text-decoration:none;font-size:0.88rem;">👗 Myntra Deals</a></li>
           <li><a href="/downloader/" style="color:#0891b2;font-weight:700;text-decoration:none;font-size:0.88rem;">⚡ Video Downloader</a></li>
+          <li><a href="/guides/" style="color:#10b981;font-weight:700;text-decoration:none;font-size:0.88rem;">📖 Buying Guides & Reviews</a></li>
         </ul>
       </div>
 
@@ -842,12 +845,7 @@ window.renderFavDrawerBody = function() {
 };
 
 function renderSubnav(activePage='') {
-  return `
-<nav class="subnav">
-  <a href="/deals/" class="${activePage==='deals'?'here':''}">🔥 Deals</a>
-  <a href="/downloader/" class="${activePage==='downloader'?'here':''}">⚡ Downloader</a>
-</nav>
-`;
+  return '';
 }
 
 function upgradeHeaderToNewNav() {
@@ -869,10 +867,17 @@ function upgradeHeaderToNewNav() {
     const path = window.location.pathname.toLowerCase();
     if (path.includes('downloader')) activePage = 'downloader';
     else if (path.includes('deals')) activePage = 'deals';
+    else if (path.includes('guides')) activePage = 'guides';
+  }
+
+  // Remove any legacy duplicate subnav strip from the page
+  const existingSubnav = document.querySelector('nav.subnav');
+  if (existingSubnav) {
+    existingSubnav.remove();
   }
 
   // Upgrade header if missing downloader or has obsolete sections
-  if (existingHdr && (!existingHdr.querySelector('a[href="/downloader/"]') || existingHdr.querySelector('a[href*="tools"]') || existingHdr.querySelector('a[href*="imgpdf"]') || existingHdr.querySelector('a[href*="wallpapers"]') || existingHdr.querySelector('a[href*="ebooks"]') || existingHdr.querySelector('a[href*="magazines"]') || existingHdr.querySelector('a[href*="templates"]') || existingHdr.querySelector('a[href*="cards"]') || existingHdr.querySelector('a[href*="news"]'))) {
+  if (existingHdr && (!existingHdr.querySelector('a[href="/downloader/"]') || !existingHdr.querySelector('a[href="/guides/"]') || existingHdr.querySelector('a[href*="tools"]') || existingHdr.querySelector('a[href*="imgpdf"]') || existingHdr.querySelector('a[href*="wallpapers"]') || existingHdr.querySelector('a[href*="ebooks"]') || existingHdr.querySelector('a[href*="magazines"]') || existingHdr.querySelector('a[href*="templates"]') || existingHdr.querySelector('a[href*="cards"]') || existingHdr.querySelector('a[href*="news"]'))) {
     const container = document.createElement('div');
     container.innerHTML = renderHeader(activePage);
     const newHdr = container.querySelector('header.hdr');
@@ -903,7 +908,7 @@ function upgradeHeaderToNewNav() {
   // Mount into #shared-header placeholder if present
   const sharedHdrPlaceholder = document.getElementById('shared-header');
   if (sharedHdrPlaceholder && !sharedHdrPlaceholder.querySelector('header.hdr')) {
-    sharedHdrPlaceholder.innerHTML = renderHeader(activePage) + renderSubnav(activePage);
+    sharedHdrPlaceholder.innerHTML = renderHeader(activePage);
     updateThemeIcon(getStoredTheme());
   }
 
@@ -911,19 +916,6 @@ function upgradeHeaderToNewNav() {
   const sharedFtrPlaceholder = document.getElementById('shared-footer');
   if (sharedFtrPlaceholder && !sharedFtrPlaceholder.innerHTML.trim()) {
     sharedFtrPlaceholder.innerHTML = renderFooter();
-  }
-
-  // Upgrade subnav pills across any page
-  const existingSubnav = document.querySelector('nav.subnav');
-  if (existingSubnav) {
-    existingSubnav.outerHTML = renderSubnav(activePage);
-  } else if (!document.querySelector('.no-shared-subnav') && !document.getElementById('shared-header')) {
-    const hdrEl = document.querySelector('header.hdr');
-    if (hdrEl) {
-      const mobNavEl = document.getElementById('mobNav') || document.querySelector('.mob-nav');
-      const target = mobNavEl || hdrEl;
-      target.insertAdjacentHTML('afterend', renderSubnav(activePage));
-    }
   }
 }
 
