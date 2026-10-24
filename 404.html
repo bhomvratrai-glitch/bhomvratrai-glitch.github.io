@@ -5,7 +5,7 @@
     (function(){
       try {
         const p = window.location.pathname.toLowerCase();
-        if (p.startsWith('/deals/p/') || p.startsWith('/product/') || p === '/product' || p === '/deal-of-the-day' || p.startsWith('/best/') || p === '/best' || p.startsWith('/articles') || p.startsWith('/guides')) {
+        if (p.startsWith('/deals/p/') || p.startsWith('/product/') || p === '/product' || p === '/deal-of-the-day' || p.startsWith('/best/') || p === '/best') {
           window.location.replace('/deals/');
         } else if (p.startsWith('/directory') || p.startsWith('/tools') || p.startsWith('/imgpdf') || p.startsWith('/wallpapers') || p.startsWith('/cards') || p.startsWith('/ebooks') || p.startsWith('/magazines') || p.startsWith('/templates') || p.startsWith('/news')) {
           window.location.replace('/');
