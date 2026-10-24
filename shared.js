@@ -537,6 +537,7 @@ function renderFooter(){
           <li><a href="/downloader/youtube-shorts-downloader.html" style="color:#4b5563;text-decoration:none;font-size:0.88rem;">YouTube Shorts Downloader</a></li>
           <li><a href="/downloader/instagram-reels-downloader.html" style="color:#4b5563;text-decoration:none;font-size:0.88rem;">Instagram Reels Downloader</a></li>
           <li><a href="/downloader/tiktok-video-downloader.html" style="color:#4b5563;text-decoration:none;font-size:0.88rem;">TikTok Video Downloader</a></li>
+          <li><a href="/downloader/video-to-mp3-converter.html" style="color:#4b5563;text-decoration:none;font-size:0.88rem;">Video to MP3 Converter</a></li>
           <li><a href="/downloader/youtube-song-downloader.html" style="color:#4b5563;text-decoration:none;font-size:0.88rem;">MP3 Audio Downloader</a></li>
         </ul>
       </div>
@@ -1193,7 +1194,8 @@ function getAllContentItems() {
     { id: 'dl-yt-shorts', title: 'YouTube Shorts Downloader & MP4 Video Saver', cat: 'downloader', tag: 'YouTube', emoji: '▶️', url: '/downloader/youtube-shorts-downloader.html' },
     { id: 'dl-ig-reels', title: 'Instagram Reels & Video Downloader (Full HD)', cat: 'downloader', tag: 'Instagram', emoji: '📸', url: '/downloader/instagram-reels-downloader.html' },
     { id: 'dl-tiktok', title: 'TikTok Video Downloader Without Watermark', cat: 'downloader', tag: 'TikTok', emoji: '🎵', url: '/downloader/tiktok-video-downloader.html' },
-    { id: 'dl-mp3', title: 'High Quality MP3 Audio & Song Extractor', cat: 'downloader', tag: 'Audio', emoji: '🎧', url: '/downloader/youtube-song-downloader.html' },
+    { id: 'dl-video-to-mp3', title: 'Video to MP3 Converter (Extract 320kbps Audio)', cat: 'downloader', tag: 'Audio', emoji: '🎧', url: '/downloader/video-to-mp3-converter.html' },
+    { id: 'dl-mp3', title: 'High Quality MP3 Audio & Song Extractor', cat: 'downloader', tag: 'Audio', emoji: '🎵', url: '/downloader/youtube-song-downloader.html' },
     { id: 'item-electronics', title: 'Electronics, Mobiles & Gadgets Deals', cat: 'deals', tag: 'Electronics', emoji: '📱', url: '/deals/?category=electronics' }
   ];
 }
