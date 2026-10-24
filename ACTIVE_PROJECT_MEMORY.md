@@ -92,12 +92,18 @@
   - Injected Schema.org `ItemList` with `Product` and `Offer` price snippets into `deals/index.html`.
   - Deployed to Cloudflare Pages (`https://1f1ae057.thebhom.pages.dev` / `thebhom.in`) and purged edge cache.
   - Pinged IndexNow API for instant crawling by Bing, Yahoo, and Yandex.
-- [x] Multi-Language (i18n) & Video to MP3 Converter Milestone (Oct 24, 2026):
-  - Built `downloader/i18n.js` providing real-time language switching across 5 global languages: English (`en`), Hindi (`hi`), Spanish (`es`), Portuguese (`pt`), and Indonesian (`id`).
-  - Injected multi-language `hreflang` alternate tags into `<head>` for international search rankings.
-  - Deployed new high-intent tool page `downloader/video-to-mp3-converter.html` targeting "video to mp3 converter online free" and 320kbps audio extraction.
-  - Updated `sitemap-main.xml` and syndicated navigation across all 11 downloader subpages.
-  - Double-verified live in production at `https://www.thebhom.in/downloader/video-to-mp3-converter` with `HTTP/2 200 OK` and pinged IndexNow API.
+- [x] Dedicated 5-Language Standalone Downloader Architecture Milestone (Oct 24, 2026):
+  - Created 5 full-page standalone dedicated language editions:
+    - English (`/downloader/`) [x-default]
+    - Hindi (`/downloader/hi/`) [hi_IN]
+    - Spanish (`/downloader/es/`) [es_ES]
+    - Portuguese (`/downloader/pt/`) [pt_BR]
+    - Indonesian (`/downloader/id/`) [id_ID]
+  - 100% Full-Page Translation: Zero English leaks across titles, headings, inputs, search buttons, streaming player, format cards, precision trimmer, 5 SEO editorial guides, FAQs, and footers.
+  - Native Language Switcher: Instant URL-based navigation with query parameter preservation (`targetUrl + window.location.search`).
+  - Search Engine Discovery: Injected crawlable semantic `<a>` link pills in footer across all 5 pages.
+  - Complete Technical SEO: Full Hreflang matrix, self-referencing canonical URLs, OpenGraph locale matching, and localized Schema.org JSON-LD (`WebApplication`, `HowTo`, `FAQPage`).
+  - Updated `sitemap-main.xml` with all 4 new language endpoints and deployed to Cloudflare Pages.
 - [x] Rank #1 SERP Optimization & Header Deduplication (Oct 24, 2026):
   - Shortened Title to crisp 58-character CTR format: `All-in-One Video Downloader: Download HD Videos Free | TheBhom`.
   - Replaced Meta Description with high-CTR 148-character snippet: `Download HD videos & Shorts from YouTube, Instagram Reels, TikTok (No Watermark), Facebook, and Twitter instantly. 100% Free, Fast & No Login Required!`.
