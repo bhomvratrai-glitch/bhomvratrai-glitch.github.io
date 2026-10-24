@@ -92,6 +92,12 @@
   - Injected Schema.org `ItemList` with `Product` and `Offer` price snippets into `deals/index.html`.
   - Deployed to Cloudflare Pages (`https://1f1ae057.thebhom.pages.dev` / `thebhom.in`) and purged edge cache.
   - Pinged IndexNow API for instant crawling by Bing, Yahoo, and Yandex.
+- [x] Multi-Language (i18n) & Video to MP3 Converter Milestone (Oct 24, 2026):
+  - Built `downloader/i18n.js` providing real-time language switching across 5 global languages: English (`en`), Hindi (`hi`), Spanish (`es`), Portuguese (`pt`), and Indonesian (`id`).
+  - Injected multi-language `hreflang` alternate tags into `<head>` for international search rankings.
+  - Deployed new high-intent tool page `downloader/video-to-mp3-converter.html` targeting "video to mp3 converter online free" and 320kbps audio extraction.
+  - Updated `sitemap-main.xml` and syndicated navigation across all 11 downloader subpages.
+  - Double-verified live in production at `https://www.thebhom.in/downloader/video-to-mp3-converter` with `HTTP/2 200 OK` and pinged IndexNow API.
 
 ---
 
