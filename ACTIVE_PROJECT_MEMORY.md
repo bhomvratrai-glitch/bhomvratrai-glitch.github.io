@@ -105,6 +105,13 @@
   - Injected official Schema.org `SoftwareApplication` JSON-LD structured data in `<head>`.
   - Eradicated duplicate `.subnav` strip across all downloader subpages and homepage; added high-converting CTA button on homepage (`index.html`).
   - Live double-verified in production at `https://www.thebhom.in/downloader/` and pinged IndexNow API.
+- [x] Editorial Guides & Reviews Hub Launch (AdSense Low Value Content Remedy) (Oct 24, 2026):
+  - Designed and deployed `/guides/index.html` featuring interactive category filters (All, Tech, Shopping, Video).
+  - Authored and published 10 in-depth, human-tone, 1,500-2,500 word buying guides and tutorials with testing methodologies, comparison tables, pros/cons cards, and Schema.org `Article` / `FAQPage` markup.
+  - Removed obsolete `/guides/*` 301 redirects from `_redirects` file to allow direct routing.
+  - Added Guides to top header nav (`/guides/`), mobile drawer, homepage platform cards, and footer links.
+  - Updated `sitemap-main.xml` with 11 new URLs and pinged IndexNow API.
+  - Double-verified live in production at `https://www.thebhom.in/guides/` and `https://www.thebhom.in/guides/top-10-smartwatches-under-2000` with `HTTP/2 200 OK`.
 
 ---
 
