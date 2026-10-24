@@ -21,6 +21,12 @@
 ## 2. Active Core Structure & Cleaned Ecosystem (October 18, 2026)
 - **Active Core Structure (Ultra-Clean Focus)**:
   - **Main Landing Site**: Root (`/`) at `https://www.thebhom.in/` featuring Deals Hub and Universal Video Downloader.
+  - **Guides & In-Depth Editorial Reviews**: Subdirectory (`/guides/`) at `https://www.thebhom.in/guides/` featuring consumer guides, editorial comparisons, and Hinglish long-tail video saving guides.
+    - **October 24, 2026 Milestone (Guides Hub & Hinglish Long-Tail SEO Silo)**:
+      - Launched `/guides/` with 14 in-depth humanized editorial guides (10 gadget & buying guides + 4 high-intent Hinglish guides targeting Indian colloquial queries like `youtube video kaise download kare`, `dawnload kese kre`, `kese kre youtube short download`, `instagram reel audio ke sath gallery me kaise save kare`).
+      - Every Hinglish guide includes `<html lang="hi-Latn">`, a 10-Second Quick Answer box for Google Position 0 Featured Snippets, conversational FAQs, HowTo/FAQPage Schema.org markup, and an above-the-fold interactive quick download widget.
+      - Enriched `/downloader/` and `/downloader/hi/` with exact conversational colloquial questions and contextual cross-links to the guides, creating a powerful bidirectional SEO internal linking silo.
+      - Double-verified live in production with `HTTP/2 200 OK` across all guide routes and submitted to IndexNow (`HTTP/2 202 Accepted`).
   - **Deals Store**: Subdirectory (`/deals/`) at `https://www.thebhom.in/deals/` featuring curated daily loot deals, price drop tracking, and direct affiliate links.
     - **October 23, 2026 Layout Restoration & Zero-Leak Milestone**:
       - Restored original compact screenshot layout (2 commits prior): compact horizontal category pills strip, announcement ticker (`⚡ DEALS OF THE DAY`), and dual high-converting card buttons (Orange **`Buy Now →`** + White/Blue **`See Details`**).
