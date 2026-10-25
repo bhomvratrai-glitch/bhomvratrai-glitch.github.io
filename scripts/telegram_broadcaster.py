@@ -21,8 +21,8 @@ SITE_URL = "https://thebhom.in"
 
 def load_credentials():
     creds = {
-        'TELEGRAM_BOT_TOKEN': os.environ.get('TELEGRAM_BOT_TOKEN', '8866349662:AAEYDu8ENkAL-um1OCeKwPxZ4MvM9CqfYY0'),
-        'TELEGRAM_CHANNEL_ID': os.environ.get('TELEGRAM_CHANNEL_ID', '-1004358353540')
+        'TELEGRAM_BOT_TOKEN': os.environ.get('TELEGRAM_BOT_TOKEN', ''),
+        'TELEGRAM_CHANNEL_ID': os.environ.get('TELEGRAM_CHANNEL_ID', '')
     }
     if os.path.exists(CRED_FILE):
         with open(CRED_FILE, 'r', encoding='utf-8') as f:

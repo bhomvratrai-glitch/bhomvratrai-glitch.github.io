@@ -33,9 +33,21 @@ PINTEREST_FEED = os.path.join(BASE_DIR, "pinterest-feed.xml")
 WOMEN_FEED = os.path.join(BASE_DIR, "women-fashion-feed.xml")
 SITEMAP_DEALS = os.path.join(BASE_DIR, "sitemap-deals.xml")
 
-AMAZON_TAG = "bhom120704-21"
-EARNKARO_USER_ID = "5610321"
-EARNKARO_API_TOKEN = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2YTljMzllYTFkYjZhYmEwYjk3YjU0MGEiLCJlYXJua2FybyI6IjU2MTAzMjEiLCJpYXQiOjE3ODg2MjMzNjJ9.Zws8JRh_mHh9mOKIbuRDp-clRopL57Bt657Coli_9NQ"
+AMAZON_TAG = os.environ.get("AMAZON_TAG", "bhom120704-21")
+EARNKARO_USER_ID = os.environ.get("EARNKARO_USER_ID", "5610321")
+CRED_FILE = os.path.expanduser('~/.gemini/config/credentials.env')
+EARNKARO_API_TOKEN = os.environ.get("EARNKARO_API_TOKEN", "")
+if not EARNKARO_API_TOKEN and os.path.exists(CRED_FILE):
+    try:
+        with open(CRED_FILE, 'r', encoding='utf-8') as f:
+            for line in f:
+                line = line.strip()
+                if line.startswith('export '): line = line[7:]
+                if line.startswith('EARNKARO_API_TOKEN='):
+                    EARNKARO_API_TOKEN = line.split('=', 1)[1].strip().strip('"').strip("'")
+                    break
+    except Exception:
+        pass
 
 SSL_CTX = ssl._create_unverified_context()
 HTTP_HEADERS = {"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"}
