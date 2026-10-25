@@ -10,6 +10,7 @@ import os
 import re
 import sys
 import time
+import subprocess
 import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
@@ -18,6 +19,33 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CRED_FILE = os.path.expanduser('~/.gemini/config/credentials.env')
 STATE_FILE = os.path.join(BASE_DIR, 'scripts', 'telegram_posted.json')
 SITE_URL = "https://thebhom.in"
+
+def sync_to_whatsapp(item):
+    """
+    Simultaneously syndicates the exact same item to WhatsApp Official Channel
+    """
+    wa_script = os.path.join(BASE_DIR, 'scripts', 'wa_cloud', 'send_broadcast.mjs')
+    if not os.path.exists(wa_script):
+        return False
+    try:
+        payload = json.dumps(item)
+        res = subprocess.run(
+            ['node', wa_script, '--json', payload],
+            cwd=os.path.join(BASE_DIR, 'scripts', 'wa_cloud'),
+            capture_output=True,
+            text=True,
+            timeout=30
+        )
+        if res.returncode == 0:
+            print(f"[✅ WhatsApp Synced] {item.get('title', '')[:40]} -> WhatsApp Channel")
+            return True
+        else:
+            err = res.stderr.strip() or res.stdout.strip()
+            print(f"[⚠️ WhatsApp Sync Notice]: {err}")
+            return False
+    except Exception as e:
+        print(f"[⚠️ WhatsApp Sync Error]: {e}")
+        return False
 
 def load_credentials():
     creds = {
@@ -289,6 +317,7 @@ def run_broadcast(max_items=2):
                 posted.add(deal['id'])
                 sent_count += 1
                 consecutive_failures = 0
+                sync_to_whatsapp(deal)
                 time.sleep(3)
             else:
                 consecutive_failures += 1
@@ -307,6 +336,7 @@ def run_broadcast(max_items=2):
                 posted.add(art['id'])
                 sent_count += 1
                 consecutive_failures = 0
+                sync_to_whatsapp(art)
                 time.sleep(3)
             else:
                 consecutive_failures += 1

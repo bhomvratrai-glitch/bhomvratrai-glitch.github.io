@@ -9,6 +9,7 @@ import os
 import sys
 import json
 import re
+import subprocess
 import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
@@ -116,16 +117,35 @@ def main():
         return
     
     posted = get_posted_ids()
-    print(f"[🚀 WhatsApp Broadcaster] Prepared {len(deals)} verified loot deals for broadcast:")
+    wa_script = os.path.join(BASE_DIR, "scripts", "wa_cloud", "send_broadcast.mjs")
+    print(f"[🚀 WhatsApp Broadcaster] Broadcasting {len(deals)} verified loot deals to WhatsApp Channel:")
+    
     for d in deals:
-        text = format_whatsapp_deal_message(d)
-        print("-----------------------------------------")
-        print(text)
-        print("-----------------------------------------")
-        posted.add(d["id"])
+        if os.path.exists(wa_script):
+            try:
+                res = subprocess.run(
+                    ["node", wa_script, "--json", json.dumps(d)],
+                    cwd=os.path.join(BASE_DIR, "scripts", "wa_cloud"),
+                    capture_output=True,
+                    text=True,
+                    timeout=30
+                )
+                if res.returncode == 0:
+                    print(f"[✅ WhatsApp Live Sent]: {d['title'][:40]}")
+                    posted.add(d["id"])
+                else:
+                    print(f"[⚠️ WhatsApp Live Warning]: {res.stderr.strip() or res.stdout.strip()}")
+            except Exception as e:
+                print(f"[⚠️ WhatsApp Execution Error]: {e}")
+        else:
+            text = format_whatsapp_deal_message(d)
+            print("-----------------------------------------")
+            print(text)
+            print("-----------------------------------------")
+            posted.add(d["id"])
     
     save_posted_ids(posted)
-    print(f"[✅ WhatsApp Broadcaster] {len(deals)} deals staged and state recorded in whatsapp_posted.json")
+    print(f"[✅ WhatsApp Broadcaster] {len(deals)} deals processed and recorded in whatsapp_posted.json")
 
 if __name__ == "__main__":
     main()

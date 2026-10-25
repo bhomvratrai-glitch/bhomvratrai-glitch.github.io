@@ -40,7 +40,11 @@ jobs:
           TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           TELEGRAM_CHANNEL_ID: ${{ secrets.TELEGRAM_CHANNEL_ID }}
           EARNKARO_API_TOKEN: ${{ secrets.EARNKARO_API_TOKEN }}
+          WA_SESSION_BASE64: ${{ secrets.WA_SESSION_BASE64 }}
         run: |
+          if [ -d "scripts/wa_cloud" ]; then
+            cd scripts/wa_cloud && npm install --omit=dev && cd ../..
+          fi
           python3 scripts/auto_hourly_deals_bot.py
           python3 scripts/telegram_broadcaster.py || true
           python3 scripts/whatsapp_broadcaster.py || true
