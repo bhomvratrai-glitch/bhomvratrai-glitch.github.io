@@ -89,6 +89,30 @@ function formatWhatsAppMessage(item) {
   );
 }
 
+async function getImageBuffer(imageUrl) {
+  if (!imageUrl || typeof imageUrl !== "string") return null;
+  try {
+    let cleanUrl = imageUrl.trim();
+    if (cleanUrl.startsWith("//")) cleanUrl = "https:" + cleanUrl;
+    if (!cleanUrl.startsWith("http")) return null;
+
+    const res = await fetch(cleanUrl, {
+      headers: {
+        "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+        "Accept": "image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8"
+      },
+      signal: AbortSignal.timeout(8000)
+    });
+    if (!res.ok) return null;
+    const arrayBuffer = await res.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
+    return buffer.length > 500 ? buffer : null;
+  } catch (err) {
+    console.error("[WhatsApp] Could not fetch image buffer:", err.message);
+    return null;
+  }
+}
+
 async function run() {
   restoreSessionIfCloud();
 
@@ -137,6 +161,7 @@ async function run() {
     }
     const slug = candidate.slug || id;
     const pageUrl = candidate.dedicatedPage || `https://thebhom.in/deals/p/${slug}.html`;
+    const img = candidate.cleanImage || candidate.image || "";
 
     item = {
       id: id,
@@ -147,7 +172,8 @@ async function run() {
       discount: discount,
       store: store,
       store_url: directUrl,
-      page_url: pageUrl
+      page_url: pageUrl,
+      image: img
     };
   }
 
@@ -182,9 +208,26 @@ async function run() {
         }
 
         const message = formatWhatsAppMessage(item);
-        console.log(`[WhatsApp] Sending to channel ${channelJid}...`);
-        await sock.sendMessage(channelJid, { text: message });
-        console.log(`✅ [WhatsApp Channel Sent]: ${item.title?.slice(0, 45)}`);
+        const imageUrl = item.image || item.cleanImage;
+        let imageBuffer = null;
+
+        if (imageUrl) {
+          console.log(`[WhatsApp] Fetching product image buffer: ${imageUrl.slice(0, 60)}...`);
+          imageBuffer = await getImageBuffer(imageUrl);
+        }
+
+        if (imageBuffer) {
+          console.log(`[WhatsApp] Sending product image + caption to channel ${channelJid}...`);
+          await sock.sendMessage(channelJid, {
+            image: imageBuffer,
+            caption: message
+          });
+          console.log(`✅ [WhatsApp Channel Sent with Image]: ${item.title?.slice(0, 45)}`);
+        } else {
+          console.log(`[WhatsApp] Sending deal text to channel ${channelJid}...`);
+          await sock.sendMessage(channelJid, { text: message });
+          console.log(`✅ [WhatsApp Channel Sent]: ${item.title?.slice(0, 45)}`);
+        }
 
         // Record in state file
         if (item.id) {
@@ -194,7 +237,7 @@ async function run() {
               postedIds = new Set(JSON.parse(fs.readFileSync(STATE_FILE, "utf-8")));
             } catch (e) {}
           }
-          postedIds.add(item.id.replace("deal_", ""));
+          postedIds.add(String(item.id).replace("deal_", ""));
           fs.writeFileSync(STATE_FILE, JSON.stringify(Array.from(postedIds).slice(-500), null, 2));
         }
 
