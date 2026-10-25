@@ -76,13 +76,14 @@
 - **Telegram Bot**: `@thebhom_live_bot` ("TheBhom News and Deals", ID `8866349662`)
 - **Broadcaster Script**: `scripts/telegram_broadcaster.py`
   - High-resolution product cards with bold discount pricing, 1-click direct retailer buy buttons (`bhom120704-21` / EarnKaro `5610321`), and TheBhom price history links.
+  - **1:1 Simultaneous WhatsApp Syndication**: Har baar jab Telegram par deal ya news post hoti hai, script autonomously `scripts/wa_cloud/send_broadcast.mjs` trigger karke exact wahi product, clean WhatsApp formatted link, direct buy store link, aur price history link official WhatsApp Channel (`120363412777089183@newsletter`) par live post karta hai.
 - **WhatsApp Deals Broadcaster**:
   - **Official WhatsApp Channel**: [TheBhom Deals](https://whatsapp.com/channel/0029Vb9DmoaEKyZLLKtLdc2I) (`https://whatsapp.com/channel/0029Vb9DmoaEKyZLLKtLdc2I`)
   - **Channel JID**: `120363412777089183@newsletter`
-  - **24/7 Headless Cloud Architecture**: Powered by `@whiskeysockets/baileys` (`scripts/wa_cloud/broadcast_cloud.mjs`). Authentication `creds.json` compressed and stored in GitHub Encrypted Secrets (`WA_SESSION_BASE64`). Runs 24/7 on GitHub Actions runners even when Mac is shut down.
+  - **24/7 Headless Cloud Architecture**: Powered by `@whiskeysockets/baileys` (`scripts/wa_cloud/send_broadcast.mjs`). Authentication `creds.json` compressed and stored in GitHub Encrypted Secrets (`WA_SESSION_BASE64`). Runs 24/7 on GitHub Actions runners even when Mac is shut down.
   - Formats verified highest-discount loot drops from `deals/data/catalog.json` with 1-click Amazon (`bhom120704-21`) and EarnKaro affiliate links.
   - State tracked in `scripts/whatsapp_posted.json` to prevent duplicates.
-  - Scheduled hourly 24/7 in GitHub Actions workflow `.github/workflows/hourly_deals_bot.yml` (tested & live verified in cloud run `40064232238`).
+  - Scheduled hourly 24/7 in GitHub Actions workflow `.github/workflows/hourly_deals_bot.yml`.
   - Admin phone number (`7987761789`) is 100% hidden by WhatsApp Channels architecture.
 
 ---
